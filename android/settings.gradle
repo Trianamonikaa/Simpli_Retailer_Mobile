@@ -1,0 +1,3 @@
+rootProject.name = 'Simpli_Retailer_Mobile'
+
+include ':app'
