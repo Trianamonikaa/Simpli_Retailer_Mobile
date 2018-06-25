@@ -44,9 +44,10 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-      <Text> Custom Drawer Navigator App Tutorial </Text>
-      </View>
+      <MyApp/>
+      // <View style={styles.container}>
+      // <Text> Custom Drawer Navigator App Tutorial </Text>
+      // </View>
 
 
 
