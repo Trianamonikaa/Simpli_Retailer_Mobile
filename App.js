@@ -7,23 +7,27 @@
 
 import React,{Component} from 'react';
 import {
-  StyleSheet,
-  Text,
   View,
+  Text,
+  StyleSheet,
+  Image,
 } from 'react-native';
-import { Router, Scene } from 'react-native-router-flux';
-import { DrawerNavigator } from 'react-navigation'
 
-import BlackScreen from './app/BlackScreen';
-import BlueScreen from './app/BlueScreen';
-import GoldScreen from './app/GoldScreen';
-import GrayScreen from './app/GrayScreen';
-import MaizeScreen from './app/MaizeScreen';
-import ScarletScreen from './app/ScarletScreen';
+import { Router, Scene } from 'react-native-router-flux';
+
+
+// import BlackScreen from './app/BlackScreen';
+// import BlueScreen from './app/BlueScreen';
+// import GoldScreen from './app/GoldScreen';
+// import GrayScreen from './app/GrayScreen';
+// import MaizeScreen from './app/MaizeScreen';
+// import ScarletScreen from './app/ScarletScreen';
 
 import HomeScreen from './HomeScreen'
 import SettingsScreen from './SettingsScreen'
-import { Icon, Button, Container, Header, Content, Left } from 'native-base'
+import {Container, Content, Header, Body, Icon} from 'native-base'
+import Logo from './src/image/logo.png'
+import {DrawerNavigator, DrawerItems } from 'react-navigation'
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -31,28 +35,49 @@ const TabIcon = ({ selected, title }) => {
   );
 };
 
+
+const CustomDrawerContentComponent = (props) => (
+  <Container>
+    <Header style={{height: 200, backgroundColor:'white'}}>
+      <Body>
+        <Image
+        style={styles.drawerImage}
+        source={Logo}/>
+      </Body>
+    </Header>
+    <Content>
+      <DrawerItems {...props} />
+      </Content>
+  </Container>
+)
+
 const MyApp = DrawerNavigator({
+  
   Home: {
     screen: HomeScreen
   },
   Settings: {
     screen: SettingsScreen
-  }
+  } 
+},{
+  initialRouteName:'Home',
+  contentComponent:CustomDrawerContentComponent,
+  drawerOpenRoute: 'DrawerOpen',
+  drawerCloseRoute: 'DrawerClose',
+  drawerToggleRoute: 'DrawerToggle'
+
 })
+
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
+       
       <MyApp/>
       // <View style={styles.container}>
       // <Text> Custom Drawer Navigator App Tutorial </Text>
       // </View>
-
-
-
-
-
       // <Router>
       //   <Scene key="root">
       //       <Scene
@@ -72,14 +97,17 @@ export default class App extends Component<Props> {
   }
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  drawerImage:{
+    height:100,
+    width:100,
+    borderRadius: 50,
   },
   welcome: {
     fontSize: 20,

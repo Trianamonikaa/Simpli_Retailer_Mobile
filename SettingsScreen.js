@@ -13,7 +13,7 @@ class SettingsScreen extends Component {
             <Container>
                 <Header>
                     <Left>
-                        <Icon name="ios-menu" onPress={()=> this.props.navigation.navigate('DrawerOpen')}/>
+                    <Icon name="ios-menu" onPress={()=> this.props.navigation.navigate('DrawerOpen')} />
                     </Left>
                 </Header>
                 <Content contentContainerStyle={{
