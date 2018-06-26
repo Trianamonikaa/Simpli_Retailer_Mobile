@@ -13,6 +13,8 @@ import {
   Image,
 } from 'react-native';
 
+// import Expo from 'expo';
+
 import { Router, Scene } from 'react-native-router-flux';
 
 
@@ -23,11 +25,34 @@ import { Router, Scene } from 'react-native-router-flux';
 // import MaizeScreen from './app/MaizeScreen';
 // import ScarletScreen from './app/ScarletScreen';
 
-import HomeScreen from './HomeScreen'
-import SettingsScreen from './SettingsScreen'
-import {Container, Content, Header, Body, Icon} from 'native-base'
-import Logo from './src/image/logo.png'
+import Penjualan from './Penjualan'
+import Produk from './Produk'
+import RiwayatPenjualan from './RiwayatPenjualan'
+
+import {Container, Content, Header, Body,Button,Item,Input, Icon} from 'native-base'
 import {DrawerNavigator, DrawerItems } from 'react-navigation'
+import {StackNavigator } from 'react-navigation'
+
+import Logo from './src/image/logo.jpg'
+
+
+
+// class Penjualan extends React.Component {
+//   static navigationOptions = {
+//     title : 'Home',
+//   };
+//   render() {
+//     const { navigate } = this.props.navigation;
+//     return (
+//       <View style={styles.contianer}>
+//       <Text
+//       onPress= {() =>navigate('Profile')}>navigate to Profile
+//       </Text>
+//       </View>
+
+//     )
+//   }
+// }
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -38,7 +63,7 @@ const TabIcon = ({ selected, title }) => {
 
 const CustomDrawerContentComponent = (props) => (
   <Container>
-    <Header style={{height: 200, backgroundColor:'white'}}>
+    <Header style={{height: 200, backgroundColor:'blue'}}>
       <Body>
         <Image
         style={styles.drawerImage}
@@ -53,46 +78,39 @@ const CustomDrawerContentComponent = (props) => (
 
 const MyApp = DrawerNavigator({
   
-  Home: {
-    screen: HomeScreen
+  Penjualan: {
+    screen: Penjualan
   },
-  Settings: {
-    screen: SettingsScreen
-  } 
+  Produk: {
+    screen: Produk
+  },
+  Riwayat: {
+    screen: RiwayatPenjualan
+  },
 },{
-  initialRouteName:'Home',
+  initialRouteName:'Penjualan',
   contentComponent:CustomDrawerContentComponent,
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',
   drawerToggleRoute: 'DrawerToggle'
+});
+// const NavigationApp = StackNavigator({
+//   // Penjualan: { screen : Penjualan},
+//   // Produk: { screen: Produk},
+//   // RiwayatPenjualan: {RiwayatPenjualan},
+// },{
+//   navigationOptions: {
+//     headerStyle: {
+//       marginTop: Expo.Constants.statusBarHeight
+//     }
+//   }
 
-})
-
-
+// });
 type Props = {};
 export default class App extends Component<Props> {
   render() {
-    return (
-       
-      <MyApp/>
-      // <View style={styles.container}>
-      // <Text> Custom Drawer Navigator App Tutorial </Text>
-      // </View>
-      // <Router>
-      //   <Scene key="root">
-      //       <Scene
-      //         key="scarlet"
-      //         component={ScarletScreen}
-      //         title="Scarlet"
-      //         initial
-      //         />
-      //         <Scene
-      //         key="gray"
-      //         component={GrayScreen}
-      //         title="Gray"
-      //         />
-      //   </Scene>
-      // </Router>
+    return (     
+      <MyApp/> 
     );
   }
 }
@@ -102,12 +120,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'red',
   },
   drawerImage:{
-    height:100,
-    width:100,
-    borderRadius: 50,
+    height:190,
+    width:280,
+    
+    
   },
   welcome: {
     fontSize: 20,

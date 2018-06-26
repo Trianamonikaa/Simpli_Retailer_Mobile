@@ -1,4 +1,4 @@
-import React, {Component } from "react";
+import React, { Component } from "react";
 import {
     View,
     Text,
@@ -7,13 +7,13 @@ import {
 
 import { Icon, Button, Container, Header, Content, Left } from 'native-base'
 
-class SettingsScreen extends Component {
+class RiwayatPenjualan extends Component {
     render() {
         return (
             <Container>
                 <Header>
                     <Left>
-                    <Icon name="ios-menu" onPress={()=> this.props.navigation.navigate('DrawerOpen')} />
+                        <Icon name="ios-menu" onPress={()=> this.props.navigation.navigate('DrawerOpen')} />
                     </Left>
                 </Header>
                 <Content contentContainerStyle={{
@@ -21,11 +21,11 @@ class SettingsScreen extends Component {
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}>
-                    <Text> Settings Screen </Text>
+                    <Text> Riwayat Penjualan </Text>
                 </Content>
 
             </Container>
         );
     }
 }
-export default SettingsScreen;
+export default RiwayatPenjualan;
