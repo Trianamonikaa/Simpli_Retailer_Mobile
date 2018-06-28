@@ -6,17 +6,24 @@ import {
     Image,
 } from "react-native";
 import Searchbar from './Searchbar';
+import {DrawerNavigator, DrawerItems } from 'react-navigation'
 
 import { StackNavigator } from 'react-navigation';
 import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail, Body,
-        Header,  Left, Right, Grid, Row, Form,Icon, Item, Input, Title, IconNB } from 'native-base';
+        Header,  Left, Right, Grid, Row, Form, Item, Input, Title, IconNB } from 'native-base';
 
 import { Icon } from 'react-native-elements';
 import {Router,Scene, Actions} from 'react-native-router-flux';
-
+import Halaman from './HalamanBayar';
+import keranjang from './keranjang'
 
 class Penjualan extends Component{
+    
+    onPressDetail=()=>{
+        this.props.navigation.navigate('Halaman');
+    }
     static navigationOptions = {
+        
         drawerIcon: (
             <Icon name = "shop"/>
         )
@@ -30,8 +37,8 @@ class Penjualan extends Component{
             <Container>
                 <Header>
                     <Left>
-                    <Icon name="ios-menu" onPress={
-                        () => this.props.navigation.navigate('DrawerOpen')} />
+                    <Icon name="menu" onPress={
+                        () => this.props.navigation.navigate('HalamanBayar')} />
                     </Left>
                     <Grid>
                         <Row style = {styles.row}>
@@ -39,22 +46,21 @@ class Penjualan extends Component{
                                 <Searchbar/>
                             </Col>
                             <Col size={1}>
-                                <Icon name = "cart" style={styles.cart}/>                              
+                            
+                                <Icon name = "shopping-cart" onPress={()=> this.props.navigation.navigate('keranjang')} /> 
+                                              
                             </Col>                   
                         </Row>
                     </Grid>                    
                 </Header>
                 <Content style={styles.contentpenjualan}>
                    
-                    <Button onPress={this.onPress}
-                    title="pindah ke halaman penjualan"
-                    color="#>
-                        <Text> light </Text>
+                    <Button onPress={this.onPressDetail}>
+                    
+                        <Text> BAYAR?</Text>
                     </Button>
                     <View style={styles.container}>
                         <Text
-                            style={styles.welcome}
-                            // onPress={() => Actions.Halaman()}
                             >
                             TAMPILAN PENJUALAN
                         </Text>

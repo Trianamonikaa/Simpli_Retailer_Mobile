@@ -5,54 +5,34 @@
 //  */
 
 
-import React,{Component} from 'react';
+import React , { Component } from "react";
 import {
+  AppRegistry,
   View,
   Text,
   StyleSheet,
   Image,
+  Button,
+  TouchableOpacity,
 } from 'react-native';
 
 // import Expo from 'expo';
 
 import { Router, Scene } from 'react-native-router-flux';
-
-
-// import BlackScreen from './app/BlackScreen';
-// import BlueScreen from './app/BlueScreen';
-// import GoldScreen from './app/GoldScreen';
-// import GrayScreen from './app/GrayScreen';
-// import MaizeScreen from './app/MaizeScreen';
-// import ScarletScreen from './app/ScarletScreen';
+import styles from './styles'
 
 import Penjualan from './Penjualan'
 import Produk from './Produk'
 import RiwayatPenjualan from './RiwayatPenjualan'
+import HalamanBayar from './HalamanBayar'
+import produkpage2 from './produkpage2'
+import keranjang from './keranjang'
+import riwayatpage2 from './riwayatpage2'
 
-import {Container, Content, Header, Body,Button,Item,Input, Icon} from 'native-base'
+import {Container, Content, Header, Body ,Item,Input, Icon} from 'native-base'
 import {DrawerNavigator, DrawerItems } from 'react-navigation'
-import {StackNavigator } from 'react-navigation'
 
 import Logo from './src/image/logo.jpg'
-
-
-
-// class Penjualan extends React.Component {
-//   static navigationOptions = {
-//     title : 'Home',
-//   };
-//   render() {
-//     const { navigate } = this.props.navigation;
-//     return (
-//       <View style={styles.contianer}>
-//       <Text
-//       onPress= {() =>navigate('Profile')}>navigate to Profile
-//       </Text>
-//       </View>
-
-//     )
-//   }
-// }
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -84,65 +64,40 @@ const MyApp = DrawerNavigator({
   Produk: {
     screen: Produk
   },
+  produkpage2 : {
+    screen : produkpage2
+  },
   Riwayat: {
     screen: RiwayatPenjualan
   },
+  Halaman: {
+    screen: HalamanBayar
+  },
+  keranjang: {
+    screen: keranjang
+  },
+  riwayatpage2: {
+    screen: riwayatpage2
+  },
+
+  
 },{
   initialRouteName:'Penjualan',
   contentComponent:CustomDrawerContentComponent,
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',
-  drawerToggleRoute: 'DrawerToggle'
+  drawerToggleRoute: 'DrawerToggle',
+  
 });
-// const NavigationApp = StackNavigator({
-//   // Penjualan: { screen : Penjualan},
-//   // Produk: { screen: Produk},
-//   // RiwayatPenjualan: {RiwayatPenjualan},
-// },{
-//   navigationOptions: {
-//     headerStyle: {
-//       marginTop: Expo.Constants.statusBarHeight
-//     }
-//   }
 
-// HEAD
-// // });
-// type Props = {};
-// export default class App extends Component<Props> {
-// =======
-// })
-
-
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
-    return (
-          
-      <MyApp/> 
+    return (  
+     <MyApp/>
+    
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red',
-  },
-  drawerImage:{
-    height:190,
-    width:280,
-    
-    
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+
+
