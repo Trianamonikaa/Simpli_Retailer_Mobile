@@ -46,9 +46,11 @@ class Penjualan extends Component{
                 </Header>
                 <Content style={styles.contentpenjualan}>
                    
-                    {/* <Button light>
+                    <Button onPress={this.onPress}
+                    title="pindah ke halaman penjualan"
+                    color="#>
                         <Text> light </Text>
-                    </Button> */}
+                    </Button>
                     <View style={styles.container}>
                         <Text
                             style={styles.welcome}
@@ -63,8 +65,6 @@ class Penjualan extends Component{
         );
     };
 }
-
-    
 
 const styles = StyleSheet.create({
     Searchbar: {

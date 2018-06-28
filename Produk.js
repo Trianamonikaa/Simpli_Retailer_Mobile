@@ -10,15 +10,11 @@ import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail,
 import produk from './src/image/produk.png';
 
 class Produk extends Component {
-    // static navigationOptions = {
-    //     title : 'Produk',
-    //     drawerIcon: (
-    //         <Image source={produk}
-    //         style={styles.imageicon}/>       
-    //     )
-        
-    // };
-    
+    static navigationOptions = {
+        drawerIcon: (
+            <Icon name = "shop"/>
+        )
+    }
     constructor(){
         super()
     }
