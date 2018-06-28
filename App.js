@@ -105,18 +105,18 @@ const MyApp = DrawerNavigator({
 //     }
 //   }
 
-<<<<<<< HEAD
-// });
-type Props = {};
-export default class App extends Component<Props> {
-=======
-})
+// HEAD
+// // });
+// type Props = {};
+// export default class App extends Component<Props> {
+// =======
+// })
 
 
-export default class App extends Component {
->>>>>>> 744579b9f9096a806e3ef6eb27e2bd74e4baa333
+export default class App extends React.Component {
   render() {
-    return (     
+    return (
+          
       <MyApp/> 
     );
   }

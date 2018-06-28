@@ -1,5 +1,4 @@
 node_modules/
 android/app/build/
 android/build/
-package.json
 android/.gradle/

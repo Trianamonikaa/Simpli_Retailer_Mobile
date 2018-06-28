@@ -3,21 +3,24 @@ import {
     View,
     Text,
     StyleSheet,
+    Image,
 } from "react-native";
 import Searchbar from './Searchbar';
-import HalamanPenjualan from './HalamanPenjualan'
 
-import {StackNavigator} from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail, Body,
-    Header,  Left, Right, Grid, Row, Form,Icon, Item, Input, Title, IconNB, } from 'native-base'
+        Header,  Left, Right, Grid, Row, Form,Icon, Item, Input, Title, IconNB } from 'native-base';
 
-import {Router,Scene, Actions} from 'react-native-router-flux'
+import { Icon } from 'react-native-elements';
+import {Router,Scene, Actions} from 'react-native-router-flux';
 
 
-class Penjualan extends React.Component{
+class Penjualan extends Component{
     static navigationOptions = {
-        title : 'Home'
-    };
+        drawerIcon: (
+            <Icon name = "shop"/>
+        )
+    }
     getName(){
         return Searchbar
     }
@@ -26,7 +29,7 @@ class Penjualan extends React.Component{
         return (
             <Container>
                 <Header>
-                <Left>
+                    <Left>
                     <Icon name="ios-menu" onPress={
                         () => this.props.navigation.navigate('DrawerOpen')} />
                     </Left>
@@ -59,25 +62,6 @@ class Penjualan extends React.Component{
                             </Container>
         );
     };
-}
-const App =()=>{
-   
-    return (
-        <Router>
-            <Scene key="root">
-            <Scene
-            key="Penjualan"
-            component={Penjualan}
-            title="Penjualan"
-            initial />
-            <Scene
-            key="Halaman"
-            component={HalamanPenjualan}
-            title="Halaman Penjualan"
-             />
-            </Scene>
-        </Router>
-    )
 }
 
     
@@ -115,7 +99,12 @@ const styles = StyleSheet.create({
       contentpenjualan:{ 
           backgroundColor: 'white', 
           padding:0, 
-          opacity : 120 }
+          opacity : 120 
+        },
+    imageicon:{
+        width: 24,
+        height: 24
+    }
    
 });
 

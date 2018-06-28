@@ -7,11 +7,18 @@ import {
 import Searchbar from './Searchbar'
 import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail, Body,
     Header,  Left, Right, Grid, Row, Form,Icon, Item, Input, Title, IconNB, } from 'native-base'
+import produk from './src/image/produk.png';
 
 class Produk extends Component {
-    static navigationOptions = {
-        title : 'Produk',
-    }
+    // static navigationOptions = {
+    //     title : 'Produk',
+    //     drawerIcon: (
+    //         <Image source={produk}
+    //         style={styles.imageicon}/>       
+    //     )
+        
+    // };
+    
     constructor(){
         super()
     }
@@ -84,7 +91,12 @@ const styles = StyleSheet.create({
           backgroundColor: 'white', 
           padding:0, 
           
+        },
+        imageicon: {
+            width :24,
+            height: 24
         }
+
    
    
     
