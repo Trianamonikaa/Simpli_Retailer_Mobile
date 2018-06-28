@@ -2,18 +2,12 @@ import React, { Component } from "react";
 import {
     View,
     Text,
-    StyleSheet,
-    Image,
+    StyleSheet
 } from "react-native";
 import Searchbar from './Searchbar';
 
-import { StackNavigator } from 'react-navigation';
 import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail, Body,
-        Header,  Left, Right, Grid, Row, Form,Icon, Item, Input, Title, IconNB } from 'native-base';
-
-import { Icon } from 'react-native-elements';
-import {Router,Scene, Actions} from 'react-native-router-flux';
-
+        Header,  Left, Right, Grid, Row, Icon, Form, Item, Input, Title, IconNB } from 'native-base';
 
 class Penjualan extends Component{
     static navigationOptions = {
@@ -25,43 +19,42 @@ class Penjualan extends Component{
         return Searchbar
     }
     render() {
-        const { navigate} = this.props.navigation;
         return (
-            <Container>
-                <Header>
-                    <Left>
-                    <Icon name="ios-menu" onPress={
-                        () => this.props.navigation.navigate('DrawerOpen')} />
-                    </Left>
-                    <Grid>
-                        <Row style = {styles.row}>
-                            <Col size={5}>
-                                <Searchbar/>
-                            </Col>
-                            <Col size={1}>
-                                <Icon name = "cart" style={styles.cart}/>                              
-                            </Col>                   
-                        </Row>
-                    </Grid>                    
-                </Header>
-                <Content style={styles.contentpenjualan}>
-                   
-                    <Button onPress={this.onPress}
-                    title="pindah ke halaman penjualan"
-                    color="#>
-                        <Text> light </Text>
-                    </Button>
-                    <View style={styles.container}>
-                        <Text
-                            style={styles.welcome}
-                            // onPress={() => Actions.Halaman()}
-                            >
-                            TAMPILAN PENJUALAN
-                        </Text>
-                        </View>
-                                </Content>
+        <Container>
+            <Header>
+                <Left>
+                <Icon name="ios-menu" onPress={
+                    () => this.props.navigation.navigate('DrawerOpen')} />
+                </Left>
+                <Grid>
+                    <Row style = {styles.row}>
+                        <Col size={5}>
+                            <Searchbar/>
+                        </Col>
+                        <Col size={1}>
+                            <Icon name = "cart" style={styles.cart}/>                              
+                        </Col>                   
+                    </Row>
+                </Grid>                    
+            </Header>
+            <Content style={styles.contentpenjualan}>
+                
+                <Button onPress={this.onPress}
+                title="pindah ke halaman penjualan"
+                color="#f00">
+                    <Text> light </Text>
+                </Button>
+                <View style={styles.container}>
+                    <Text
+                        style={styles.welcome}
+                        // onPress={() => Actions.Halaman()}
+                        >
+                        TAMPILAN PENJUALAN
+                    </Text>
+                    </View>
+                            </Content>
 
-                            </Container>
+                        </Container>
         );
     };
 }
