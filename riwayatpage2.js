@@ -27,13 +27,10 @@ class riwayatpage2 extends Component {
                     <Icon name="arrow-left" onPress={
                         () => this.props.navigation.navigate('Riwayat')} />
                     </Left>
-                    <Grid>
-                        <Row style = {styles.row}>
-                            <Col size={5}>
-                                <Searchbar/>
-                            </Col>
-                        </Row>
-                    </Grid> 
+                    <Body>
+                        <Title> Detail Transaksi</Title>
+                        <Right/>
+                    </Body>
                 </Header>
 
                 <Content style={styles.contentpenjualan}>                

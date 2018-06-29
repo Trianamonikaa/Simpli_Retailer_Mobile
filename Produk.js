@@ -1,15 +1,39 @@
 import React, {Component } from "react";
 import {
     View,
-    Text,
-    StyleSheet
+    StyleSheet,
+    Image
 } from "react-native";
+
+import { Button, 
+        Container, 
+        Content, 
+        Thumbnail, 
+        Body,
+        Header,  
+        Left, 
+        Right, 
+        Grid, 
+        Row,
+        Icon,
+        List,
+        ListItem,
+        Text, 
+        Col,} from 'native-base'
 import Searchbar from './Searchbar'
-import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail, Body,
-    Header,  Left, Right, Grid, Row, Form,  Item, Input, Title, IconNB, } from 'native-base'
 import Halaman from './HalamanBayar'
-import { Icon } from 'react-native-elements';
+
 import Penjualan from './Penjualan'
+import styles from './styles'
+const beras = require("./src/image/beras.jpg");
+
+const datas =[
+    {
+        img: beras,
+        text: "BERAS",
+        note: "Ini adalah beras yang berasal dari padi. ."
+    }
+]
 
 class Produk extends Component {
     onPressDetail=()=>{
@@ -41,10 +65,31 @@ class Produk extends Component {
                 </Header>
 
                 <Content style={styles.contentpenjualan}>
-                    <Button onPress = {this.onPressDetail}>
-                        <Text> lihat detail produk </Text>
-                    </Button>
-                    <Text> halaman Produk</Text>
+                   
+                    <View>
+                    <List
+            dataArray={datas}
+            renderRow={data =>
+              <ListItem thumbnail>
+                <Left>
+                  <Thumbnail square size={55} source={data.img} />
+                </Left>
+                <Body>
+                  <Text>
+                    {data.text}
+                  </Text>
+                  <Text numberOfLines={1} note>
+                    {data.note}
+                  </Text>
+                </Body>
+                <Right>
+                  <Button onPress={this.onPressDetail}>
+                    <Text>View</Text>
+                  </Button>
+                </Right>
+              </ListItem>}
+          />
+                       </View> 
                 </Content>
 
             </Container>
@@ -52,41 +97,5 @@ class Produk extends Component {
     }
 
 }
-const styles = StyleSheet.create({
-    
-        col: {
-            // paddingHorizontal: 5,
-            backgroundColor:'white',
-            width:'80%'
-        },
-      col1: {
-        // paddingHorizontal: 1,
-        backgroundColor:'pink',
-        width:'20%'
-      },
-      row: {
-        paddingBottom: 5,
-      },
-      iconText: {
-        fontSize: 12,
-      },
-      mbl15:{
-          marginBottom : 20,
-          backgroundColor: 'red',
-          width: 80,
-          height: 50
-      },
-      cart:{
 
-      },
-      contentpenjualan:{ 
-          backgroundColor: 'white', 
-          padding:0, 
-          
-        },
-        imageicon: {
-            width :24,
-            height: 24
-        }
-});
 export default Produk;

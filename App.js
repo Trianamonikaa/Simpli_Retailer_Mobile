@@ -1,10 +1,3 @@
-// /**
-//  * Sample React Native App
-//  * https://github.com/facebook/react-native
-//  * @flow
-//  */
-
-
 import React , { Component } from "react";
 import {
   AppRegistry,
@@ -15,8 +8,6 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
-
-// import Expo from 'expo';
 
 import { Router, Scene } from 'react-native-router-flux';
 import styles from './styles'
@@ -78,9 +69,7 @@ const MyApp = DrawerNavigator({
   },
   riwayatpage2: {
     screen: riwayatpage2
-  },
-
-  
+  }, 
 },{
   initialRouteName:'Penjualan',
   contentComponent:CustomDrawerContentComponent,

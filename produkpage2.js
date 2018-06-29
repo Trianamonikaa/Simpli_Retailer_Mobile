@@ -2,13 +2,26 @@ import React, {Component } from "react";
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Image,
 } from "react-native";
 import Searchbar from './Searchbar'
-import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail, Body,
-    Header,  Left, Right, Grid, Row, Form,  Item, Input, Title, IconNB, } from 'native-base'
-import Produk from './Produk'
-
+import { Button, 
+        Col, 
+        Container, 
+        Content, 
+        Thumbnail, 
+        Body,
+        Header,  
+        Left, 
+        Right, 
+        Row, 
+        Form,  
+        Item, 
+        Title, 
+        } from 'native-base'
+import styles from './styles'
+import beras from './src/image/beras.jpg'
 
 import { Icon } from 'react-native-elements';
 class produkpage2 extends Component {
@@ -25,63 +38,35 @@ class produkpage2 extends Component {
             <Container>
                 <Header>
                 <Left>
-                    <Icon name="arrow-left" onPress={
+                    <Icon name="arrow-back" onPress={
                         () => this.props.navigation.navigate('Produk')} />
                     </Left>
-                    <Grid>
-                        <Row style = {styles.row}>
-                            <Col size={5}>
-                                <Searchbar/>
-                            </Col>
-                        </Row>
-                    </Grid> 
+                    <Body>
+                        <Title> detail produk </Title>
+                        <Right/>
+                    </Body>
+                    
                 </Header>
 
-                <Content style={styles.contentpenjualan}>                
-                    <Text >detail produk </Text>
+                <Content> 
+                    <View  style={styles.contentpicture}>         
+                        <Image source={beras} style={styles.imageproduk} />
+                    </View>
+                    <View>
+                        <Text style={styles.textmenu}> Detail Produk: </Text>
+                        <Text style={styles.text}>Nama Produk : Beras Pulen</Text>
+                        <Text style={styles.text}>Harga Jual : Rp 78.000,-</Text>
+                        <Text style={styles.text}>Satuan </Text>
+                        <Text style={styles.text}>Harga beli : Rp 68.000,-</Text>
+                        <Text style={styles.text}>Tanggal datang produk : 29 Juni 2019</Text>
+                        <Text style={styles.text}>Banyak produk yang datang : 44</Text>
+                    </View>
+                    
                 </Content>
 
             </Container>
         );
     }
 }
-const styles = StyleSheet.create({
-    Searchbar: {
-      backgroundColor: "#FFF",
-      width : 500,
-    },
-        col: {
-            // paddingHorizontal: 5,
-            backgroundColor:'white',
-            width:'80%'
-        },
-      col1: {
-        // paddingHorizontal: 1,
-        backgroundColor:'blue',
-        width:'20%'
-      },
-      row: {
-        paddingBottom: 5,
-      },
-      iconText: {
-        fontSize: 12,
-      },
-      mbl15:{
-          marginBottom : 20,
-          backgroundColor: 'red',
-          width: 80,
-          height: 50
-      },
-      
-     
-      contentpenjualan:{ 
-          backgroundColor: 'white', 
-          padding:0, 
-          
-        },
-        imageicon: {
-            width :24,
-            height: 24
-        }
-});
+
 export default produkpage2;

@@ -1,14 +1,29 @@
 import React, {Component } from "react";
 import {
-    View,
     Text,
-    StyleSheet
 } from "react-native";
 import Searchbar from './Searchbar'
-import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail, Body,
-    Header,  Left, Right, Grid, Row, Form,  Item, Input, Title, IconNB, } from 'native-base'
-import keranjang from './keranjang'
+import { 
+        Col, 
+        Container, 
+        Content, 
+        Body,
+        Header,  
+        Left, 
+        Right, 
+        Grid, 
+        Row, 
+        Form, 
+        Item, 
+        Input, 
+        Title, 
+        } from 'native-base'
+
+
 import { Icon } from 'react-native-elements';
+import styles from './styles';
+
+
 class HalamanBayar extends Component {
     onPresDetail 
     static navigationOptions = {
@@ -26,21 +41,147 @@ class HalamanBayar extends Component {
             <Container>
                 <Header>
                 <Left>
-                    <Icon name="arrow-left" onPress={
+                    <Icon name="arrow-back" onPress={
                         () => this.props.navigation.navigate('keranjang')} />
                     </Left>
-                    <Grid>
-                        <Row style = {styles.row}>
-                            <Col size={5}>
-                                <Searchbar/>
-                            </Col>
-                        </Row>
-                    </Grid>
-                </Header>
+                    <Body>
+                        <Title> Halaman Bayar </Title>
+                        <Right/>
+                    </Body>
+                    </Header>                
 
-                <Content style={styles.contentpenjualan}>
-                 
-                    <Text > ketika mau bayar </Text>
+                <Content padder>
+                <Grid>
+                    <Row>
+                        <Col>
+                        <Left>
+                            <Text style={styles.text}>
+                                Cash
+                            </Text>
+                            </Left>
+                        </Col>
+                        <Col>
+                            <Form>
+                                <Item regular>
+                                <Input keyboardType={'numeric'} placeholder="Harga"/>
+                                </Item>
+                        
+                            </Form>
+                        </Col>
+                    <Right/>
+                    </Row>
+                    <Row>
+                        <Col>
+                        <Left>
+                            <Text style={styles.text}>
+                                Kartu Kredit
+                            </Text>
+                            </Left>
+                        </Col>
+                        <Col>
+                            <Form>
+                                <Item regular>
+                                <Input  keyboardType={'numeric'} placeholder="Harga"/>
+                                </Item>
+                        
+                            </Form>
+                        </Col>
+                    <Right/>
+                    </Row>
+                    <Row>
+                        <Col>
+                        <Left>
+                            <Text style={styles.text}>
+                                Debit
+                            </Text>
+                            </Left>
+                        </Col>
+                        <Col>
+                            <Form>
+                                <Item regular>
+                                <Input keyboardType={'numeric'}  placeholder="Harga" />
+                                </Item>
+                        
+                            </Form>
+                        </Col>
+                    <Right/>
+                    </Row>
+                    <Row>
+                        <Col>
+                        <Left>
+                            <Text style={styles.text}>
+                                Total Harga
+                            </Text>
+                            </Left>
+                        </Col>
+                        <Col>
+                            <Text style={styles.text}>
+                                Rp 54.000
+                            </Text>
+                        </Col>
+                    <Right/>
+                    </Row>
+                    <Row>
+                        <Col>
+                        <Left>
+                            <Text style={styles.text}>
+                                Diskon
+                            </Text>
+                            </Left>
+                        </Col>
+                        <Col>
+                            <Text style={styles.text}>
+                                Rp 54.000
+                            </Text>
+                        </Col>
+                    <Right/>
+                    </Row>
+                    <Row>
+                        <Col>
+                        <Left>
+                            <Text style={styles.text}>
+                                Pajak
+                            </Text>
+                            </Left>
+                        </Col>
+                        <Col>
+                            <Text style={styles.text}>
+                                Rp 54.000
+                            </Text>
+                        </Col>
+                    <Right/>
+                    </Row>
+                    <Row>
+                        <Col>
+                        <Left>
+                            <Text style={styles.text}>
+                                Tunai
+                            </Text>
+                            </Left>
+                        </Col>
+                        <Col>
+                            <Text style={styles.text}>
+                                Rp 54.000
+                            </Text>
+                        </Col>
+                    <Right/>
+                    </Row>
+                    <Row>
+                        <Col>
+                        <Left>
+                            <Text style={styles.text}>
+                                Kembali
+                            </Text>
+                            </Left>
+                        </Col>
+                        <Col>
+                            <Text style={styles.text}>
+                                Rp 46.000
+                            </Text>
+                        </Col>
+                    <Right/>
+                    </Row>
+                </Grid>
                 </Content>
 
             </Container>
@@ -48,43 +189,5 @@ class HalamanBayar extends Component {
     }
 
 }
-const styles = StyleSheet.create({
-    Searchbar: {
-      backgroundColor: "#FFF",
-      width : 500,
-    },
-        col: {
-            // paddingHorizontal: 5,
-            backgroundColor:'white',
-            width:'80%'
-        },
-      col1: {
-        // paddingHorizontal: 1,
-        backgroundColor:'blue',
-        width:'20%'
-      },
-      row: {
-        paddingBottom: 5,
-      },
-      iconText: {
-        fontSize: 12,
-      },
-      mbl15:{
-          marginBottom : 20,
-          backgroundColor: 'red',
-          width: 80,
-          height: 50
-      },
-      
-     
-      contentpenjualan:{ 
-          backgroundColor: 'white', 
-          padding:0, 
-          
-        },
-        imageicon: {
-            width :24,
-            height: 24
-        }
-});
+
 export default HalamanBayar;

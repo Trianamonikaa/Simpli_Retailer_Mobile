@@ -10,20 +10,27 @@ import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail,
 import riwayatpage2 from './riwayatpage2'
 
 import { Icon } from 'react-native-elements';
+import styles from "./styles";
 class RiwayatPenjualan extends Component {
     static navigationOptions = {
         drawerIcon: (
-            <Icon name = "air"/>
+            <Icon name = "bicycle"/>
         )
     }
     render() {
         return (
             <Container>
                 <Header>
-                    <Left>
-                        <Icon name="menu" onPress={()=> this.props.navigation.navigate('DrawerOpen')} />
+                    <Left>  
+                        <Icon name="menu" onPress={()=>
+                             this.props.navigation.navigate('DrawerOpen')} />
                     </Left>
+                    <Body>
+                        <Title> Halaman Bayar </Title>
+                        <Right/>
+                    </Body> 
                 </Header>
+
                 <Content contentContainerStyle={{
                     flex: 1,
                     alignItems: 'center',
