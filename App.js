@@ -1,24 +1,22 @@
 import React , { Component } from "react";
 import {
-  AppRegistry,
-  View,
+ 
   Text,
-  StyleSheet,
+ 
   Image,
-  Button,
-  TouchableOpacity,
+ 
 } from 'react-native';
 
-import { Router, Scene } from 'react-native-router-flux';
+
 import styles from './styles'
 
-import Penjualan from './Penjualan'
-import Produk from './Produk'
-import RiwayatPenjualan from './RiwayatPenjualan'
-import HalamanBayar from './HalamanBayar'
-import produkpage2 from './produkpage2'
-import keranjang from './keranjang'
-import riwayatpage2 from './riwayatpage2'
+import Penjualan from './src/screen/penjualan/Penjualan'
+import Produk from './src/screen/produk/Produk'
+import RiwayatPenjualan from './src/screen/riwayat/RiwayatPenjualan'
+import HalamanBayar from './src/screen/penjualan/HalamanBayar'
+import produkpage2 from './src/screen/produk/produkpage2'
+import keranjang from './src/screen/penjualan/keranjang'
+import riwayatpage2 from './src/screen/riwayat/riwayatpage2'
 
 import {Container, Content, Header, Body ,Item,Input, Icon} from 'native-base'
 import {DrawerNavigator, DrawerItems } from 'react-navigation'
@@ -71,7 +69,7 @@ const MyApp = DrawerNavigator({
     screen: riwayatpage2
   }, 
 },{
-  initialRouteName:'Penjualan',
+  initialRouteName:'riwayatpage2',
   contentComponent:CustomDrawerContentComponent,
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',

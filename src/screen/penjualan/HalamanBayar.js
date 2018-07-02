@@ -22,7 +22,14 @@ import {
 
 import { Icon } from 'react-native-elements';
 import styles from './styles';
-
+const pict1 = require("../../image/beras.jpg")
+const cards = [
+    {
+        text: "Beras",
+        name : "one",
+        image : pict1
+    },
+]
 
 class HalamanBayar extends Component {
     onPresDetail 
@@ -45,7 +52,7 @@ class HalamanBayar extends Component {
                         () => this.props.navigation.navigate('keranjang')} />
                     </Left>
                     <Body>
-                        <Title> Halaman Bayar </Title>
+                        <Title style={styles.text}> Detail Pembayaran </Title>
                         <Right/>
                     </Body>
                     </Header>                

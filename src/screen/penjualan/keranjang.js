@@ -1,15 +1,19 @@
 import React, {Component } from "react";
 import {
-    View,
     Text,
-    StyleSheet
+    
 } from "react-native";
 import Searchbar from './Searchbar'
-import { Button, Col, Container, Content, DeckSwiper, Card, CardItem, Thumbnail, Body,
-    Header,  Left, Right, Grid, Row, Form,  Item, Input, Title, IconNB, } from 'native-base'
-import Penjualan from './Penjualan'
+import { Button, 
+    Col, 
+    Container, 
+    Content, 
+    Body,
+    Header,  
+    Left, 
+    Right, 
+    Title } from 'native-base'
 import styles from './styles'
-import Halaman from './HalamanBayar'
 import { Icon } from 'react-native-elements';
 class keranjang extends Component {
     onPresDetail 

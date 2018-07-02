@@ -39,8 +39,11 @@ export default {
     width : 500,
   },
   col: {
-    backgroundColor:'white',
-    width:'80%',
+    backgroundColor:'pink',
+    width:'50%',
+    borderTopLeftRadius : 10,
+    borderTopLeftRadius : 10,
+    overflow : 'hidden',
     alignItems: "center"
   },
   col1: {
@@ -113,6 +116,15 @@ export default {
   text: {
     fontSize: 20,
     paddingLeft : 5,
+  },
+  imgOver : {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: 'red',
+    position: 'absolute',
+    backgroundColor: 'transparent',
+   
   }
 
 };

@@ -1,7 +1,18 @@
 const React = require("react-native");
 
 const { StyleSheet } = React;
-
+import { Button, 
+  Container,
+  Header,
+  Title,
+  Content,
+  ListItem,
+  Icon,
+  Left,
+  Right,
+  Body,
+  List,
+  } from 'native-base';
 export default {
   
   buttonContainer: {
@@ -111,8 +122,30 @@ export default {
     borderBottomWidth : 1,
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     paddingLeft : 5,
+    margin : 0,
+    padding : 0
+  },
+  textdetail: {
+    fontSize : 18,
+  },
+  itembody: {
+    borderColor : 'hidden', 
+  },
+  textright: {
+    alignSelf: 'flex-end',
+    fontSize : 18,
+    margin : 0,
+    padding : 0
+    
+  },
+  pad : {
+    paddingBottom : 15
+  },
+  riwayatitem: {
+    margin : 0,
+    padding : 0
   }
 
 };

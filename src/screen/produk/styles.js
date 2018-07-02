@@ -113,6 +113,7 @@ export default {
   text: {
     fontSize: 20,
     paddingLeft : 5,
+    
   }
 
 };

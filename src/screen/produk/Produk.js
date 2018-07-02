@@ -1,8 +1,7 @@
 import React, {Component } from "react";
 import {
     View,
-    StyleSheet,
-    Image
+    
 } from "react-native";
 
 import { Button, 
@@ -21,11 +20,9 @@ import { Button,
         Text, 
         Col,} from 'native-base'
 import Searchbar from './Searchbar'
-import Halaman from './HalamanBayar'
 
-import Penjualan from './Penjualan'
 import styles from './styles'
-const beras = require("./src/image/beras.jpg");
+const beras = require("../../image/beras.jpg");
 
 const datas =[
     {
@@ -41,7 +38,7 @@ class Produk extends Component {
     }
     static navigationOptions = {
         drawerIcon: (
-            <Icon name = "shop"/> 
+            <Icon name = "cart"/> 
         ), 
     }
     getName(){

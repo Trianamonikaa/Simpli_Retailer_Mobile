@@ -2,33 +2,33 @@ import React, {Component } from "react";
 import {
     View,
     Text,
-    StyleSheet,
+   
     Image,
 } from "react-native";
 import Searchbar from './Searchbar'
-import { Button, 
-        Col, 
+import {  
         Container, 
         Content, 
-        Thumbnail, 
         Body,
         Header,  
         Left, 
         Right, 
-        Row, 
-        Form,  
-        Item, 
+       Icon,
         Title, 
         } from 'native-base'
 import styles from './styles'
-import beras from './src/image/beras.jpg'
+import beras from '../../image/beras.jpg'
 
-import { Icon } from 'react-native-elements';
 class produkpage2 extends Component {
     // onPresDetail 
-    static navigationOptions = {
-        drawerLabel: ()=> null
+    static navigationOptions = {  
+        drawerIcon: (
+            <Icon name = "ios-cart-outline"/>
+        )
     }
+    // static navigationOptions = {
+    //     drawerLabel: ()=> null
+    // }
     getName(){
         
         return Searchbar
