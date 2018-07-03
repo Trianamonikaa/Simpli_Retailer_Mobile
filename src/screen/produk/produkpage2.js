@@ -26,9 +26,9 @@ class produkpage2 extends Component {
             <Icon name = "ios-cart-outline"/>
         )
     }
-    // static navigationOptions = {
-    //     drawerLabel: ()=> null
-    // }
+    static navigationOptions = {
+        drawerLabel: ()=> null
+    }
     getName(){
         
         return Searchbar

@@ -12,7 +12,7 @@ export default {
     marginTop: 10
   },
   mb15: {
-    marginBottom: 20
+    
   },
   mt15: {
     marginTop: 15
@@ -69,7 +69,9 @@ export default {
   
   },
   mb: {
-    marginBottom: 15
+    height : 300,
+    width : 390,
+    paddingLeft : 5
   },
   imageicon:{
     width: 24,
@@ -79,7 +81,7 @@ export default {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: 'white',
   },
   drawerImage:{
     height:190,
@@ -125,6 +127,10 @@ export default {
     position: 'absolute',
     backgroundColor: 'transparent',
    
+  },
+  listkeranjang : {
+  backgroundColor: 'transparent',
+
   }
 
 };

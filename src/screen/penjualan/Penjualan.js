@@ -56,13 +56,7 @@ class Penjualan extends Component{
                         </Row>
                     </Grid>                    
                 </Header>
-                {/* <Content style={styles.contentpenjualan}>   
-                    <Button onPress={this.onPressDetail}>
-                        <Text> BAYAR?</Text>
-                    </Button>
-                    <View>
-                    </View>
-                </Content> */}
+                
                 <Content padder>
                 <Button onPress={()=> this.props.navigation.navigate('Halaman')}>
                 <Text> BAYAR </Text><Right/>

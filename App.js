@@ -1,3 +1,4 @@
+console.disableYellowBox = true;
 import React , { Component } from "react";
 import {
  
@@ -69,7 +70,7 @@ const MyApp = DrawerNavigator({
     screen: riwayatpage2
   }, 
 },{
-  initialRouteName:'riwayatpage2',
+  initialRouteName:'keranjang',
   contentComponent:CustomDrawerContentComponent,
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',
