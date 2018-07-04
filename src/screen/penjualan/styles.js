@@ -69,7 +69,7 @@ export default {
   
   },
   mb: {
-    height : 300,
+    height : 250,
     width : 390,
     paddingLeft : 5
   },
@@ -92,11 +92,7 @@ export default {
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  
   textmenu: {
     fontSize : 21,
     fontWeight : 'bold',
@@ -116,7 +112,7 @@ export default {
     borderBottomWidth : 1,
   },
   text: {
-    fontSize: 20,
+    fontSize: 15,
     paddingLeft : 5,
   },
   imgOver : {
@@ -129,8 +125,28 @@ export default {
    
   },
   listkeranjang : {
-  backgroundColor: 'transparent',
+  backgroundColor: 'grey',
+  marginLeft : 0,
+  paddingLeft : 0
+  },
+  red: {
+    backgroundColor : 'ref',
+  },
+  pink : {
+    backgroundColor : 'pink'
+  },
+  textBold: {
+    fontWeight: '200',
+    color: 'blue',
+  },
+  buttonText: {
+    fontSize: 21,
+    color: 'rgb(0,122,255)',
+  },
+  buttonTouchable: {
+    padding: 16,
+  },
 
-  }
+  
 
 };
