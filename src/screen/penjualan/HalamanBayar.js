@@ -1,6 +1,6 @@
 import React, {Component } from "react";
 import {
-    Text,
+    Text,View,
 } from "react-native";
 import Searchbar from './Searchbar'
 import { 
@@ -46,148 +46,113 @@ class HalamanBayar extends Component {
     render() {
         return (
             <Container>
-                <Header>
-                <Left>
-                    <Icon name="arrow-back" onPress={
-                        () => this.props.navigation.navigate('keranjang')} />
+               <Header style = {styles.headerback}>
+                    <Left>
+                        <Icon size={40}
+                         name="menu" onPress={
+                            () => this.props.navigation.navigate('DrawerOpen')} />
                     </Left>
-                    <Body>
-                        <Title style={styles.text}> Detail Pembayaran </Title>
-                        <Right/>
+                    <Body style={{width : '50%'}}>
+                        <Title style={{color : 'black'}}> Detail Pembayaran </Title>
                     </Body>
-                    </Header>                
+                </Header>                
 
-                <Content padder>
-                <Grid>
-                    <Row>
-                        <Col>
-                        <Left>
-                            <Text style={styles.text}>
-                                Cash
-                            </Text>
+                <Content padder style={{ backgroundColor: 'grey' }}>
+                    <Grid style={{ backgroundColor: 'yellow' }}>
+                        <Row >
+                           
+                            <Left>
+                                <Text style = {styles.text}>Cash</Text>
                             </Left>
-                        </Col>
-                        <Col>
-                            <Form>
-                                <Item regular>
-                                <Input keyboardType={'numeric'} placeholder="Harga"/>
-                                </Item>
+                            <Body >
+                            <Form style = {{width : 150, height :40, }}>
+                                    <Item regular>
+                                        <Input style = {{width : 150, height :35,fontSize : 15}}
+                                        keyboardType={'numeric'} placeholder="Harga" />
+                                    </Item>
+                                </Form>
+                            </Body>
+                        </Row>
+                        <Row>
+                          
+                            <Left>
+                                <Text style = {styles.text}>Debit</Text>
+                            </Left>
+                            <Body >
+                            <Form style = {{width : 150, height :40, }}>
+                                    <Item regular>
+                                        <Input style = {{width : 150, height :35, fontSize : 15}}
+                                        keyboardType={'numeric'} placeholder="Harga" />
+                                    </Item>
+                                </Form>
+                            </Body>
+                        </Row>
+                        <Row>
+                          
+                            <Left>
+                                <Text style = {styles.text}>Credit Card</Text>
+                            </Left>
+                            <Body >
+                            <Form style = {{width : 150, height :40,}}>
+                                    <Item regular>
+                                        <Input 
+                                        style = {{width : 150, height :35, fontSize : 15}}
+                                        keyboardType={'numeric'} placeholder="Harga" />
+                                    </Item>
+                                </Form>
+                            </Body>
+                        </Row>
+                        <Row style = {{paddingTop : 10}}>
+                             <Left>
+                                <Text style = {styles.text}>Total Harga</Text>
+                            </Left>
+                            <Body >
+                            <Text style={styles.text}>
+                                    Rp 54.000
+                            </Text>
+                            </Body>
+                        </Row>
+                        <Row>
+                             <Left>
+                                <Text style = {styles.text}>Diskon</Text>
+                            </Left>
+                            <Body >
+                            <Text style={styles.text}>
+                                    Rp 54.000
+                            </Text>
+                            </Body>
+                        </Row>
+                        <Row>
+                             <Left>
+                                <Text style = {styles.text}>Pajak</Text>
+                            </Left>
+                            <Body >
+                            <Text style={styles.text}>
+                                    Rp 54.000
+                            </Text>
+                            </Body>
+                        </Row>
+                        <Row>
+                             <Left>
+                                <Text style = {styles.text}>Tunai</Text>
+                            </Left>
+                            <Body >
+                            <Text style={styles.text}>
+                                    Rp 54.000
+                            </Text>
+                            </Body>
+                        </Row>
+                        <Row>
+                             <Left>
+                                <Text style = {styles.text}>Kembali</Text>
+                            </Left>
+                            <Body >
+                            <Text style={styles.text}>
+                                    Rp 54.000
+                            </Text>
+                            </Body>
+                        </Row>
                         
-                            </Form>
-                        </Col>
-                    <Right/>
-                    </Row>
-                    <Row>
-                        <Col>
-                        <Left>
-                            <Text style={styles.text}>
-                                Kartu Kredit
-                            </Text>
-                            </Left>
-                        </Col>
-                        <Col>
-                            <Form>
-                                <Item regular>
-                                <Input  keyboardType={'numeric'} placeholder="Harga"/>
-                                </Item>
-                        
-                            </Form>
-                        </Col>
-                    <Right/>
-                    </Row>
-                    <Row>
-                        <Col>
-                        <Left>
-                            <Text style={styles.text}>
-                                Debit
-                            </Text>
-                            </Left>
-                        </Col>
-                        <Col>
-                            <Form>
-                                <Item regular>
-                                <Input keyboardType={'numeric'}  placeholder="Harga" />
-                                </Item>
-                        
-                            </Form>
-                        </Col>
-                    <Right/>
-                    </Row>
-                    <Row>
-                        <Col>
-                        <Left>
-                            <Text style={styles.text}>
-                                Total Harga
-                            </Text>
-                            </Left>
-                        </Col>
-                        <Col>
-                            <Text style={styles.text}>
-                                Rp 54.000
-                            </Text>
-                        </Col>
-                    <Right/>
-                    </Row>
-                    <Row>
-                        <Col>
-                        <Left>
-                            <Text style={styles.text}>
-                                Diskon
-                            </Text>
-                            </Left>
-                        </Col>
-                        <Col>
-                            <Text style={styles.text}>
-                                Rp 54.000
-                            </Text>
-                        </Col>
-                    <Right/>
-                    </Row>
-                    <Row>
-                        <Col>
-                        <Left>
-                            <Text style={styles.text}>
-                                Pajak
-                            </Text>
-                            </Left>
-                        </Col>
-                        <Col>
-                            <Text style={styles.text}>
-                                Rp 54.000
-                            </Text>
-                        </Col>
-                    <Right/>
-                    </Row>
-                    <Row>
-                        <Col>
-                        <Left>
-                            <Text style={styles.text}>
-                                Tunai
-                            </Text>
-                            </Left>
-                        </Col>
-                        <Col>
-                            <Text style={styles.text}>
-                                Rp 54.000
-                            </Text>
-                        </Col>
-                    <Right/>
-                    </Row>
-                    <Row>
-                        <Col>
-                        <Left>
-                            <Text style={styles.text}>
-                                Kembali
-                            </Text>
-                            </Left>
-                        </Col>
-                        <Col>
-                            <Text style={styles.text}>
-                                Rp 46.000
-                            </Text>
-                        </Col>
-                    <Right/>
-                    </Row>
                 </Grid>
                 </Content>
 

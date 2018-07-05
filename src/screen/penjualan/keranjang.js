@@ -1,14 +1,11 @@
 'use strict';
 import PopupDialog from 'react-native-popup-dialog';
-import React, { Component, PropTypes } from "react";
+import React, { Component} from "react";
 import {
     Text, 
     View, 
     Alert, 
-    AppRegistry,
-    StyleSheet,
-    TouchableOpacity,
-    Linking
+   
 } from "react-native";
 import Searchbar from './Searchbar'
 import {
@@ -19,11 +16,22 @@ import {
     Body,
     Header,
     Left,
-    Title, List, ListItem,
+    Right,
+    Title, 
+    List, 
+    ListItem,
     SwipeRow,
-    Form, Input, Item, Grid, Row, Col
+    Form, 
+    Input, 
+    Item, 
+    Grid, 
+    Row, 
+    Col
 } from 'native-base'
 import styles from './styles'
+// import Barcode from 'react-native-smart-barcode'
+// import Camera from 'react-native-camera';
+// import PropTypes from 'prop-types';
 // import QRCodeScanner from 'react-native-qrcode-scanner';
 const datas = [
     {
@@ -74,25 +82,53 @@ const datas = [
         harga: "Rp 56.000",
         peritem: "Rp 5.000"
     },
+    {
+        kuantitas: "5",
+        nama: "cijjjj",
+        harga: "Rp 56.000",
+        peritem: "Rp 5.000"
+    },
+    {
+        kuantitas: "5",
+        nama: "dfsdfdsf",
+        harga: "Rp 56.000",
+        peritem: "Rp 5.000"
+    },
 ]
-const cardImage = require("../../image/beras.jpg")
-class ScanScreen extends Component {
-    onSuccess(e) {
-      Linking
-        .openURL(e.data)
-        .catch(err => console.error('An error occured', err));
-    }}
+// const ScannerComponent = Platform.select({
+//     android: () => require('react-native-barcode-scanner-google').default,
+//     ios: () => require('react-native-camera').default
+//   })();
+// const cardImage = require("../../image/beras.jpg")
+// class ScanScreen extends Component {
+//     onSuccess(e) {
+//       Linking
+//         .openURL(e.data)
+//         .catch(err => console.error('An error occured', err));
+//     }}
+    
 class keranjang extends Component {
     onPresDetail
     static navigationOptions = {
         drawerLabel: () => null
     }
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            inputNumber : 0,
+            selecteditem : {}
+        }
     }
     getName() {
         return Searchbar
     }
+    ubahkuantitas(number){
+        this.popupDialog.dismiss();
+        this.state.selecteditem.kuantitas = number;
+        // alert(number);
+
+    }
+    
     deleteRow(item) {
         // lakukan delete item
       }
@@ -108,17 +144,27 @@ class keranjang extends Component {
             { cancelable: false }
           )
     }
+    
+    
     render() {
         return (
-            <Container >
-                <Header>
+                <Container >
+                <Header style = {styles.headerback}>
                     <Left>
-                        <Icon name="menu" onPress={
+                        <Icon size={70}
+                         name="menu" onPress={
                             () => this.props.navigation.navigate('DrawerOpen')} />
                     </Left>
-                    <Body>
-                        <Title> Keranjang Belanjaan </Title>
+                    <Body style={{width : '50%'}}>
+                        <Title style={{color : 'black'}}> Keranjang Belanja </Title>
                     </Body>
+                    <Right>
+                        <Button style={{backgroundColor: 'papayawhip'}}
+                            onPress={() => this.props.navigation.navigate('Penjualan')}
+                        >
+                            <Text style = {{fontSize : 18}}>Search</Text>
+                        </Button>
+                    </Right>
                 </Header>
                 <PopupDialog
                     ref={(popupDialog) => { this.popupDialog = popupDialog; }}
@@ -127,32 +173,20 @@ class keranjang extends Component {
                         <Text>Masukkan berapa banyak barang yang akan dibeli</Text>
                         <Form >
                             <Item regular>
-                                <Input keyboardType={'numeric'} placeholder="barang"> </Input>
+                                <Input keyboardType={'numeric'} placeholder="barang" 
+                                onChangeText = {(inputNumber) => this.setState({inputNumber})}
+
+                                    value={this.state.inputNumber}> 
+                                </Input>
                             </Item>
                         </Form>
-                        <Button onPress={() => this.props.navigation.navigate('Halaman')}>
+                        <Button onPress={() =>this.ubahkuantitas(this.state.inputNumber)}>
                             <Text>Submit</Text>
                         </Button>
                     </View>
                 </PopupDialog>
-                <Content style={{
-                    backgroundColor: 'transparent',
-                }}
-                    padder>
-                    {/* <QRCodeScanner style={{width : 100}}
-                        onRead={this.onSuccess.bind(this)}
-                        topContent={
-                            <Text style={styles.centerText}>
-                                Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> 
-                                on your computer and scan the QR code.
-                            </Text>
-                        }
-                        bottomContent={
-                            <TouchableOpacity style={styles.buttonTouchable}>
-                                <Text style={styles.buttonText}>OK. Got it!</Text>
-                            </TouchableOpacity>
-                        }
-                    /> */}
+                <Content >
+                   
                     <View style={{ backgroundColor: 'transparent', padding: 0, margin: 0 }}   >
                         <List scrollEnabled={false}
                             style={styles.listkeranjang}
@@ -160,14 +194,15 @@ class keranjang extends Component {
                             dataArray={datas}
                             renderRow={data =>
                                 <ListItem
-                                    style={{ backgroundColor: 'white', paddingLeft: 0, marginLeft: 0, paddingRight: 0, marginRight: 0 }}>
+                                    style={styles.rowmenu}>
                                     <SwipeRow scrollEnabled={false}
-                                        style={{ backgroundColor: 'white', paddingRight: 0, marginRight: 0 }}
+                                        style={{ backgroundColor: 'white', paddingRight: 0, marginRight: 0 , borderBottomWidth : 0, marginBottom:0, paddingBottom:0,}}
                                         leftOpenValue={75}
                                         rightOpenValue={-75}
                                         left={
 
                                             <Button onPress={() => {
+                                                this.state.selecteditem= data;
                                                 this.popupDialog.show();
                                             }}
                                             >
@@ -183,19 +218,17 @@ class keranjang extends Component {
                                             </Button>
                                         }
                                         body={
-                                            <View style={{ backgroundColor: 'white', width: '100%', paddingLeft: 0,  margin: 0 }}>
+                                            <View noBorder={true} 
+                                            style={{ backgroundColor: 'white', width: '100%', paddingLeft: 0,  margin: 0 , borderBottomWidth : 0, marginBottom:0, paddingBottom:0}}>
 
-                                                <ListItem avatar noBorder={true}
-                                                    style={{
-                                                        paddingBottom: 0, paddingTop: 0, paddingRight: 0
-                                                    }}
+                                                <ListItem  noBorder={true}
+                                                    
                                                 >
 
-                                                    <Grid>
-                                                        <Row>
-                                                            <Col style={{ width: '70%' }}>
-
-                                                                <Text style={styles.text}>
+                                                    <Grid >
+                                                        <Row style={{height : 'auto', width: 'auto'}}>
+                                                            <Col >
+                                                                <Text style={{fontSize:20}}>
                                                                     {data.nama}
                                                                 </Text>
                                                             </Col>
@@ -230,7 +263,7 @@ class keranjang extends Component {
                 <View >
                     <Button full style={styles.mb15}
                         onPress={() => this.props.navigation.navigate('Halaman')} >
-                        <Text>MAU BAYAR INI</Text>
+                        <Text style = {styles.text}>MAU BAYAR INI</Text>
                     </Button>
                 </View>
             </Container>

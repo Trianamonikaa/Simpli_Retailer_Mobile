@@ -1,239 +1,117 @@
 import React, { Component } from "react";
 import {
-    Text,
-    Image,
+  Text,
+  Image,
 } from "react-native";
 import Searchbar from './Searchbar';
 
-import { Button, 
-        Col, 
-        Container, 
-        Content, 
-        Card, 
-        CardItem,
-        Body,
-        Header,  
-        Left, Right, 
-        Grid, Row, 
-        Icon} from 'native-base';
+import {
+  Input,
+  Button,
+  Col,
+  Container,
+  Content,
+  List,
+  ListItem,
+  Body,
+  Header,
+  Left, Right,
+  Grid, Row,
+  Icon,
+  Item, 
+} from 'native-base';
 
 import styles from './styles'
 
-import beras from '../../image/beras.jpg'
+
+const datas = [
+  { nama: "pasir lalalalalal",
+      harga: "Rp 25.000",
+      peritem: "Rp 5.000"
+  },
+  {  nama: "eskrim ayaaaamm",
+      harga: "Rp 56.000",
+      peritem: "Rp 5.000"
+  },
+  { nama: "selada guuuuu",
+      harga: "Rp 56.000",
+      peritem: "Rp 5.000"
+  },
+  {nama: "bakso",
+      harga: "Rp 56.000",
+      peritem: "Rp 5.000"
+  },
+  { nama: "tuna",
+      harga: "Rp 56.000",
+      peritem: "Rp 5.000"
+  },
+  {
+      nama: "pisang",
+      harga: "Rp 56.000",
+      peritem: "Rp 5.000"
+  },
+  {
+      nama: "lala",
+      harga: "Rp 56.000",
+      peritem: "Rp 5.000"
+  },
+  {
+      nama: "lala",
+      harga: "Rp 56.000",
+      peritem: "Rp 5.000"
+  },
+]
 
 
-class Penjualan extends Component{
-    
-    onPressDetail=()=>{
-        this.props.navigation.navigate('Halaman');
-    }
-    static navigationOptions = {  
-        drawerIcon: (
-            <Icon name = "ios-cart-outline"/>
-        )
-    }
-    getName(){
-        return Searchbar
-    }
-    render() {
-        return (
-            <Container>
-                <Header>
+class Penjualan extends Component {
+
+  onPressDetail = () => {
+    this.props.navigation.navigate('keranjang');
+  }
+  static navigationOptions = {
+    drawerIcon: (
+      <Icon name="ios-cart-outline" />
+    )
+  }
+
+  render() {
+    return (
+      <Container>
+        <Header style = {styles.headerback}>
                     <Left>
-                    <Icon name="menu" onPress={
-                        () => this.props.navigation.navigate('HalamanBayar')} />
+                        <Icon size={70}
+                         name="arrow-back" onPress={
+                            () => this.props.navigation.navigate('keranjang')} />
                     </Left>
-                    <Grid>
-                        <Row style = {styles.row}>
-                            <Col size={5}>
-                                <Searchbar/>
-                            </Col>
-                            <Col  style = {styles.keranjang}>
-                                <Icon name = "ios-cart-outline" onPress={
-                                ()=> this.props.navigation.navigate('keranjang')} />                   
-                            <Right/>
-                            </Col>                   
-                        </Row>
-                    </Grid>                    
+                    <Body style={{width : '50%', backgroundColor : 'rebbecapurple'}}>
+                        <Item >
+                          <Icon active name = "search"/>
+                          <Input placeholder = "Search"/>
+                        </Item>
+                      </Body>
+                    
                 </Header>
-                
-                <Content padder>
-                <Button onPress={()=> this.props.navigation.navigate('Halaman')}>
-                <Text> BAYAR </Text><Right/>
-                </Button>
-          <Card style={styles.mb}>
-            <Grid>
-                <Row style = {styles.row}>
-                    <Col style = {styles.imgOver}>
-                    <CardItem>
-              <Left>
-                <Body>
-                  <Text>BERAS PULEN</Text>
-                  <Text note>Rp 80.000</Text>
-                </Body>
-              </Left>
-            </CardItem>
 
-            <CardItem cardBody>
-              <Image
-                style={{
-                  resizeMode: "cover",
-                  width: 100,
-                  height: 100,
-                  flex: 1
-                }}
-                source={beras}
-              />
-            </CardItem>
+        <Content padder>
+        <List 
+        dataArray={datas} renderRow = {data =>
+        <ListItem onPress= {()=>this.props.navigation.navigate('keranjang')}>
+          <Left>
+            <Text > 
+            {data.nama}</Text>
+          </Left>
+          <Right>
+            <Text> {data.peritem} </Text>
+          </Right>
+        </ListItem>}
+/>
 
-            <CardItem style={{ paddingVertical: 0 }}>
-              <Left>
-                <Button transparent>
-                  <Icon active name="thumbs-up" />
-                  <Text>4923 Likes</Text>
-                </Button>
-              </Left>
-              <Body>
-                <Button transparent>
-                  <Icon active name="chatbubbles" />
-                  <Text>89 Comments</Text>
-                </Button>
-              </Body>
-              <Right>
-                <Text>11h ago</Text>
-              </Right>
-            </CardItem>
-                    </Col>
-                    <Col>
-                    <CardItem>
-              <Left>
-                <Body>
-                  <Text>BERAS PULEN</Text>
-                  <Text note>Rp 80.000</Text>
-                </Body>
-              </Left>
-            </CardItem>
-
-            <CardItem cardBody>
-              <Image
-                style={{
-                  resizeMode: "cover",
-                  width: null,
-                  height: 100,
-                  flex: 1
-                }}
-                source={beras}
-              />
-            </CardItem>
-
-            <CardItem style={{ paddingVertical: 0 }}>
-              <Left>
-                <Button transparent>
-                  <Icon active name="thumbs-up" />
-                  <Text>4923 Likes</Text>
-                </Button>
-              </Left>
-              <Body>
-                <Button transparent>
-                  <Icon active name="chatbubbles" />
-                  <Text>89 Comments</Text>
-                </Button>
-              </Body>
-              <Right>
-                <Text>11h ago</Text>
-              </Right>
-            </CardItem>
-                    </Col>
-                </Row>
-                <Row style = {styles.row}>
-                <Col style = {styles.col}>
-                    <CardItem>
-              <Left>
-                <Body>
-                  <Text>BERAS PULEN</Text>
-                  <Text note>Rp 80.000</Text>
-                </Body>
-              </Left>
-            </CardItem>
-
-            <CardItem cardBody>
-              <Image
-                style={{
-                  resizeMode: "cover",
-                  width: null,
-                  height: 100,
-                  flex: 1
-                }}
-                source={beras}
-              />
-            </CardItem>
-
-            <CardItem style={{ paddingVertical: 0 }}>
-              <Left>
-                <Button transparent>
-                  <Icon active name="thumbs-up" />
-                  <Text>4923 Likes</Text>
-                </Button>
-              </Left>
-              <Body>
-                <Button transparent>
-                  <Icon active name="chatbubbles" />
-                  <Text>89 Comments</Text>
-                </Button>
-              </Body>
-              <Right>
-                <Text>11h ago</Text>
-              </Right>
-            </CardItem>
-                    </Col>
-                    <Col>
-                    <CardItem>
-              <Left>
-                <Body>
-                  <Text>BERAS PULEN</Text>
-                  <Text note>Rp 80.000</Text>
-                </Body>
-              </Left>
-            </CardItem>
-
-            <CardItem cardBody>
-              <Image
-                style={{
-                  resizeMode: "cover",
-                  width: null,
-                  height: 100,
-                  flex: 1
-                }}
-                source={beras}
-              />
-            </CardItem>
-
-            <CardItem style={{ paddingVertical: 0 }}>
-              <Left>
-                <Button transparent>
-                  <Icon active name="thumbs-up" />
-                  <Text>4923 Likes</Text>
-                </Button>
-              </Left>
-              <Body>
-                <Button transparent>
-                  <Icon active name="chatbubbles" />
-                  <Text>89 Comments</Text>
-                </Button>
-              </Body>
-              <Right>
-                <Text>11h ago</Text>
-              </Right>
-            </CardItem>
-                    </Col>
-                </Row>
-            </Grid>
-          </Card>
-          </Content>
+          
+        </Content>
 
 
-            </Container>
-        );
-    };
+      </Container>
+    );
+  };
 }
 export default Penjualan;

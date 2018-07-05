@@ -70,7 +70,7 @@ const MyApp = DrawerNavigator({
     screen: riwayatpage2
   }, 
 },{
-  initialRouteName:'keranjang',
+  initialRouteName:'Halaman',
   contentComponent:CustomDrawerContentComponent,
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',

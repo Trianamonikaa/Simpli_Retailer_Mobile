@@ -11,10 +11,11 @@ import {
   Text
 } from "native-base";
 
+
 class Searchbar extends Component {
   render() {
     return (
-      <Container style={styles.container}>
+      <Container style={styles.containersearch}>
         <Header searchBar rounded>
           <Item>
             <Icon active name="search" />
@@ -31,7 +32,8 @@ class Searchbar extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFF",
+    backgroundColor: 'papayawhip',
+    width : '80%'
   },
 });
 
