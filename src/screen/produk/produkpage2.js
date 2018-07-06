@@ -36,17 +36,16 @@ class produkpage2 extends Component {
     render() {
         return (
             <Container>
-                <Header>
-                <Left>
-                    <Icon name="arrow-back" onPress={
-                        () => this.props.navigation.navigate('Produk')} />
+                <Header style = {styles.headerback}>
+                    <Left>
+                        <Icon size={30}
+                         name="arrow-back" onPress={
+                            () => this.props.navigation.navigate('Produk')} />
                     </Left>
-                    <Body>
-                        <Title> detail produk </Title>
-                        <Right/>
+                    <Body style={{width : '50%'}}>
+                        <Title style={{color : 'black'}}> Detail Produk </Title>
                     </Body>
-                    
-                </Header>
+                </Header> 
 
                 <Content> 
                     <View  style={styles.contentpicture}>         
@@ -54,12 +53,20 @@ class produkpage2 extends Component {
                     </View>
                     <View>
                         <Text style={styles.textmenu}> Detail Produk: </Text>
-                        <Text style={styles.text}>Nama Produk : Beras Pulen</Text>
-                        <Text style={styles.text}>Harga Jual : Rp 78.000,-</Text>
+                        <Text style={styles.text}>Nama Produk   : Beras Pulen</Text>
+                        <Text style={styles.text}>Harga Jual         : Rp 78.000,-</Text>
                         <Text style={styles.text}>Satuan </Text>
-                        <Text style={styles.text}>Harga beli : Rp 68.000,-</Text>
-                        <Text style={styles.text}>Tanggal datang produk : 29 Juni 2019</Text>
-                        <Text style={styles.text}>Banyak produk yang datang : 44</Text>
+                        <Text style={styles.text}>Harga beli          : Rp 68.000,-</Text>
+                        <Text style={styles.text}>Produk datang : 29 Juni 2019</Text>
+                        <Text style={styles.text}>Banyak Produk : 44</Text>
+                        <Text style={styles.text}>Produk deudad : 29 Juni 2019</Text>
+                        <Text style={styles.text}>Produk dududu : 29 Juni 2019</Text>
+                        <Text style={styles.text}>Produk dadada : 29 Juni 2019</Text>
+                        <Text style={styles.text}>Produk dududu : 29 Juni 2019</Text>
+                        <Text style={styles.text}>Produk uuuuuu : 29 Juni 2019</Text>
+                        <Text style={styles.text}>Produk pppppp : 29 Juni 2019</Text>
+                        <Text style={styles.text}>Produk dedede : 29 Juni 2019</Text>
+
                     </View>
                     
                 </Content>

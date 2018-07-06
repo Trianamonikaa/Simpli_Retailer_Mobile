@@ -111,9 +111,13 @@ export default {
     borderBottomWidth : 1,
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     paddingLeft : 5,
     
-  }
+  },
+  headerback : {
+    backgroundColor : 'pink'
+  
+  },
 
 };

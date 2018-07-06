@@ -7,8 +7,6 @@ import Searchbar from './Searchbar';
 
 import {
   Input,
-  Button,
-  Col,
   Container,
   Content,
   List,
@@ -16,7 +14,6 @@ import {
   Body,
   Header,
   Left, Right,
-  Grid, Row,
   Icon,
   Item, 
 } from 'native-base';
@@ -73,34 +70,39 @@ class Penjualan extends Component {
       <Icon name="ios-cart-outline" />
     )
   }
-
   render() {
     return (
       <Container>
-        <Header style = {styles.headerback}>
-                    <Left>
-                        <Icon size={70}
+        <Header style = {{backgroundColor : 'pink'}}>
+                    <Left style = {{backgroundColor : 'pink', paddingLeft : 0, width : '10%'}}>
+                        <Icon size={40} 
+                        style = {{paddingRight : 0}}
                          name="arrow-back" onPress={
                             () => this.props.navigation.navigate('keranjang')} />
                     </Left>
-                    <Body style={{width : '50%', backgroundColor : 'rebbecapurple'}}>
+                    <Body style={{width : '90%', backgroundColor : 'rebbecapurple'}}>
                         <Item >
-                          <Icon active name = "search"/>
-                          <Input placeholder = "Search"/>
+                          <Icon
+                          active name = "search"/>
+                          <Input style = {{backgroundColor : 'pink', alignContent : 'center', fontSize : 20, width : '100%'}}
+                          placeholder = "Search ..."/>
                         </Item>
                       </Body>
+                      <Right style = {{width : '0%'}}>
+                        </Right>
                     
                 </Header>
 
-        <Content padder>
-        <List 
+        <Content >
+        <List style = {{backgroundColor :'transparent', }}
         dataArray={datas} renderRow = {data =>
-        <ListItem onPress= {()=>this.props.navigation.navigate('keranjang')}>
-          <Left>
-            <Text > 
+        <ListItem style = {{backgroundColor :'transparent' ,marginLeft : 0, paddingLeft : 8}}
+        onPress= {()=>this.props.navigation.navigate('transparent')}>
+          <Left style = {{backgroundColor :'transparent'}}>
+            <Text style = {styles.text}> 
             {data.nama}</Text>
           </Left>
-          <Right>
+          <Right style = {{backgroundColor :'transparent'}}>
             <Text> {data.peritem} </Text>
           </Right>
         </ListItem>}

@@ -3,7 +3,7 @@ import {
     Text,View,
 } from "react-native";
 import Searchbar from './Searchbar'
-import { 
+import { Button,
         Col, 
         Container, 
         Content, 
@@ -48,7 +48,7 @@ class HalamanBayar extends Component {
             <Container>
                <Header style = {styles.headerback}>
                     <Left>
-                        <Icon size={40}
+                        <Icon size={30}
                          name="menu" onPress={
                             () => this.props.navigation.navigate('DrawerOpen')} />
                     </Left>
@@ -57,8 +57,8 @@ class HalamanBayar extends Component {
                     </Body>
                 </Header>                
 
-                <Content padder style={{ backgroundColor: 'grey' }}>
-                    <Grid style={{ backgroundColor: 'yellow' }}>
+                <Content padder style={{ backgroundColor: 'white' }}>
+                    <Grid style={{ backgroundColor: 'transparent' }}>
                         <Row >
                            
                             <Left>
@@ -154,6 +154,9 @@ class HalamanBayar extends Component {
                         </Row>
                         
                 </Grid>
+                <Button  block style={{backgroundColor : 'burlywood'}}>
+              <Text>BAYAR</Text>
+            </Button>
                 </Content>
 
             </Container>

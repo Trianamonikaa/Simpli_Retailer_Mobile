@@ -1,91 +1,134 @@
-import React, {Component } from "react";
+import React, { Component } from "react";
 import {
-    Text,View
-   
+    Text, View
+
 } from "react-native";
 import Searchbar from './Searchbar'
-import {  Container, Content, Body,
-    Header,  Left, Right,  Title, List, ListItem } from 'native-base'
+import {
+    Container,
+    Content,
+    Body,
+    Header,
+    Left,
+    Right,
+    Title,
+    List,
+    ListItem,
+    Grid,
+    Col,
+    Row
+} from 'native-base'
 
 import styles from './styles'
 import { Icon } from 'react-native-elements';
 
-const data= [
+
+const data = [
     {
-        nama : "beras",
-        harga : "Rp 98.000"
+        nama: "Beras",
+        harga: "Rp 98.000"
     },
     {
-        nama : "susu",
-        harga : "Rp 66.000"
+        nama: "Susu",
+        harga: "Rp 66.000"
     },
     {
-        nama : "pasir",
-        harga : "Rp 104.000"
+        nama: "Pasir",
+        harga: "Rp 104.000"
     }
 ]
-class riwayatpage2 extends Component { 
+class riwayatpage2 extends Component {
     static navigationOptions = {
-        drawerLabel: ()=> null
+        drawerLabel: () => null
     }
-    getName(){     
+    getName() {
         return Searchbar
     }
     render() {
         return (
             <Container>
-                <Header>
-                <Left>
-                    <Icon name="arrow-back" onPress={
-                        () => this.props.navigation.navigate('Riwayat')} />
+                <Header style={styles.headerback}>
+                    <Left>
+                        <Icon size={30}
+                            name="arrow-back" onPress={
+                                () => this.props.navigation.navigate('Riwayat')} />
                     </Left>
-                    <Body>
-                        <Title> Detail Transaksi</Title>
-                        <Right/>
+                    <Body style={{ width: '50%' }}>
+                        <Title style={{ color: 'black' }}> Detail Transaksi </Title>
                     </Body>
                 </Header>
-
-                <Content >                
-                    <Text  style={styles.text} > 
-                           ID ORDER : 02-07-242</Text>
-                        <Text style={styles.text}> TANGGAL : 02-07-2018</Text>
-                        <Text style={styles.text} >  PEMBAYARAN : CASH</Text>
-                        <Text style={styles.text}> DAFTAR BELANJA</Text>
-                        <List
-            dataArray={data}
-            renderRow={data =>
-              <ListItem avatar>
-               <Body>
-                    <View style={{paddingBottom : 5}}>
-                  <Text style ={{fontSize: 18  }}>{data.nama}</Text>
-              <Text style={styles.textright}>{data.harga}</Text>
-                </View>
-                </Body>
-            </ListItem>}/>
-          <ListItem avatar>
-                        <Body>
+                <Content style={{ backgroundColor: 'transparent' }}>
+                    <Text style={styles.text}> ID ORDER : 02-07-242</Text>
+                    <Text style={styles.text}> TANGGAL : 02-07-2018</Text>
+                    <Text style={styles.text}>  PEMBAYARAN : CASH</Text>
+                    <Text style={styles.text}> DAFTAR BELANJA</Text>
+                    <List style={{ backgroundColor: 'transparent' }}
+                        dataArray={data}
+                        renderRow={data =>
+                            <ListItem noBorder={true}
+                                style={{ backgroundColor: 'transparent', paddingBottom: 0, paddingTop: 0 }}>
+                                <Body style={{ backgroundColor: 'transparent' }}>
+                                    <View >
+                                        <Grid>
+                                            <Row >
+                                                <Col>
+                                                    <Text style={styles.textleft}>{data.nama}</Text>
+                                                </Col>
+                                                <Text style={styles.textright}>{data.harga}</Text>
+                                            </Row>
+                                        </Grid>
+                                    </View>
+                                </Body>
+                            </ListItem>
+                        } />
+                    <ListItem style={{ backgroundColor: 'transparent' }}>
+                        <Body style={{ borderTopWidth: 3, backgroundColor: 'transparent' }}>
                             <View style={styles.riwayatitem}>
-                                <Text style={styles.text}>Total Harga</Text>
-                                <Text style={styles.textright}>Rp 268.000</Text>
-                            </View>
-                            <View style={styles.riwayatitem}>
-                                <Text style={styles.text}>Diskon</Text>
-                                <Text style={styles.textright}>Rp 268.000</Text>
-                            </View>
-                            <View style={styles.riwayatitem}>
-                                <Text style={styles.text}>Pajak</Text>
-                                <Text style={styles.textright}>Rp 268.000</Text>
-                            </View>
-                            <View style={styles.riwayatitem}>
-                                <Text style={styles.text}>Tunai</Text>
-                                <Text style={styles.textright}>Rp 268.000</Text>
-                            </View>
-                            <View style={styles.riwayatitem}>
-                                <Text style={styles.text}>Kembali</Text>
-                                <Text style={styles.textright}>Rp 268.000</Text>
+                                <Grid>
+                                    <Row>
+                                        <Col>
+                                            <Text style={styles.textleft}>Total Harga</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text style={styles.textright}>Rp 268.000</Text>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <Text style={styles.textleft}>Diskon</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text style={styles.textright}>Rp 268.000</Text>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <Text style={styles.textleft}>Pajak</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text style={styles.textright}>Rp 268.000</Text>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <Text style={styles.textleft}>Tunai</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text style={styles.textright}>Rp 268.000</Text>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <Text style={styles.textleft}>Kembali</Text>
+                                        </Col>
+                                        <Col>
+                                            <Text style={styles.textright}>Rp 268.000</Text>
+                                        </Col>
+                                    </Row>
+                                </Grid>
                             </View>
                         </Body>
-        </ListItem>
+                    </ListItem>
                 </Content>
 
             </Container>

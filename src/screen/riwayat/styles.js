@@ -53,6 +53,7 @@ export default {
     backgroundColor:'white',
     width:'80%',
     alignItems: "center"
+    
   },
   col1: {
     backgroundColor:'blue',
@@ -61,6 +62,7 @@ export default {
   row: {
     paddingBottom: 5,
   },
+ 
   iconText: {
     fontSize: 12,
   },
@@ -133,19 +135,31 @@ export default {
   itembody: {
     borderColor : 'hidden', 
   },
+  textleft : {
+    alignSelf: 'flex-start',
+    fontSize : 18,
+    justifyContent : 'center',
+    float : 'left'
+  },
   textright: {
     alignSelf: 'flex-end',
     fontSize : 18,
-    margin : 0,
-    padding : 0
-    
+    justifyContent : 'center',
+    float : 'left'
   },
   pad : {
     paddingBottom : 15
   },
   riwayatitem: {
-    margin : 0,
-    padding : 0
-  }
+    marginTop : 0,
+    marginBottom : 0,
+    paddingBottom : 0,
+    backgroundColor : 'transparent',
+    paddingTop : 0,
+  },
+  headerback : {
+    backgroundColor : 'pink'
+  
+  },
 
 };

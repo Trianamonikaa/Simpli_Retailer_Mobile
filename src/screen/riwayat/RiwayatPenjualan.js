@@ -18,7 +18,7 @@ import {
     Body,
     List,
 } from 'native-base';
-
+import styles from './styles'
 
 
 const data = [
@@ -43,14 +43,14 @@ class RiwayatPenjualan extends Component {
     render() {
         return (
             <Container>
-                <Header>
+                   <Header style = {styles.headerback}>
                     <Left>
-                        <Icon name="menu" onPress={() =>
-                            this.props.navigation.navigate('DrawerOpen')} />
+                        <Icon size={30}
+                         name="menu" onPress={
+                            () => this.props.navigation.navigate('DrawerOpen')} />
                     </Left>
-                    <Body>
-                        <Title> Riwayat Penjualan </Title>
-                        <Right />
+                    <Body style={{width : '50%'}}>
+                        <Title style={{color : 'black'}}>Riwayat Penjualan </Title>
                     </Body>
                 </Header>
 
@@ -60,15 +60,14 @@ class RiwayatPenjualan extends Component {
                         <List
                             dataArray={data}
                             renderRow={data =>
-                                <ListItem avatar>
+                                <ListItem  onPress={() => this.props.navigation.navigate('riwayatpage2')}>
                                     <Body>
-                                        <Button transparent onPress={() => this.props.navigation.navigate('riwayatpage2')}>
-                                            <Text>{data.text}</Text>
-                                        </Button>
-                                        <Text numberOfLines={1} note>{data.note}</Text>
+                                            <Text style = {{fontSize : 20}}>{data.text}</Text>
+                                        <Text style = {{fontSize : 16}}
+                                        numberOfLines={1} note>{data.note}</Text>
                                     </Body>
                                     <Right>
-                                        <Text note>
+                                        <Text note style = {{fontSize : 18}}>
                                             {data.time}
                                         </Text>
                                     </Right>

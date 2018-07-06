@@ -8,12 +8,12 @@ import { Button,
         Container, 
         Content, 
         Thumbnail, 
-        Body,
+        Body,Item,
         Header,  
         Left, 
         Right, 
         Grid, 
-        Row,
+        Row,Input, 
         Icon,
         List,
         ListItem,
@@ -47,18 +47,19 @@ class Produk extends Component {
     render() {
         return (
             <Container>
-                <Header>
-                <Left>
-                    <Icon name="menu" onPress={
-                        () => this.props.navigation.navigate('DrawerOpen')} />
+                <Header style = {styles.headerback}>
+                    <Left>
+                        <Icon size={70}
+                         name="arrow-back" onPress={
+                            () => this.props.navigation.navigate('keranjang')} />
                     </Left>
-                    <Grid>
-                        <Row style = {styles.row}>
-                            <Col size={5}>
-                                <Searchbar/>
-                            </Col>
-                        </Row>
-                    </Grid>
+                    <Body style={{width : '50%', backgroundColor : 'rebbecapurple'}}>
+                        <Item >
+                          <Icon active name = "search"/>
+                          <Input placeholder = "Search"/>
+                        </Item>
+                      </Body>
+                    
                 </Header>
 
                 <Content style={styles.contentpenjualan}>
@@ -80,7 +81,7 @@ class Produk extends Component {
                   </Text>
                 </Body>
                 <Right>
-                  <Button onPress={this.onPressDetail}>
+                  <Button onPress={this.onPressDetail} style = {{backgroundColor : 'burlywood'}}>
                     <Text>View</Text>
                   </Button>
                 </Right>

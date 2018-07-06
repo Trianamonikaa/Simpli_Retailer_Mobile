@@ -1,11 +1,12 @@
 'use strict';
-import PopupDialog from 'react-native-popup-dialog';
-import React, { Component} from "react";
+import PopupDialog, { DialogButton} from 'react-native-popup-dialog';
+import React, { Component } from "react";
 import {
-    Text, 
-    View, 
-    Alert, 
-   
+    Text,
+    View,
+    AppRegistry,
+    Alert,
+
 } from "react-native";
 import Searchbar from './Searchbar'
 import {
@@ -17,15 +18,15 @@ import {
     Header,
     Left,
     Right,
-    Title, 
-    List, 
+    Title,
+    List,
     ListItem,
     SwipeRow,
-    Form, 
-    Input, 
-    Item, 
-    Grid, 
-    Row, 
+    Form,
+    Input,
+    Item,
+    Grid,
+    Row,
     Col
 } from 'native-base'
 import styles from './styles'
@@ -95,18 +96,6 @@ const datas = [
         peritem: "Rp 5.000"
     },
 ]
-// const ScannerComponent = Platform.select({
-//     android: () => require('react-native-barcode-scanner-google').default,
-//     ios: () => require('react-native-camera').default
-//   })();
-// const cardImage = require("../../image/beras.jpg")
-// class ScanScreen extends Component {
-//     onSuccess(e) {
-//       Linking
-//         .openURL(e.data)
-//         .catch(err => console.error('An error occured', err));
-//     }}
-    
 class keranjang extends Component {
     onPresDetail
     static navigationOptions = {
@@ -115,78 +104,80 @@ class keranjang extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inputNumber : 0,
-            selecteditem : {}
+            inputNumber: 0,
+            selecteditem: {}
         }
     }
     getName() {
         return Searchbar
     }
-    ubahkuantitas(number){
+    ubahkuantitas(number) {
         this.popupDialog.dismiss();
         this.state.selecteditem.kuantitas = number;
-        // alert(number);
-
     }
-    
-    deleteRow(item) {
-        // lakukan delete item
-      }
-    showalert(title,msg, item ){
+
+    showalert1(title, msg, item) {
         Alert.alert(
             title,
             msg,
             [
-              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-            
-              {text: 'OK', onPress: () => this.deleteRow(item)}
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+
+                { text: 'OK', onPress: () => this.deleteRow(item) }
             ],
             { cancelable: false }
-          )
+        )
     }
-    
-    
+    showalert2(title, msg) {
+
+
+    }
     render() {
         return (
-                <Container >
-                <Header style = {styles.headerback}>
-                    <Left>
-                        <Icon size={70}
-                         name="menu" onPress={
-                            () => this.props.navigation.navigate('DrawerOpen')} />
+            <Container >
+                <Header style={styles.headerback}>
+                    <Left style = {{width : '10%'}}>
+                        <Icon size={40}
+                            style={{ paddingLeft: 5, paddingBottom: 5, paddingTop: 5 }}
+                            name="menu" onPress={
+                                () => this.props.navigation.navigate('DrawerOpen')} />
                     </Left>
-                    <Body style={{width : '50%'}}>
-                        <Title style={{color : 'black'}}> Keranjang Belanja </Title>
+                    <Body style={{ width: '80%' }}>
+                        <Title style={{ color: 'black' }}> Keranjang Belanja </Title>
                     </Body>
-                    <Right>
-                        <Button style={{backgroundColor: 'papayawhip'}}
+                    <Right style = {{width : '10%'}}>
+                        <Button style={{ backgroundColor: 'papayawhip' }}
                             onPress={() => this.props.navigation.navigate('Penjualan')}
                         >
-                            <Text style = {{fontSize : 18}}>Search</Text>
+                            <Icon name="search" style={{ color: 'darksalmon' }}>
+                            </Icon>
                         </Button>
                     </Right>
                 </Header>
                 <PopupDialog
+                    height   = {200}
+                    actions = {[<DialogButton text = "Oke" align = "center" onPress = {() => this.ubahkuantitas(this.state.inputNumber)}/>]}
+                    
                     ref={(popupDialog) => { this.popupDialog = popupDialog; }}
                 >
-                    <View>
-                        <Text>Masukkan berapa banyak barang yang akan dibeli</Text>
-                        <Form >
-                            <Item regular>
-                                <Input keyboardType={'numeric'} placeholder="barang" 
-                                onChangeText = {(inputNumber) => this.setState({inputNumber})}
 
-                                    value={this.state.inputNumber}> 
+                    <View  style = {{backgroundColor : 'white'}}>
+                        <Text style={{fontWeight : 'Bold', textAlign : 'center',fontSize : 22, paddingBottom : 5, paddingTop : 10, color : 'black'}}>Masukkan berapa banyak barang yang akan dibeli</Text>
+                        <Form style = {{backgroundColor : 'white', alignItems :'center'}} >
+                            <Item regular style = {{backgroundColor : 'transparent', width : '50%', textAlign : 'center', justifyContent : 'center', alignItems : 'center'}}>
+                                <Input style = {{textAlign : 'center', backgroundColor: 'lightgrey'}} 
+                                keyboardType={'numeric'} placeholder="Jumlah barang" placeholderTextColor = 'grey'
+                                    onChangeText={(inputNumber) => this.setState({ inputNumber })}
+
+                                    value={this.state.inputNumber}>
                                 </Input>
                             </Item>
                         </Form>
-                        <Button onPress={() =>this.ubahkuantitas(this.state.inputNumber)}>
-                            <Text>Submit</Text>
-                        </Button>
+                
                     </View>
                 </PopupDialog>
                 <Content >
-                   
+
                     <View style={{ backgroundColor: 'transparent', padding: 0, margin: 0 }}   >
                         <List scrollEnabled={false}
                             style={styles.listkeranjang}
@@ -196,13 +187,14 @@ class keranjang extends Component {
                                 <ListItem
                                     style={styles.rowmenu}>
                                     <SwipeRow scrollEnabled={false}
-                                        style={{ backgroundColor: 'white', paddingRight: 0, marginRight: 0 , borderBottomWidth : 0, marginBottom:0, paddingBottom:0,}}
+                                        style={{ backgroundColor: 'white', paddingRight: 0, marginRight: 0, borderBottomWidth: 0, marginBottom: 0, paddingBottom: 0, }}
                                         leftOpenValue={75}
                                         rightOpenValue={-75}
                                         left={
 
                                             <Button onPress={() => {
-                                                this.state.selecteditem= data;
+                                                this.state.selecteditem = data;
+                                                this.popupDialog.
                                                 this.popupDialog.show();
                                             }}
                                             >
@@ -211,40 +203,46 @@ class keranjang extends Component {
                                         }
 
                                         right={
-                                            
+
                                             <Button danger >
-                                                <Icon active name="trash" onPress={() => this.showalert("Delete Confirmation","Delete " + data.nama +"?", data)} />
+                                                <Icon active name="trash" onPress={() => this.showalert("Delete Confirmation", "Delete " + data.nama + "?", data)} />
 
                                             </Button>
                                         }
                                         body={
-                                            <View noBorder={true} 
-                                            style={{ backgroundColor: 'white', width: '100%', paddingLeft: 0,  margin: 0 , borderBottomWidth : 0, marginBottom:0, paddingBottom:0}}>
+                                            <View noBorder={true}
+                                                style={{ backgroundColor: 'transparent', width: '100%', paddingLeft: 0, margin: 0, paddingBottom: 0 , marginLeft : 0 }}>
 
-                                                <ListItem  noBorder={true}
-                                                    
-                                                >
-
-                                                    <Grid >
-                                                        <Row style={{height : 'auto', width: 'auto'}}>
-                                                            <Col >
-                                                                <Text style={{fontSize:20}}>
+                                                <ListItem noBorder={true}
+                                                style = {{backgroundColor : 'transparent', marginLeft : 0, paddingBottom : 0, paddingTop : 0}}>
+                                                    <Grid style = {{backgroundColor : 'transparent', paddingBottom : 0, paddingTop : 0, marginBottom : 0, marginTop: 0, marginLeft : 10}}>
+                                                        <Row  >
+                                                          
+                                                            <Col style={{paddingLeft : 10, paddingRight : 10}} >
+                                                                <Text style={{ fontSize: 20 }}
+                                                                    onPress={() => {
+                                                                        this.state.selecteditem = data;
+                                                                        this.popupDialog.show();
+                                                                    }}>
                                                                     {data.nama}
                                                                 </Text>
                                                             </Col>
-
                                                         </Row>
-                                                        <Row>
-                                                            <Col>
+                                                        <Row style={{paddingLeft : 10, paddingRight : 10}}
+                                                        onPress={() => {
+                                                            this.state.selecteditem = data;
+                                                            this.popupDialog.show();
+                                                        }}>
+                                                            <Col >
                                                                 <Text numberOfLines={1} note style={styles.text}>
                                                                     {data.peritem}
                                                                 </Text>
                                                             </Col>
-                                                            <Col>
+                                                            <Col >
                                                                 <Text style={styles.text}> x{data.kuantitas} </Text>
                                                             </Col>
-                                                            <Col>
-                                                                <Text style={styles.text}>
+                                                            <Col >
+                                                                <Text style={[styles.text, {textAlign : 'right'}] }>
                                                                     {data.harga}
                                                                 </Text>
                                                             </Col>
@@ -263,7 +261,7 @@ class keranjang extends Component {
                 <View >
                     <Button full style={styles.mb15}
                         onPress={() => this.props.navigation.navigate('Halaman')} >
-                        <Text style = {styles.text}>MAU BAYAR INI</Text>
+                        <Text style={styles.text}>BAYAR</Text>
                     </Button>
                 </View>
             </Container>

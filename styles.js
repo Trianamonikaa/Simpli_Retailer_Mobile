@@ -79,8 +79,8 @@ export default {
     backgroundColor: 'red',
   },
   drawerImage:{
-    height:190,
-    width:280,
+    height:'100%',
+    width:'100%',
   },
   welcome: {
     fontSize: 20,

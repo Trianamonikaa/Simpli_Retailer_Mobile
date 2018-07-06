@@ -1,10 +1,11 @@
 console.disableYellowBox = true;
-import React , { Component } from "react";
+
+import React , { Component} from "react";
 import {
  
   Text,
- 
   Image,
+  StatusBar,
  
 } from 'react-native';
 
@@ -33,7 +34,10 @@ const TabIcon = ({ selected, title }) => {
 
 const CustomDrawerContentComponent = (props) => (
   <Container>
-    <Header style={{height: 200, backgroundColor:'blue'}}>
+    <StatusBar 
+    backgroundColor = "gold"
+    barStyle="light-content"/>
+    <Header style={{height: 200, backgroundColor:'blue', paddingLeft : 0, paddingRight : 0}}>
       <Body>
         <Image
         style={styles.drawerImage}
@@ -70,12 +74,11 @@ const MyApp = DrawerNavigator({
     screen: riwayatpage2
   }, 
 },{
-  initialRouteName:'Halaman',
+  initialRouteName:'keranjang',
   contentComponent:CustomDrawerContentComponent,
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',
   drawerToggleRoute: 'DrawerToggle',
-  
 });
 
 export default class App extends Component {
