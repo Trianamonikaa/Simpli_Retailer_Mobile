@@ -178,6 +178,9 @@ export default {
     backgroundColor: 'purple',
     paddingBottom: 0
   },
+  textharga: {
+    
+  }
 
 
 
