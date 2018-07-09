@@ -4,13 +4,7 @@ const { StyleSheet } = React;
 
 export default {
   
-  buttonContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    flex: 1,
-    justifyContent: "center",
-    marginTop: 10
-  },
+ 
   mb15: {
     marginBottom: 20
   },
@@ -117,7 +111,11 @@ export default {
   },
   headerback : {
     backgroundColor : 'pink'
-  
   },
+  textdetail :{
+    textAlign : 'center',
+    fontSize : 22,
+
+  }
 
 };

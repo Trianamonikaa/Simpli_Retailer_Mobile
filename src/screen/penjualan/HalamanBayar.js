@@ -49,8 +49,8 @@ class HalamanBayar extends Component {
                <Header style = {styles.headerback}>
                     <Left>
                         <Icon size={30}
-                         name="menu" onPress={
-                            () => this.props.navigation.navigate('DrawerOpen')} />
+                         name="arrow-back" onPress={
+                            () => this.props.navigation.goBack()} />
                     </Left>
                     <Body style={{width : '50%'}}>
                         <Title style={{color : 'black'}}> Detail Pembayaran </Title>
@@ -154,7 +154,11 @@ class HalamanBayar extends Component {
                         </Row>
                         
                 </Grid>
-                <Button  block style={{backgroundColor : 'burlywood'}}>
+                <Button  onPress = {()=> this.props.navigation.navigate('Keranjang')
+
+
+                }
+                block style={{backgroundColor : 'burlywood'}}>
               <Text>BAYAR</Text>
             </Button>
                 </Content>

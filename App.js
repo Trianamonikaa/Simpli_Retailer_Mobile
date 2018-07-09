@@ -17,7 +17,7 @@ import Produk from './src/screen/produk/Produk'
 import RiwayatPenjualan from './src/screen/riwayat/RiwayatPenjualan'
 import HalamanBayar from './src/screen/penjualan/HalamanBayar'
 import produkpage2 from './src/screen/produk/produkpage2'
-import keranjang from './src/screen/penjualan/keranjang'
+import Keranjang from './src/screen/penjualan/Keranjang'
 import riwayatpage2 from './src/screen/riwayat/riwayatpage2'
 
 import {Container, Content, Header, Body ,Item,Input, Icon} from 'native-base'
@@ -52,8 +52,8 @@ const CustomDrawerContentComponent = (props) => (
 
 const MyApp = DrawerNavigator({
   
-  Penjualan: {
-    screen: Penjualan
+  Keranjang: {
+    screen: Keranjang
   },
   Produk: {
     screen: Produk
@@ -67,14 +67,14 @@ const MyApp = DrawerNavigator({
   Halaman: {
     screen: HalamanBayar
   },
-  keranjang: {
-    screen: keranjang
+  Penjualan: {
+    screen: Penjualan
   },
   riwayatpage2: {
     screen: riwayatpage2
   }, 
 },{
-  initialRouteName:'keranjang',
+  initialRouteName:'Keranjang',
   contentComponent:CustomDrawerContentComponent,
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',

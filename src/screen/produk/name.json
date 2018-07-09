@@ -1,0 +1,51 @@
+
+[
+    {
+        "id": "1",
+        "img": "beras",
+        "text": "BERAS PULEN",
+        "hargajual" : "Rp 56.000",
+        "hargabeli" : "Rp 34.000",
+        "barangmasuk" : "09 Juli 2018"
+    },
+    {
+        "id": "2",
+        "img": "beras",
+        "text": "BERAS BIASA",
+        "hargajual" : "Rp 56.000",
+        "hargabeli" : "Rp 34.000",
+        "barangmasuk" : "09 Juli 2018"
+    },
+    {
+        "id": "3",
+        "img": "beras",
+        "text": "BERAS REGULAR",
+        "hargajual" : "Rp 56.000",
+        "hargabeli" : "Rp 34.000",
+        "barangmasuk" : "09 Juli 2018"
+    },
+    {
+        "id": "4",
+        "img": "beras",
+        "text": "BERAS HUM",
+        "hargajual" : "Rp 56.000",
+        "hargabeli" : "Rp 34.000",
+        "barangmasuk" : "09 Juli 2018"
+    },
+    {
+        "id": "5",
+        "img": "beras",
+        "text": "BERAS LALALA",
+        "hargajual" : "Rp 56.000",
+        "hargabeli" : "Rp 34.000",
+        "barangmasuk" : "09 Juli 2018"
+    },
+    {
+        "id": "6",
+        "img": "beras",
+        "text": "BERAS MOM",
+        "hargajual" : "Rp 56.000",
+        "hargabeli" : "Rp 34.000",
+        "barangmasuk" : "09 Juli 2018"
+    }
+]
