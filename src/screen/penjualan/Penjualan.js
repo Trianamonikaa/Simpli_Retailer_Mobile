@@ -23,8 +23,8 @@ import styles from './styles'
 const datas = [
   {
     nama: "pasir lalalalalal",
-    harga: "Rp 25.000",
-    peritem: "Rp 5.000",
+    harga: 25000,
+    peritem: 5000,
     kuantitas : "6"
   },
   {

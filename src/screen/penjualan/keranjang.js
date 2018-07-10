@@ -1,13 +1,14 @@
 'use strict';
 import PopupDialog, { DialogButton } from 'react-native-popup-dialog';
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import {
+    Platform,
     Text,
     View,
     AppRegistry,
-    Alert,
-
+    Alert
 } from "react-native";
+// import BarcodeScanner from 'react-native-barcodescanner';
 import Searchbar from './Searchbar'
 import {
     Button,
@@ -30,10 +31,6 @@ import {
     Col
 } from 'native-base'
 import styles from './styles'
-// import Barcode from 'react-native-smart-barcode'
-// import Camera from 'react-native-camera';
-// import PropTypes from 'prop-types';
-// import QRCodeScanner from 'react-native-qrcode-scanner';
 const datas = [
     // {
     //     kuantitas: "5",
@@ -98,13 +95,19 @@ const datas = [
 ]
 class Keranjang extends Component {
 
-    
+
     constructor(props) {
         super(props);
         this.state = {
-            inputNumber: 0,
-            selecteditem: {}
+            // inputNumber: 0,
+            // selecteditem: {},
+            torchMode: 'off',
+            cameraType: 'back',
         }
+    }
+    barcodeReceived(e) {
+        console.log('Barcode: ' + e.data);
+        console.log('Type: ' + e.type);
     }
     static navigationOptions = {
         drawerIcon: (
@@ -131,20 +134,18 @@ class Keranjang extends Component {
             { cancelable: false }
         )
     }
-    // state = {
-    //     returnData,
-    // };
-       
+
     returnData(data) {
         datas.push(data);
     }
     render() {
-        // const {item} = this.state;
-        // let totalPrice = 0;
-        // returnData.forEach((item) => {
-        //     totalPrice += item.kuantitas * item.peritem;
-        // })
         return (
+            // <BarcodeScanner
+            //     onBarCodeRead={this.barcodeReceived}
+            //     style={{ flex: 1 }}
+            //     torchMode={this.state.torchMode}
+            //     cameraType={this.state.cameraType}
+            // />
             <Container >
                 <Header style={styles.headerback}>
                     <Left style={{ width: '10%' }}>
@@ -281,5 +282,5 @@ class Keranjang extends Component {
     }
 
 }
-
+AppRegistry.registerComponent('BarcodeScannerApp', () => BarcodeScannerApp);
 export default Keranjang;
