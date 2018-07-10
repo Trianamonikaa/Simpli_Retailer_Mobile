@@ -6,7 +6,8 @@ import {
     Text,
     View,
     AppRegistry,
-    Alert
+    Alert,
+    FlatList,
 } from "react-native";
 // import BarcodeScanner from 'react-native-barcodescanner';
 import Searchbar from './Searchbar'
@@ -31,84 +32,33 @@ import {
     Col
 } from 'native-base'
 import styles from './styles'
-const datas = [
-    // {
-    //     kuantitas: "5",
-    //     nama: "pasir lalalalalal",
-    //     harga: "Rp 25.000",
-    //     peritem: "Rp 5.000"
-    // },
-    // {
-    //     kuantitas: "9",
-    //     nama: "eskrim ayaaaamm",
-    //     harga: "Rp 56.000",
-    //     peritem: "Rp 5.000"
-    // },
-    // {
-    //     kuantitas: "8",
-    //     nama: "selada guuuuu",
-    //     harga: "Rp 56.000",
-    //     peritem: "Rp 5.000"
-    // },
-    // {
-    //     kuantitas: "66",
-    //     nama: "bakso",
-    //     harga: "Rp 56.000",
-    //     peritem: "Rp 5.000"
-    // },
-    // {
-    //     kuantitas: "34",
-    //     nama: "tuna",
-    //     harga: "Rp 56.000",
-    //     peritem: "Rp 5.000"
-    // },
-    // {
-    //     kuantitas: "5",
-    //     nama: "pisang",
-    //     harga: "Rp 56.000",
-    //     peritem: "Rp 5.000"
-    // },
-    // {
-    //     kuantitas: "5",
-    //     nama: "lala",
-    //     harga: "Rp 56.000",
-    //     peritem: "Rp 5.000"
-    // },
-    // {
-    //     kuantitas: "5",
-    //     nama: "lala",
-    //     harga: "Rp 56.000",
-    //     peritem: "Rp 5.000"
-    // },
-    // {
-    //     kuantitas: "5",
-    //     nama: "cijjjj",
-    //     harga: "Rp 56.000",
-    //     peritem: "Rp 5.000"
-    // },
-    // {
-    //     kuantitas: "5",
-    //     nama: "dfsdfdsf",
-    //     harga: "Rp 56.000",
-    //     peritem: "Rp 5.000"
-    // },
-]
 class Keranjang extends Component {
-
-
     constructor(props) {
         super(props);
         this.state = {
-            // inputNumber: 0,
-            // selecteditem: {},
-            torchMode: 'off',
-            cameraType: 'back',
+            inputNumber: 0,
+            selecteditem: 0,
+            Order:
+            {
+                Id: '1',
+                OrderNo: '1',
+                OrderDate: '090718',
+                Status: '0',
+                Type: 'ok',
+                Description: 'ok',
+                CreatedTime: '1',
+                TotalHarga: 0,
+                ModifiedTime: '1',
+                ModifiedBy: '0',
+                Cashier: '2',
+                OrderItem: []
+            }
         }
     }
-    barcodeReceived(e) {
-        console.log('Barcode: ' + e.data);
-        console.log('Type: ' + e.type);
-    }
+    // barcodeReceived(e) {
+    //     console.log('Barcode: ' + e.data);
+    //     console.log('Type: ' + e.type);
+    // }
     static navigationOptions = {
         drawerIcon: (
             <Icon name="ios-cart-outline" />
@@ -119,9 +69,12 @@ class Keranjang extends Component {
     }
     ubahkuantitas(number) {
         this.popupDialog.dismiss();
-        this.state.selecteditem.kuantitas = number;
+        this.state.Order.OrderItem[this.state.selecteditem].kuantitas = number;
+        // this.render();
+        // alert(Order.OrderItem[this.state.selecteditem].kuantitas);
+        // alert(.kuantitas);
+        this.state.inputNumber = 0;
     }
-
     showalert1(title, msg, item) {
         Alert.alert(
             title,
@@ -134,18 +87,20 @@ class Keranjang extends Component {
             { cancelable: false }
         )
     }
-
     returnData(data) {
-        datas.push(data);
+        this.state.Order.OrderItem.push(data);
+        alert(this.state.Order.OrderItem[0].nama);
+        this.state.Order.TotalHarga = 0;
+        this.state.Order.OrderItem.forEach((data) => {
+            data.harga = data.kuantitas * data.peritem;
+            this.state.Order.TotalHarga += data.harga;
+        })
+    }
+    getTotal() {
+        return this.state.Order.TotalHarga;
     }
     render() {
         return (
-            // <BarcodeScanner
-            //     onBarCodeRead={this.barcodeReceived}
-            //     style={{ flex: 1 }}
-            //     torchMode={this.state.torchMode}
-            //     cameraType={this.state.cameraType}
-            // />
             <Container >
                 <Header style={styles.headerback}>
                     <Left style={{ width: '10%' }}>
@@ -168,19 +123,21 @@ class Keranjang extends Component {
                 </Header>
                 <PopupDialog
                     height={200}
-                    actions={[<DialogButton text="Oke" align="center" onPress={() => this.ubahkuantitas(this.state.inputNumber)} />]}
-
+                    actions={[<DialogButton text="Oke" align="center" 
+                    onPress={() => this.ubahkuantitas(this.state.inputNumber)} />]}
                     ref={(popupDialog) => { this.popupDialog = popupDialog; }}
                 >
-
                     <View style={{ backgroundColor: 'white' }}>
-                        <Text style={{ fontWeight: 'Bold', textAlign: 'center', fontSize: 22, paddingBottom: 5, paddingTop: 10, color: 'black' }}>Masukkan berapa banyak barang yang akan dibeli</Text>
+                        <Text style={{ fontWeight: 'Bold', textAlign: 'center', fontSize: 22, paddingBottom: 5, paddingTop: 10, color: 'black' }}>
+                            Masukkan berapa banyak barang yang akan dibeli</Text>
                         <Form style={{ backgroundColor: 'white', alignItems: 'center' }} >
-                            <Item regular style={{ backgroundColor: 'transparent', width: '50%', textAlign: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                            <Item regular style={{
+                                backgroundColor: 'transparent', width: '50%', textAlign: 'center', justifyContent: 'center',
+                                alignItems: 'center'
+                            }}>
                                 <Input style={{ textAlign: 'center', backgroundColor: 'lightgrey' }}
                                     keyboardType={'numeric'} placeholder="Jumlah barang" placeholderTextColor='grey'
-                                    onChangeText={(inputNumber) => this.setState({ inputNumber })}
-
+                                    onChangeText={(inputNumber) => this.setState({inputNumber })}
                                     value={this.state.inputNumber}>
                                 </Input>
                             </Item>
@@ -194,8 +151,8 @@ class Keranjang extends Component {
                         <List scrollEnabled={false}
                             style={styles.listkeranjang}
 
-                            dataArray={datas}
-                            renderRow={data =>
+                            dataArray={this.state.Order.OrderItem}
+                            renderRow={(data, sectionID, rowID, higlightRow) =>
                                 <ListItem
                                     style={styles.rowmenu}>
                                     <SwipeRow scrollEnabled={false}
@@ -205,7 +162,7 @@ class Keranjang extends Component {
                                         left={
 
                                             <Button onPress={() => {
-                                                this.state.selecteditem = data;
+                                                this.state.selecteditem = rowID;
                                                 this.popupDialog.
                                                     this.popupDialog.show();
                                             }}
@@ -233,9 +190,9 @@ class Keranjang extends Component {
                                                             <Col style={{ paddingLeft: 10, paddingRight: 10 }} >
                                                                 <Text style={{ fontSize: 20 }}
                                                                     onPress={() => {
-                                                                        this.state.selecteditem = data;
+                                                                        // alert(rowID);
+                                                                        this.state.selecteditem = rowID;
                                                                         this.popupDialog.show();
-
                                                                     }}>
                                                                     {data.nama}
                                                                 </Text>
@@ -243,7 +200,7 @@ class Keranjang extends Component {
                                                         </Row>
                                                         <Row style={{ paddingLeft: 10, paddingRight: 10 }}
                                                             onPress={() => {
-                                                                this.state.selecteditem = data;
+                                                                this.state.selecteditem = rowID;
                                                                 this.popupDialog.show();
                                                             }}>
                                                             <Col >
@@ -268,13 +225,14 @@ class Keranjang extends Component {
                                     />
 
                                 </ListItem>}
+                            keyExtractor={data => data.id}
                         />
                     </View>
                 </Content>
                 <View >
                     <Button full style={styles.mb15}
                         onPress={() => this.props.navigation.navigate('Halaman')} >
-                        <Text >BAYAR: </Text>
+                        <Text >BAYAR: {this.getTotal()} </Text>
                     </Button>
                 </View>
             </Container>
@@ -282,5 +240,5 @@ class Keranjang extends Component {
     }
 
 }
-AppRegistry.registerComponent('BarcodeScannerApp', () => BarcodeScannerApp);
+// AppRegistry.registerComponent('BarcodeScannerApp', () => BarcodeScannerApp);
 export default Keranjang;

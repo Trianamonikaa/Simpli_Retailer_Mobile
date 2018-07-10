@@ -22,52 +22,60 @@ import styles from './styles'
 
 const datas = [
   {
+    id: 1,
     nama: "pasir lalalalalal",
-    harga: 25000,
+    harga: 0,
     peritem: 5000,
-    kuantitas : "6"
+    kuantitas: 1
   },
   {
+    id: 2,
     nama: "eskrim ayaaaamm",
-    harga: "Rp 56.000",
-    peritem: "Rp 5.000",
-    kuantitas : "7"
+    harga: 0,
+    peritem: 8000,
+    kuantitas: 1
   },
   {
+    id: 3,
     nama: "selada guuuuu",
-    harga: "Rp 56.000",
-    peritem: "Rp 5.000",
-    kuantitas : "12"
+    harga: 0,
+    peritem: 6000,
+    kuantitas: 1
   },
   {
+    id: 4,
     nama: "bakso",
-    harga: "Rp 56.000",
-    peritem: "Rp 5.000",
-    kuantitas : "3"
+    harga: 0,
+    peritem: 8000,
+    kuantitas: 1
   },
   {
+    id: 5,
     nama: "tuna",
-    harga: "Rp 56.000",
-    peritem: "Rp 5.000",
-    kuantitas : "11"
+    harga: 0,
+    peritem: 3000,
+    kuantitas: 1
   },
   {
+    id: 6,
     nama: "pisang",
-    harga: "Rp 56.000",
-    peritem: "Rp 5.000",
-    kuantitas : "9"
+    harga: 0,
+    peritem: 9000,
+    kuantitas: 1
   },
   {
+    id: 7,
     nama: "lala",
-    harga: "Rp 56.000",
-    peritem: "Rp 5.000",
-    kuantitas : "22"
+    harga: 0,
+    peritem: 5000,
+    kuantitas: 1
   },
   {
+    id: 8,
     nama: "lala",
-    harga: "Rp 56.000",
-    peritem: "Rp 5.000",
-    kuantitas : "8"
+    harga: 0,
+    peritem: 5000,
+    kuantitas: 1
   },
 ]
 
@@ -84,8 +92,16 @@ class Penjualan extends Component {
     this.props.navigation.state.params.returnData(data);
     this.props.navigation.goBack();
   }
- 
+  state = {
+    datas,
+  }
+
   render() {
+    const { datas } = this.state;
+    let totalharga = 0;
+    datas.forEach((data) => {
+      totalharga += data.kuantitas * data.harga
+    })
     return (
       <Container>
         <Header style={{ backgroundColor: 'pink' }}>
@@ -126,6 +142,7 @@ class Penjualan extends Component {
         </Content>
 
 
+        <Text> {totalharga} </Text>
       </Container>
     );
   };

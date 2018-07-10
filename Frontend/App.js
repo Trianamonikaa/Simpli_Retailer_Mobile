@@ -23,7 +23,7 @@ import riwayatpage2 from './src/screen/riwayat/riwayatpage2'
 import {Container, Content, Header, Body ,Item,Input, Icon} from 'native-base'
 import {DrawerNavigator, DrawerItems } from 'react-navigation'
 
-import Logo from './src/image/logo.jpg'
+import Logo from './src/image/aice.jpg'
 
 const TabIcon = ({ selected, title }) => {
   return (

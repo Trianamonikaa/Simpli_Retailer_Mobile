@@ -50,7 +50,7 @@ class RiwayatPenjualan extends Component {
                     <Left>
                         <Icon size={30}
                             name="menu" onPress={
-                                () => this.props.navigation.navigate('DrawerOpen')} />
+                                () => this.props.navigation.openDrawer()} />
                     </Left>
                     <Body style={{ width: '50%' }}>
                         <Title style={{ color: 'black' }}>Riwayat Penjualan </Title>

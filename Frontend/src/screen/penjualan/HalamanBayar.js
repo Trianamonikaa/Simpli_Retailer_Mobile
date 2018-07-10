@@ -43,6 +43,8 @@ class HalamanBayar extends Component {
         
         return Searchbar
     }
+        
+    
     render() {
         return (
             <Container>
