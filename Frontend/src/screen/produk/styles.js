@@ -38,8 +38,13 @@ export default {
     alignItems: "center"
   },
   col1: {
-    backgroundColor:'blue',
-    width:'20%'
+    width : '35%', paddingRight : 5
+  },
+  col2: {
+    width : '10%',  paddingRight : 5
+  },
+  col3: {
+    width : '55%', paddingRight : 5
   },
   row: {
     paddingBottom: 5,
@@ -107,14 +112,16 @@ export default {
   text: {
     fontSize: 18,
     paddingLeft : 5,
+    color : 'black'
     
   },
   headerback : {
-    backgroundColor : 'pink'
+    backgroundColor : '#f06292'
   },
   textdetail :{
     textAlign : 'center',
     fontSize : 22,
+    color : 'black'
 
   }
 

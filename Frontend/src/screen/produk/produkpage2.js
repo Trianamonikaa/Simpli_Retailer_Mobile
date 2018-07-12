@@ -2,20 +2,21 @@ import React, { Component } from "react";
 import {
     View,
     Text,
-    Image, 
+    Image,
 } from "react-native";
 import Searchbar from './Searchbar'
 import {
     Container,
     Content,
     Body,
-    Header, 
+    Header,
     Left,
     Grid,
     Icon,
     Row,
-    Title, 
-    Col
+    Title,
+    Col,
+    Right
 } from 'native-base'
 import styles from './styles'
 import crayon from '../../image/crayon.jpg'
@@ -44,45 +45,62 @@ class produkpage2 extends Component {
         return (
             <Container>
                 <Header style={styles.headerback}>
-                    <Left>
+                    <Left style={{ width: '10%' }}>
                         <Icon size={30}
                             name="arrow-back" onPress={
                                 () => this.props.navigation.navigate('Produk')} />
                     </Left>
-                    <Body style={{ width: '50%' }}>
+                    <Body style={{ width: '80%' }}>
                         <Title style={{ color: 'black' }}> Detail Produk </Title>
                     </Body>
+                    <Right style={{ width: '10%' }}>
+                    </Right>
                 </Header>
 
                 <Content>
                     <View style={styles.contentpicture}>
-                        <Image source={crayon} style={styles.imageproduk} />
+                        <Image source={detail.img} style={styles.imageproduk} />
                     </View>
                     <View>
                         <Grid >
                             <Row >
-                                <Col><Text> Nama barang </Text></Col>
-                                <Col >
-                                <Text style = {styles.textdetail}>:</Text></Col>
-                                <Col ><Text> {detail.text}</Text>
+                                <Col>
+                                    <Text style={styles.text}>Nama barang
+                                </Text>
+                                </Col>
+                                <Col style={styles.col2} >
+                                    <Text style={styles.textdetail}>:</Text></Col>
+                                <Col style={styles.col3}><Text style={styles.text}> {detail.text}</Text>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col><Text> Harga Jual </Text></Col>
-                                <Col><Text style = {styles.textdetail}>:</Text></Col>
-                                <Col><Text> {detail.hargajual}</Text>
+                                <Col style={styles.col1}><Text style={styles.text}>Harga Jual </Text></Col>
+                                <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
+                                <Col style={styles.col3}><Text style={styles.text}> {detail.hargajual}</Text>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col><Text> Nama Beli </Text></Col>
-                                <Col><Text style = {styles.textdetail}>:</Text></Col>
-                                <Col><Text> {detail.hargabeli}</Text>
+                                <Col style={styles.col1}><Text style={styles.text}>Harga Beli </Text></Col>
+                                <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
+                                <Col style={styles.col3}><Text style={styles.text}> {detail.hargabeli}</Text>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col><Text>Barang datang</Text></Col>
-                                <Col><Text style = {styles.textdetail}>:</Text></Col>
-                                <Col><Text> {detail.barangmasuk}</Text>
+                                <Col style={styles.col1}><Text style={styles.text}>Barang datang</Text></Col>
+                                <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
+                                <Col style={styles.col3}><Text style={styles.text}> {detail.barangmasuk}</Text>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col style={styles.col1}><Text style={styles.text}>Nomor Produksi</Text></Col>
+                                <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
+                                <Col style={styles.col3}><Text style={styles.text}> {detail.barangmasuk}</Text>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col style={styles.col1}><Text style={styles.text}>Perusahaan</Text></Col>
+                                <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
+                                <Col style={styles.col3}><Text style={styles.text}> {detail.barangmasuk}</Text>
                                 </Col>
                             </Row>
 

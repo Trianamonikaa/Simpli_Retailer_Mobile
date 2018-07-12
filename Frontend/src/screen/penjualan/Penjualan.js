@@ -104,8 +104,8 @@ class Penjualan extends Component {
     })
     return (
       <Container>
-        <Header style={{ backgroundColor: 'pink' }}>
-          <Left style={{ backgroundColor: 'pink', paddingLeft: 0, width: '10%' }}>
+        <Header style={styles.headerback}>
+          <Left style={{ backgroundColor: '#f06292', paddingLeft: 0, width: '10%' }}>
             <Icon size={40}
               style={{ paddingRight: 0 }}
               name="arrow-back" onPress={
@@ -115,8 +115,8 @@ class Penjualan extends Component {
             <Item >
               <Icon
                 active name="search" />
-              <Input style={{ backgroundColor: 'pink', alignContent: 'center', fontSize: 20, width: '100%' }}
-                placeholder="Search ..." />
+              <Input style={styles.headerback}
+                placeholder="Search ..."  />
             </Item>
           </Body>
           <Right style={{ width: '0%' }}>
@@ -133,7 +133,7 @@ class Penjualan extends Component {
                     {data.nama}</Text>
                 </Left>
                 <Right style={{ backgroundColor: 'transparent' }}>
-                  <Text> {data.peritem} </Text>
+                  <Text style={styles.text}> {data.peritem} </Text>
                 </Right>
               </ListItem>}
           />

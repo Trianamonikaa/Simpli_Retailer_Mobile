@@ -40,55 +40,49 @@ const data = [
 class RiwayatPenjualan extends Component {
     static navigationOptions = {
         drawerIcon: (
-            <Icon name="bicycle" />
+            <Icon name="paper" />
         )
     }
     render() {
         return (
-            <Container>
+            <Container >
                 <Header style={styles.headerback}>
-                    <Left>
+                    <Left style={{ width: '10%' }}>
                         <Icon size={30}
                             name="menu" onPress={
                                 () => this.props.navigation.openDrawer()} />
                     </Left>
-                    <Body style={{ width: '50%' }}>
+                    <Body style={{ width: '80%' }}>
                         <Title style={{ color: 'black' }}>Riwayat Penjualan </Title>
                     </Body>
+                    <Right style={{ width: '50%' }}>
+                    </Right>
                 </Header>
 
                 <Content >
 
                     <View>
-                        <List
+                        <List 
                             dataArray={data}
                             renderRow={data =>
-                                <ListItem onPress={() => this.props.navigation.navigate('riwayatpage2')}>
-                                    {/* <Body>
-                                            <Text style = {{fontSize : 20}}>{data.text}</Text>
-                                        <Text style = {{fontSize : 16}}
-                                        numberOfLines={1} note>{data.note}</Text>
-                                    </Body>
-                                    <Right>
-                                        <Text note style = {{fontSize : 14,justifyContent : 'flex-end' }}>
-                                            {data.time}
-                                        </Text>
-                                    </Right> */}
+                                <ListItem  noBorder = {true}
+                                onPress={() => this.props.navigation.navigate('riwayatpage2')}>
+                                    
                                     <Grid>
                                         <Row style={{ backgroundColor: 'transparent' }}>
                                             <Col>
-                                                <Text style={{ fontSize: 20 }}>{data.text}</Text>
+                                                <Text style={{ fontSize: 20,color : 'black' }}>{data.text}</Text>
 
                                             </Col>
                                             <Col style={{ backgroundColor: 'transparent'}}>
                                                 {/* <Right style={{  fontSize: 14 , backgroundColor : 'green'}}> */}
-                                                    <Text style= {{textAlign : 'right'}}>
+                                                    <Text style= {{textAlign : 'right',color : 'black'}}>
                                                         {data.time}
                                                     </Text>
                                                 {/* </Right> */}
                                             </Col>
                                         </Row>
-                                        <Col><Text style={{ fontSize: 16 }}
+                                        <Col><Text style={{ fontSize: 16,color : 'black' }}
                                             numberOfLines={1} note>{data.note}</Text>
                                         </Col>
                                         <Row>

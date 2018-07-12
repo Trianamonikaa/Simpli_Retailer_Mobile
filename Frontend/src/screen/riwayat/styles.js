@@ -127,7 +127,8 @@ export default {
     fontSize: 18,
     paddingLeft : 5,
     margin : 0,
-    padding : 0
+    padding : 0,
+    color : 'black'
   },
   textdetail: {
     fontSize : 18,
@@ -139,13 +140,15 @@ export default {
     alignSelf: 'flex-start',
     fontSize : 18,
     justifyContent : 'center',
-    float : 'left'
+    float : 'left',
+    color : 'black'
   },
   textright: {
     alignSelf: 'flex-end',
     fontSize : 18,
     justifyContent : 'center',
-    float : 'left'
+    float : 'left',
+    color : 'black'
   },
   pad : {
     paddingBottom : 15
@@ -158,8 +161,12 @@ export default {
     paddingTop : 0,
   },
   headerback : {
-    backgroundColor : 'pink'
-  
+    backgroundColor : '#f06292'
   },
+  inputharga: {
+    width : 150, 
+    height :35, 
+    fontSize : 15,
+  }
 
 };

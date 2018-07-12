@@ -2,12 +2,11 @@
 import PopupDialog, { DialogButton } from 'react-native-popup-dialog';
 import React, { Component, PropTypes } from "react";
 import {
-    Platform,
     Text,
     View,
-    AppRegistry,
     Alert,
-    FlatList,
+    AsyncStorage,
+    AppRegistry,
 } from "react-native";
 // import BarcodeScanner from 'react-native-barcodescanner';
 import Searchbar from './Searchbar'
@@ -32,49 +31,66 @@ import {
     Col
 } from 'native-base'
 import styles from './styles'
+const Order =
+{
+    Id: '1',
+    OrderNo: '1',
+    OrderDate: '090718',
+    Status: '0',
+    Type: 'ok',
+    Description: 'ok',
+    CreatedTime: '1',
+    TotalHarga: 0,
+    ModifiedTime: '1',
+    ModifiedBy: '0',
+    Cashier: '2',
+    OrderItem: []
+}
 class Keranjang extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inputNumber: 0,
+            inputNumber: '',
             selecteditem: 0,
-            Order:
-            {
-                Id: '1',
-                OrderNo: '1',
-                OrderDate: '090718',
-                Status: '0',
-                Type: 'ok',
-                Description: 'ok',
-                CreatedTime: '1',
-                TotalHarga: 0,
-                ModifiedTime: '1',
-                ModifiedBy: '0',
-                Cashier: '2',
-                OrderItem: []
-            }
+            number: ''
         }
+        AsyncStorage.getItem('number', (error, result) => {
+            if (result) {
+                this.setState({
+                    number: result
+                });
+            }
+        });
     }
-    // barcodeReceived(e) {
-    //     console.log('Barcode: ' + e.data);
-    //     console.log('Type: ' + e.type);
-    // }
+    saveData() {
+        let number = this.state.inputNumber;
+        this.setState({
+            number: number
+        })
+        alert('Data tersimpan');
+    }
+    ubahkuantitas = (number) => {
+        const { inputNumber } = this.state;
+        Order.OrderItem[this.state.selecteditem].kuantitas = number;
+        alert(Order.OrderItem[this.state.selecteditem].kuantitas);
+    }
     static navigationOptions = {
         drawerIcon: (
-            <Icon name="ios-cart-outline" />
+            <Icon name="cart" />
         )
     }
     getName() {
         return Searchbar
     }
-    ubahkuantitas(number) {
-        this.popupDialog.dismiss();
-        this.state.Order.OrderItem[this.state.selecteditem].kuantitas = number;
-        // this.render();
-        // alert(Order.OrderItem[this.state.selecteditem].kuantitas);
-        // alert(.kuantitas);
-        this.state.inputNumber = 0;
-    }
+    // ubahkuantitas(number) {
+    //     this.popupDialog.dismiss();
+    //     Order.OrderItem[this.state.selecteditem].kuantitas = number;
+    //     // this.render();
+    //     // alert(Order.OrderItem[this.state.selecteditem].kuantitas);
+    //     // alert(.kuantitas);
+    //     this.state.inputNumber = 0;
+    // }
+
     showalert1(title, msg, item) {
         Alert.alert(
             title,
@@ -88,16 +104,15 @@ class Keranjang extends Component {
         )
     }
     returnData(data) {
-        this.state.Order.OrderItem.push(data);
-        alert(this.state.Order.OrderItem[0].nama);
-        this.state.Order.TotalHarga = 0;
-        this.state.Order.OrderItem.forEach((data) => {
+        Order.OrderItem.push(data);
+        Order.TotalHarga = 0;
+        Order.OrderItem.forEach((data) => {
             data.harga = data.kuantitas * data.peritem;
-            this.state.Order.TotalHarga += data.harga;
+            Order.TotalHarga += data.harga;
         })
     }
     getTotal() {
-        return this.state.Order.TotalHarga;
+        return Order.TotalHarga;
     }
     render() {
         return (
@@ -110,7 +125,7 @@ class Keranjang extends Component {
                                 () => this.props.navigation.openDrawer()} />
                     </Left>
                     <Body style={{ width: '80%' }}>
-                        <Title style={{ color: 'black' }}> Keranjang Belanja </Title>
+                        <Title style={{ color: 'black' }}> Keranjang </Title>
                     </Body>
                     <Right style={{ width: '10%' }}>
                         <Button style={{ backgroundColor: 'papayawhip' }}
@@ -123,9 +138,9 @@ class Keranjang extends Component {
                 </Header>
                 <PopupDialog
                     height={200}
-                    actions={[<DialogButton text="Oke" align="center" 
-                    onPress={() => this.ubahkuantitas(this.state.inputNumber)} />]}
-                    ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+                    actions={[<DialogButton text="Oke" align="center"
+                        onPress={this.saveData.bind(this)} />]}
+                    ref={(popupDialog) => { this.popupDialog = popupDialog }}
                 >
                     <View style={{ backgroundColor: 'white' }}>
                         <Text style={{ fontWeight: 'Bold', textAlign: 'center', fontSize: 22, paddingBottom: 5, paddingTop: 10, color: 'black' }}>
@@ -137,8 +152,11 @@ class Keranjang extends Component {
                             }}>
                                 <Input style={{ textAlign: 'center', backgroundColor: 'lightgrey' }}
                                     keyboardType={'numeric'} placeholder="Jumlah barang" placeholderTextColor='grey'
-                                    onChangeText={(inputNumber) => this.setState({inputNumber })}
-                                    value={this.state.inputNumber}>
+                                    onChangeText={(inputNumber) => this.setState({ inputNumber })}
+                                    
+                                >
+                                    {/* onChangeText={(inputNumber) => this.setState({ inputNumber })}
+                                    value={this.state.inputNumber}> */}
                                 </Input>
                             </Item>
                         </Form>
@@ -151,7 +169,7 @@ class Keranjang extends Component {
                         <List scrollEnabled={false}
                             style={styles.listkeranjang}
 
-                            dataArray={this.state.Order.OrderItem}
+                            dataArray={Order.OrderItem}
                             renderRow={(data, sectionID, rowID, higlightRow) =>
                                 <ListItem
                                     style={styles.rowmenu}>
@@ -188,7 +206,7 @@ class Keranjang extends Component {
                                                         <Row  >
 
                                                             <Col style={{ paddingLeft: 10, paddingRight: 10 }} >
-                                                                <Text style={{ fontSize: 20 }}
+                                                                <Text style={styles.text}
                                                                     onPress={() => {
                                                                         // alert(rowID);
                                                                         this.state.selecteditem = rowID;
@@ -209,7 +227,7 @@ class Keranjang extends Component {
                                                                 </Text>
                                                             </Col>
                                                             <Col >
-                                                                <Text style={styles.text}> x{data.kuantitas} </Text>
+                                                                <Text style={styles.text}> x{this.state.number} </Text>
                                                             </Col>
                                                             <Col >
                                                                 <Text style={[styles.text, { textAlign: 'right' }]}>
@@ -231,8 +249,8 @@ class Keranjang extends Component {
                 </Content>
                 <View >
                     <Button full style={styles.mb15}
-                        onPress={() => this.props.navigation.navigate('Halaman')} >
-                        <Text >BAYAR: {this.getTotal()} </Text>
+                        onPress={() => this.props.navigation.navigate('Halaman', Order)} >
+                        <Text style={{ color: 'black' }}>BAYAR: {this.getTotal()} </Text>
                     </Button>
                 </View>
             </Container>

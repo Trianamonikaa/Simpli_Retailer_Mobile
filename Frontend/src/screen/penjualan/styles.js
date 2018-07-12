@@ -12,14 +12,14 @@ export default {
     marginTop: 10
   },
   mb15: {
-    backgroundColor : 'rosybrown'
+    backgroundColor : '#f48fb1'
 
   },
   mt15: {
     marginTop: 15
   },
   headerback : {
-    backgroundColor : 'pink'
+    backgroundColor : '#f06292'
   
   },
   iconButton: {
@@ -134,6 +134,7 @@ export default {
   text: {
     fontSize: 15,
     paddingLeft: 5,
+    color : 'black'
   },
   imgOver: {
     alignItems: 'center',

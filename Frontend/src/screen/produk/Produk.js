@@ -25,6 +25,8 @@ import Searchbar from './Searchbar'
 import styles from './styles'
 const beras = require("../../image/beras.jpg");
 const crayon = require("../../image/crayon.jpg");
+const aice = require("../../image/aice.jpg");
+
 
 
 const datas = 
@@ -32,23 +34,23 @@ const datas =
     {
         id: 1,
         img: beras,
-        text: "BERAS PULEN",
+        text: "Beras Pulen",
         hargajual : "Rp 56.000",
         hargabeli : "Rp 34.000",
         barangmasuk : "09 Juli 2018"
     },
     {
         id: 2,
-        img: beras,
-        text: "BERAS BIASA",
+        img: crayon,
+        text: "Crayon Faber Castell",
         hargajual : "Rp 56.000",
         hargabeli : "Rp 34.000",
         barangmasuk : "09 Juli 2018"
     },
     {
         id: 3,
-        img: beras,
-        text: "BERAS REGULAR",
+        img: aice,
+        text: "Aice Mochi",
         hargajual : "Rp 56.000",
         hargabeli : "Rp 34.000",
         barangmasuk : "09 Juli 2018"
@@ -62,7 +64,7 @@ class Produk extends Component {
     }
     static navigationOptions = {
         drawerIcon: (
-            <Icon name="cart" />
+            <Icon name="keypad" />
         ),
     }
     getName() {
@@ -80,7 +82,7 @@ class Produk extends Component {
                     <Body style={{ width: '85%', backgroundColor: 'rebbecapurple' }}>
                         <Item >
                             <Icon active name="search" />
-                            <Input style={{ backgroundColor : 'pink' , width : 70}}placeholder="Search" />
+                            <Input style={{ backgroundColor : '#f06292' , width : 70}}placeholder="Search" />
                         </Item>
                     </Body>
                     <Right style={{ width: '5%' }}>
