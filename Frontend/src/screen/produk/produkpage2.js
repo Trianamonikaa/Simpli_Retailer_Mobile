@@ -58,14 +58,15 @@ class produkpage2 extends Component {
                 </Header>
 
                 <Content>
-                    <View style={styles.contentpicture}>
+                    <View 
+                    style={styles.contentpicture }>
                         <Image source={detail.img} style={styles.imageproduk} />
                     </View>
                     <View>
-                        <Grid >
+                        <Grid noBorder = {true} >
                             <Row >
                                 <Col>
-                                    <Text style={styles.text}>Nama barang
+                                    <Text style={[styles.text, {fontWeight : 'bold'}]}>Nama barang
                                 </Text>
                                 </Col>
                                 <Col style={styles.col2} >
@@ -74,31 +75,31 @@ class produkpage2 extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col style={styles.col1}><Text style={styles.text}>Harga Jual </Text></Col>
+                                <Col style={styles.col1}><Text style={[styles.text, {fontWeight : 'bold'}]}>Harga Jual </Text></Col>
                                 <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
-                                <Col style={styles.col3}><Text style={styles.text}> {detail.hargajual}</Text>
+                                <Col style={styles.col3}><Text style={styles.text}> Rp {detail.hargajual}</Text>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col style={styles.col1}><Text style={styles.text}>Harga Beli </Text></Col>
+                                <Col style={styles.col1}><Text style={[styles.text, {fontWeight : 'bold'}]}>Harga Beli </Text></Col>
                                 <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
-                                <Col style={styles.col3}><Text style={styles.text}> {detail.hargabeli}</Text>
+                                <Col style={styles.col3}><Text style={styles.text}> Rp {detail.hargabeli}</Text>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col style={styles.col1}><Text style={styles.text}>Barang datang</Text></Col>
-                                <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
-                                <Col style={styles.col3}><Text style={styles.text}> {detail.barangmasuk}</Text>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col style={styles.col1}><Text style={styles.text}>Nomor Produksi</Text></Col>
+                                <Col style={styles.col1}><Text style={[styles.text, {fontWeight : 'bold'}]}>Barang datang</Text></Col>
                                 <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
                                 <Col style={styles.col3}><Text style={styles.text}> {detail.barangmasuk}</Text>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col style={styles.col1}><Text style={styles.text}>Perusahaan</Text></Col>
+                                <Col style={styles.col1}><Text style={[styles.text, {fontWeight : 'bold'}]}>Nomor Produksi</Text></Col>
+                                <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
+                                <Col style={styles.col3}><Text style={styles.text}> {detail.barangmasuk}</Text>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col style={styles.col1}><Text style={[styles.text, {fontWeight : 'bold'}]}>Perusahaan</Text></Col>
                                 <Col style={styles.col2}><Text style={styles.textdetail}>:</Text></Col>
                                 <Col style={styles.col3}><Text style={styles.text}> {detail.barangmasuk}</Text>
                                 </Col>

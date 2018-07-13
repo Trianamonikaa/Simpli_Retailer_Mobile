@@ -31,28 +31,28 @@ import {
     Col
 } from 'native-base'
 import styles from './styles'
-const Order =
-{
-    Id: '1',
-    OrderNo: '1',
-    OrderDate: '090718',
-    Status: '0',
-    Type: 'ok',
-    Description: 'ok',
-    CreatedTime: '1',
-    TotalHarga: 0,
-    ModifiedTime: '1',
-    ModifiedBy: '0',
-    Cashier: '2',
-    OrderItem: []
-}
 class Keranjang extends Component {
     constructor(props) {
         super(props);
         this.state = {
             inputNumber: '',
             selecteditem: 0,
-            number: ''
+            number: '',
+            Order:
+            {
+                Id: '1',
+                OrderNo: '1',
+                OrderDate: '090718',
+                Status: '0',
+                Type: 'ok',
+                Description: 'ok',
+                CreatedTime: '1',
+                TotalHarga: 0,
+                ModifiedTime: '1',
+                ModifiedBy: '0',
+                Cashier: '2',
+                OrderItem: []
+            }
         }
         AsyncStorage.getItem('number', (error, result) => {
             if (result) {
@@ -71,8 +71,8 @@ class Keranjang extends Component {
     }
     ubahkuantitas = (number) => {
         const { inputNumber } = this.state;
-        Order.OrderItem[this.state.selecteditem].kuantitas = number;
-        alert(Order.OrderItem[this.state.selecteditem].kuantitas);
+        this.state.Order.OrderItem[this.state.selecteditem].kuantitas = number;
+        alert(this.state.Order.OrderItem[this.state.selecteditem].kuantitas);
     }
     static navigationOptions = {
         drawerIcon: (
@@ -104,15 +104,16 @@ class Keranjang extends Component {
         )
     }
     returnData(data) {
-        Order.OrderItem.push(data);
-        Order.TotalHarga = 0;
-        Order.OrderItem.forEach((data) => {
+        this.state.Order.OrderItem.push(data);
+        this.state.Order.TotalHarga = 0;
+        this.state.Order.OrderItem.forEach((data) => {
             data.harga = data.kuantitas * data.peritem;
-            Order.TotalHarga += data.harga;
+            this.state.Order.TotalHarga += data.harga;
         })
+        // alert(this.state.Order.OrderItem['lala'].nama)
     }
     getTotal() {
-        return Order.TotalHarga;
+        return this.state.Order.TotalHarga;
     }
     render() {
         return (
@@ -153,7 +154,7 @@ class Keranjang extends Component {
                                 <Input style={{ textAlign: 'center', backgroundColor: 'lightgrey' }}
                                     keyboardType={'numeric'} placeholder="Jumlah barang" placeholderTextColor='grey'
                                     onChangeText={(inputNumber) => this.setState({ inputNumber })}
-                                    
+
                                 >
                                     {/* onChangeText={(inputNumber) => this.setState({ inputNumber })}
                                     value={this.state.inputNumber}> */}
@@ -164,13 +165,11 @@ class Keranjang extends Component {
                     </View>
                 </PopupDialog>
                 <Content >
-
                     <View style={{ backgroundColor: 'transparent', padding: 0, margin: 0 }}   >
                         <List scrollEnabled={false}
                             style={styles.listkeranjang}
-
-                            dataArray={Order.OrderItem}
-                            renderRow={(data, sectionID, rowID, higlightRow) =>
+                            dataArray={this.state.Order.OrderItem}
+                            renderRow={(data) =>
                                 <ListItem
                                     style={styles.rowmenu}>
                                     <SwipeRow scrollEnabled={false}
@@ -249,7 +248,7 @@ class Keranjang extends Component {
                 </Content>
                 <View >
                     <Button full style={styles.mb15}
-                        onPress={() => this.props.navigation.navigate('Halaman', Order)} >
+                        onPress={() => this.props.navigation.navigate('Halaman', this.state.Order)} >
                         <Text style={{ color: 'black' }}>BAYAR: {this.getTotal()} </Text>
                     </Button>
                 </View>

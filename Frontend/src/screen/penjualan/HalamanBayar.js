@@ -43,21 +43,30 @@ class HalamanBayar extends Component {
             first: '',
             second: '',
             third: '',
-            sum: 0
+            sum: 0,
         }
     }
     totalbayar = () => {
         const { first, second, third } = this.state;
         this.setState({
             sum: Number(first) + Number(second) + Number(third)
-        })
+        });
+        
     }
     
-    getTotal() {
-        this.props.navigation.state.params.Order;
-        // return Order.getTotal;
+    // updatevalue(first, second, third){
+    //     this.setState({first, second, third,
+    //         sum: Number(first) + Number(second) + Number(third)
+    //       });
+    //     }
+    
+    returnData() {
+        this.props.navigation.state.params.returnData('Order');
+        this.props.navigation.goBack();
+        // Order.totalharga.push(Order);
+        // return Order.totalharga;
+        return Order.getTotal;
     }
-
     render() {
         return (
             <Container>
@@ -84,10 +93,12 @@ class HalamanBayar extends Component {
                                 <Form style={{ width: 150, height: 40, }}>
                                     <Item regular
                                     >
-                                        <Input style={{ width: 150, height: 40, fontSize: 15 }}
+                                        <Input onPress = {this.totalbayar} 
+                                        style={{ width: 150, height: 40, fontSize: 15 }}
                                             keyboardType={'numeric'} placeholder="Harga"
                                             value={this.state.first}
-                                            onChangeText={(first) => this.setState({ first })} />
+                                            onChangeText={(first) => this.setState({first})} />
+                                            {/* onChangeText={(first) => this.updatevalue(first, this.state.second, this.state.third)} /> */}
                                     </Item>
                                 </Form>
                             </Body>
@@ -103,7 +114,7 @@ class HalamanBayar extends Component {
                                         <Input style={{ width: 150, height: 40, fontSize: 15 }}
                                             keyboardType={'numeric'} placeholder="Harga"
                                             value={this.state.second}
-                                            onChangeText={(second) => this.setState({ second })} />
+                                            onChangeText={(second) => this.setState({second})} />
                                     </Item>
                                 </Form>
                             </Body>
@@ -120,11 +131,11 @@ class HalamanBayar extends Component {
                                             style={{ width: 150, height: 40, fontSize: 15 }}
                                             keyboardType={'numeric'} placeholder="Harga"
                                             value={this.state.third}
-                                            onChangeText={(third) => this.setState({ third })} />
+                                            onChangeText={(third) => this.setState({third})} />
                                     </Item>
                                 </Form>
                                 <TouchableHighlight onPress={this.totalbayar}>
-                                    <Text style ={styles.text}>Calculate</Text>
+                                    <Text style={styles.text}>Calculate</Text>
                                 </TouchableHighlight>
                             </Body>
                         </Row>
@@ -134,8 +145,8 @@ class HalamanBayar extends Component {
                             </Left>
                             <Body >
                                 <Text style={styles.text}>
-                                    {this.getTotal()}
-                            </Text>
+                                    {this.returnData}
+                                </Text>
                             </Body>
                         </Row>
                         <Row style={{ paddingTop: 10, paddingBottom: 10 }}>
@@ -164,7 +175,7 @@ class HalamanBayar extends Component {
                             </Left>
                             <Body >
                                 <Text style={styles.text}>
-                                   Rp {this.state.sum}
+                                    Rp {this.state.sum}
                                 </Text>
                             </Body>
                         </Row>

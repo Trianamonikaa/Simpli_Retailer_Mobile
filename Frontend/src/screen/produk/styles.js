@@ -38,10 +38,10 @@ export default {
     alignItems: "center"
   },
   col1: {
-    width : '35%', paddingRight : 5
+    width : '40%', paddingRight : 5
   },
   col2: {
-    width : '10%',  paddingRight : 5
+    width : '5%',  paddingRight : 5
   },
   col3: {
     width : '55%', paddingRight : 5
@@ -107,12 +107,12 @@ export default {
     flex : .5,
     flexDirection : 'row',
     justifyContent : 'center',
-    borderBottomWidth : 1,
   },
   text: {
     fontSize: 18,
     paddingLeft : 5,
-    color : 'black'
+    color : 'black',
+    fontFamily: 'vincHand'
     
   },
   headerback : {
