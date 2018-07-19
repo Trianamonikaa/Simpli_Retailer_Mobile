@@ -82,20 +82,25 @@ const datas = [
 
 class Penjualan extends Component {
 
-  onPressDetail = () => {
-    this.props.navigation.navigate('Keranjang');
-  }
+  
   static navigationOptions = {
     drawerLabel: () => null
   }
-  returnwithdata = (data) => {
-    this.props.navigation.state.params.returnData(data);
-    this.props.navigation.goBack();
-  }
+  // returnwithdata = (data) => {
+  //   this.props.navigation.state.params.returnData(data);
+  //   this.props.navigation.goBack();
+  // }
   state = {
     datas,
   }
-
+returnData(data ){
+  this.props.navigation.navigate('Keranjang');
+  // alert(data.nama)
+  this.props.navigation.state.params.returnData;
+  this.setState({data : data});
+  this.returnData.bind(this);
+  
+}
   render() {
     const { datas } = this.state;
     let totalharga = 0;
@@ -127,7 +132,7 @@ class Penjualan extends Component {
           <List style={{ backgroundColor: 'transparent', }}
             dataArray={datas} renderRow={data =>
               <ListItem style={{ backgroundColor: 'transparent', marginLeft: 0, paddingLeft: 8 }}
-                onPress={() => this.returnwithdata(data)}>
+                onPress={() => this.returnData(data)}>
                 <Left style={{ backgroundColor: 'transparent' }}>
                   <Text style={styles.text}>
                     {data.nama}</Text>

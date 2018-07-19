@@ -103,20 +103,24 @@ class Keranjang extends Component {
             { cancelable: false }
         )
     }
-    returnData(data) {
-        this.state.Order.OrderItem.push(data);
-        this.state.Order.TotalHarga = 0;
-        this.state.Order.OrderItem.forEach((data) => {
-            data.harga = data.kuantitas * data.peritem;
-            this.state.Order.TotalHarga += data.harga;
-        })
-        // alert(this.state.Order.OrderItem['lala'].nama)
+    // returnData(data) {
+    //     this.state.Order.OrderItem.push(data);
+    //     this.state.Order.TotalHarga = 0;
+    //     this.state.Order.OrderItem.forEach((data) => {
+    //         data.harga = data.kuantitas * data.peritem;
+    //         this.state.Order.TotalHarga += data.harga;
+    //     })
+    //     alert(this.state.Order.OrderItem[this.state.inputNumber].nama)
+    // }
+    returnData(data){
+        return data;
+        alert(data.nama)
     }
     getTotal() {
         return this.state.Order.TotalHarga;
     }
     render() {
-        return (
+         return (
             <Container >
                 <Header style={styles.headerback}>
                     <Left style={{ width: '10%' }}>
@@ -130,7 +134,7 @@ class Keranjang extends Component {
                     </Body>
                     <Right style={{ width: '10%' }}>
                         <Button style={{ backgroundColor: 'papayawhip' }}
-                            onPress={() => this.props.navigation.navigate('Penjualan', { returnData: this.returnData.bind(this) })}
+                            onPress={() => this.props.navigation.navigate('Penjualan', this.returnData )}
                         >
                             <Icon name="search" style={{ color: 'darksalmon' }}>
                             </Icon>
