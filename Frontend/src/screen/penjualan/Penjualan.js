@@ -81,26 +81,24 @@ const datas = [
 
 
 class Penjualan extends Component {
+  constructor(props) {
+    super(props);
 
-  
+    console.log(this.props.navigation.getParam('OrderItem', 'default'));
+  }
+
+
   static navigationOptions = {
     drawerLabel: () => null
   }
-  // returnwithdata = (data) => {
-  //   this.props.navigation.state.params.returnData(data);
-  //   this.props.navigation.goBack();
-  // }
   state = {
     datas,
   }
-returnData(data ){
-  this.props.navigation.navigate('Keranjang');
-  // alert(data.nama)
-  this.props.navigation.state.params.returnData;
-  this.setState({data : data});
-  this.returnData.bind(this);
-  
-}
+  backToKeranjang(data) {
+    let OrderItem = this.props.navigation.getParam('OrderItem', 'default');
+    OrderItem.push(data);
+    this.props.navigation.navigate('Keranjang', {OrderItem:OrderItem} );
+  }
   render() {
     const { datas } = this.state;
     let totalharga = 0;
@@ -121,7 +119,7 @@ returnData(data ){
               <Icon
                 active name="search" />
               <Input style={styles.headerback}
-                placeholder="Search ..."  />
+                placeholder="Search ..." />
             </Item>
           </Body>
           <Right style={{ width: '0%' }}>
@@ -132,7 +130,7 @@ returnData(data ){
           <List style={{ backgroundColor: 'transparent', }}
             dataArray={datas} renderRow={data =>
               <ListItem style={{ backgroundColor: 'transparent', marginLeft: 0, paddingLeft: 8 }}
-                onPress={() => this.returnData(data)}>
+                onPress={() => this.backToKeranjang(data)}>
                 <Left style={{ backgroundColor: 'transparent' }}>
                   <Text style={styles.text}>
                     {data.nama}</Text>

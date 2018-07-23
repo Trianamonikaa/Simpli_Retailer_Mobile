@@ -1,6 +1,6 @@
 'use strict';
-import PopupDialog, { DialogButton } from 'react-native-popup-dialog';
-import React, { Component, PropTypes } from "react";
+import PopupDialog, { DialogButton, SlideAnimation  } from 'react-native-popup-dialog';
+import React, { Component } from "react";
 import {
     Text,
     View,
@@ -31,11 +31,15 @@ import {
     Col
 } from 'native-base'
 import styles from './styles'
+const slideAnimation = new SlideAnimation({
+    slideFrom: 'bottom',
+  });
+
 class Keranjang extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inputNumber: '',
+            inputNumber: 0,
             selecteditem: 0,
             number: '',
             Order:
@@ -54,25 +58,30 @@ class Keranjang extends Component {
                 OrderItem: []
             }
         }
-        AsyncStorage.getItem('number', (error, result) => {
-            if (result) {
-                this.setState({
-                    number: result
-                });
-            }
+        console.log(this.props.navigation.getParam('OrderItem', []));
+        let OrderItem = this.props.navigation.getParam('OrderItem', []);
+        OrderItem.forEach(item => {
+            item.harga = item.peritem * item.kuantitas;
+            this.state.Order.OrderItem.push(item);
         });
+        this.setState({Order:this.state.Order});
+        console.log(this.state.Order.OrderItem);
     }
-    saveData() {
-        let number = this.state.inputNumber;
-        this.setState({
-            number: number
-        })
-        alert('Data tersimpan');
-    }
-    ubahkuantitas = (number) => {
-        const { inputNumber } = this.state;
-        this.state.Order.OrderItem[this.state.selecteditem].kuantitas = number;
-        alert(this.state.Order.OrderItem[this.state.selecteditem].kuantitas);
+    // saveData() {
+    //     let number = this.state.inputNumber;
+    //     this.setState({
+    //         number: number
+    //     })
+    //     alert('Data tersimpan');
+    // }
+    ubahkuantitas(){
+        console.log(this.state.inputNumber + " Ubah < Kuantitas");
+        console.log(this.state.selecteditem + " < Index");
+        // this.popupDialog.dismiss();
+        // this.render();
+        // if (this.PopupDialog) {
+        //     this.PopupDialog.dismiss();
+        // }
     }
     static navigationOptions = {
         drawerIcon: (
@@ -82,14 +91,6 @@ class Keranjang extends Component {
     getName() {
         return Searchbar
     }
-    // ubahkuantitas(number) {
-    //     this.popupDialog.dismiss();
-    //     Order.OrderItem[this.state.selecteditem].kuantitas = number;
-    //     // this.render();
-    //     // alert(Order.OrderItem[this.state.selecteditem].kuantitas);
-    //     // alert(.kuantitas);
-    //     this.state.inputNumber = 0;
-    // }
 
     showalert1(title, msg, item) {
         Alert.alert(
@@ -103,23 +104,11 @@ class Keranjang extends Component {
             { cancelable: false }
         )
     }
-    // returnData(data) {
-    //     this.state.Order.OrderItem.push(data);
-    //     this.state.Order.TotalHarga = 0;
-    //     this.state.Order.OrderItem.forEach((data) => {
-    //         data.harga = data.kuantitas * data.peritem;
-    //         this.state.Order.TotalHarga += data.harga;
-    //     })
-    //     alert(this.state.Order.OrderItem[this.state.inputNumber].nama)
-    // }
-    returnData(data){
-        return data;
-        alert(data.nama)
-    }
     getTotal() {
         return this.state.Order.TotalHarga;
     }
     render() {
+        console.log("called");
          return (
             <Container >
                 <Header style={styles.headerback}>
@@ -134,7 +123,7 @@ class Keranjang extends Component {
                     </Body>
                     <Right style={{ width: '10%' }}>
                         <Button style={{ backgroundColor: 'papayawhip' }}
-                            onPress={() => this.props.navigation.navigate('Penjualan', this.returnData )}
+                            onPress={() => this.props.navigation.navigate('Penjualan', {OrderItem:this.state.Order.OrderItem} )}
                         >
                             <Icon name="search" style={{ color: 'darksalmon' }}>
                             </Icon>
@@ -143,10 +132,10 @@ class Keranjang extends Component {
                 </Header>
                 <PopupDialog
                     height={200}
-                    actions={[<DialogButton text="Oke" align="center"
-                        onPress={this.saveData.bind(this)} />]}
-                    ref={(popupDialog) => { this.popupDialog = popupDialog }}
-                >
+                    actions={[<DialogButton text="Oke" align="center" 
+                    // onPress={() => this.ubahkuantitas()} />]}
+                    ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+                    dialogAnimation={slideAnimation}>
                     <View style={{ backgroundColor: 'white' }}>
                         <Text style={{ fontWeight: 'Bold', textAlign: 'center', fontSize: 22, paddingBottom: 5, paddingTop: 10, color: 'black' }}>
                             Masukkan berapa banyak barang yang akan dibeli</Text>
@@ -157,15 +146,10 @@ class Keranjang extends Component {
                             }}>
                                 <Input style={{ textAlign: 'center', backgroundColor: 'lightgrey' }}
                                     keyboardType={'numeric'} placeholder="Jumlah barang" placeholderTextColor='grey'
-                                    onChangeText={(inputNumber) => this.setState({ inputNumber })}
-
-                                >
-                                    {/* onChangeText={(inputNumber) => this.setState({ inputNumber })}
-                                    value={this.state.inputNumber}> */}
+                                    onChangeText={(inputNumber) => this.setState({ inputNumber })}>
                                 </Input>
                             </Item>
                         </Form>
-
                     </View>
                 </PopupDialog>
                 <Content >
@@ -173,7 +157,7 @@ class Keranjang extends Component {
                         <List scrollEnabled={false}
                             style={styles.listkeranjang}
                             dataArray={this.state.Order.OrderItem}
-                            renderRow={(data) =>
+                            renderRow={(data, sectionID, rowID, higlightRow) =>
                                 <ListItem
                                     style={styles.rowmenu}>
                                     <SwipeRow scrollEnabled={false}
@@ -183,9 +167,8 @@ class Keranjang extends Component {
                                         left={
 
                                             <Button onPress={() => {
-                                                this.state.selecteditem = rowID;
-                                                this.popupDialog.
-                                                    this.popupDialog.show();
+                                                // this.state.selecteditem = rowID;
+                                                // this.popupDialog.show();
                                             }}
                                             >
                                                 <Icon active name="add" style={{ color: "#FFF" }} />
@@ -202,35 +185,32 @@ class Keranjang extends Component {
                                         body={
                                             <View noBorder={true}
                                                 style={{ backgroundColor: 'transparent', width: '100%', paddingLeft: 0, margin: 0, paddingBottom: 0, marginLeft: 0 }}>
-
-                                                <ListItem noBorder={true}
-                                                    style={{ backgroundColor: 'transparent', marginLeft: 0, paddingBottom: 0, paddingTop: 0 }}>
-                                                    <Grid style={{ backgroundColor: 'transparent', paddingBottom: 0, paddingTop: 0, marginBottom: 0, marginTop: 0, marginLeft: 10 }}>
-                                                        <Row  >
-
+                                                    <Grid
+                                                        onPress={() => {
+                                                            // this.state.selecteditem = rowID;
+                                                            // this.popupDialog.show();
+                                                        }}
+                                                        style={{ backgroundColor: 'transparent', paddingBottom: 0, paddingTop: 0, marginBottom: 0, marginTop: 0, marginLeft: 10 }}>
+                                                        <Row>
                                                             <Col style={{ paddingLeft: 10, paddingRight: 10 }} >
                                                                 <Text style={styles.text}
                                                                     onPress={() => {
                                                                         // alert(rowID);
-                                                                        this.state.selecteditem = rowID;
-                                                                        this.popupDialog.show();
+                                                                        // this.state.selecteditem = rowID;
+                                                                        // this.popupDialog.show();
                                                                     }}>
                                                                     {data.nama}
                                                                 </Text>
                                                             </Col>
                                                         </Row>
-                                                        <Row style={{ paddingLeft: 10, paddingRight: 10 }}
-                                                            onPress={() => {
-                                                                this.state.selecteditem = rowID;
-                                                                this.popupDialog.show();
-                                                            }}>
+                                                        <Row style={{ paddingLeft: 10, paddingRight: 10 }}>
                                                             <Col >
                                                                 <Text numberOfLines={1} note style={styles.text}>
                                                                     {data.peritem}
                                                                 </Text>
                                                             </Col>
                                                             <Col >
-                                                                <Text style={styles.text}> x{this.state.number} </Text>
+                                                                <Text style={styles.text}> x{data.kuantitas} </Text>
                                                             </Col>
                                                             <Col >
                                                                 <Text style={[styles.text, { textAlign: 'right' }]}>
@@ -239,8 +219,6 @@ class Keranjang extends Component {
                                                             </Col>
                                                         </Row>
                                                     </Grid>
-
-                                                </ListItem>
                                             </View>
                                         }
                                     />
