@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {
   Text,
-  Image,
+  AsyncStorage,
 } from "react-native";
 
 import {
@@ -78,35 +78,68 @@ const datas = [
     kuantitas: 1
   },
 ]
-
-
 class Penjualan extends Component {
-
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      Order: {
+        Id: '1',
+        OrderNo: '1',
+        OrderDate: '00000',
+        Status: 'Hayo kenapa gabisa hayoooOOOO',
+        Type: 'ok',
+        Description: 'ok',
+        CreatedTime: '1',
+        TotalHarga: 0,
+        ModifiedTime: '1',
+        ModifiedBy: '0',
+        Cashier: '34',
+        OrderItem: []
+      }
+    }
+    // alert(props.navigation.state.params.Order.Id);
+    // if ( props.navigation.state.params.Order != undefined ){
+    //             // alert(this.props.navigation.state.params.Order.Status);
+    //             this.setState({Order : props.navigation.state.params.Order})
+    //             // alert(this.state.Order.Status);
+    // }
+    AsyncStorage.setItem('Order', JSON.stringify(this.state.Order), () => {
+      if (props.navigation.state.params != undefined) {
+        this.setState({ Order: props.navigation.state.params.Order });
+        AsyncStorage.mergeItem('Order', JSON.stringify(props.navigation.state.params.Order), () => {
+          AsyncStorage.getItem('Order', (err, result) => {
+            console.log(result);
+          })
+        })
+      }
+    })
+  }
   static navigationOptions = {
     drawerLabel: () => null
   }
   // returnwithdata = (data) => {
-  //   this.props.navigation.state.params.returnData(data);
-  //   this.props.navigation.goBack();
+  //   // alert(this.state.Order.Id);
+  //   this.state.Order.OrderItem.push(data);
+  //   // alert(this.state.Order.OrderItem[0].nama);
+
+  //   // alert(this.state.Order.OrderItem[0].nama);
+  //   this.setState({Order : this.state.Order});
+  //   // alert(this.state.Order.OrderItem[0].nama);
+  //   // alert(this.state.Order.Status);
+  //   this.props.navigation.navigate('Keranjang', { Order : this.state.Order });
+  //   // this.props.navigation.state.params.returnData(data);
+  //   // this.props.navigation.goBack();
+  //   // // alert('returnwithdata');
+  //   // alert(this.props.navigation.toString());
   // }
   state = {
     datas,
   }
-returnData(data ){
-  this.props.navigation.navigate('Keranjang');
-  // alert(data.nama)
-  this.props.navigation.state.params.returnData;
-  this.setState({data : data});
-  this.returnData.bind(this);
-  
-}
+
+
   render() {
-    const { datas } = this.state;
-    let totalharga = 0;
-    datas.forEach((data) => {
-      totalharga += data.kuantitas * data.harga
-    })
+
+    // alert(this.state.Order.Status);
     return (
       <Container>
         <Header style={styles.headerback}>
@@ -121,7 +154,7 @@ returnData(data ){
               <Icon
                 active name="search" />
               <Input style={styles.headerback}
-                placeholder="Search ..."  />
+                placeholder="Search ..." />
             </Item>
           </Body>
           <Right style={{ width: '0%' }}>
@@ -132,7 +165,8 @@ returnData(data ){
           <List style={{ backgroundColor: 'transparent', }}
             dataArray={datas} renderRow={data =>
               <ListItem style={{ backgroundColor: 'transparent', marginLeft: 0, paddingLeft: 8 }}
-                onPress={() => this.returnData(data)}>
+                onPress={() => this.props.navigation.navigate('Keranjang')}>
+                {/* onPress={() => this.returnwithdata(data)}> */}
                 <Left style={{ backgroundColor: 'transparent' }}>
                   <Text style={styles.text}>
                     {data.nama}</Text>
@@ -146,8 +180,6 @@ returnData(data ){
 
         </Content>
 
-
-        <Text> {totalharga} </Text>
       </Container>
     );
   };

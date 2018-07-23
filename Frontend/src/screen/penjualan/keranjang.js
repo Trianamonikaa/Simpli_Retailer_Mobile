@@ -1,15 +1,15 @@
 'use strict';
 import PopupDialog, { DialogButton } from 'react-native-popup-dialog';
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 import {
     Text,
     View,
+    StyleSheet,
     Alert,
     AsyncStorage,
     AppRegistry,
 } from "react-native";
-// import BarcodeScanner from 'react-native-barcodescanner';
-import Searchbar from './Searchbar'
+import Searchbar from './Searchbar';
 import {
     Button,
     Icon,
@@ -28,13 +28,17 @@ import {
     Item,
     Grid,
     Row,
-    Col
+    Col,
+    Thumbnail
 } from 'native-base'
 import styles from './styles'
 class Keranjang extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            torchMode: 'off',
+            cameraType: 'back',
+            qrcode: '',
             inputNumber: '',
             selecteditem: 0,
             number: '',
@@ -54,14 +58,34 @@ class Keranjang extends Component {
                 OrderItem: []
             }
         }
-        AsyncStorage.getItem('number', (error, result) => {
-            if (result) {
-                this.setState({
-                    number: result
-                });
+
+        // if (props.navigation.state.params  != undefined) {
+        //     if (props.navigation.state.params.Order  != undefined) {
+        //         // alert(this.props.navigation.state.params.Order.Status)
+        //         this.setState({ Order: props.navigation.state.params.Order });
+        //         // alert(props.navigation.state.params.Order.OrderItem[0].nama);
+        //         alert(this.state.Order.OrderItem[0].nama);
+        //         // alert(this.state.Order.Status);
+        //     }
+        // }
+        AsyncStorage.setItem('Order', JSON.stringify(this.state.Order), () => {
+            if (props.navigation.state.params != undefined) {
+                this.setState({ Order: props.navigation.state.params.Order });
+                AsyncStorage.mergeItem('Order', JSON.stringify(props.navigation.state.params.Order), () => {
+                    AsyncStorage.getItem('Order', (err, result) => {
+                        console.log(result);
+                    })
+                })
             }
-        });
+        })
+
     }
+
+    // barcodeReceived(e) {
+    //     console.log('Barcode: ' + e.data);
+    //     console.log('Type: ' + e.type);
+    // }
+
     saveData() {
         let number = this.state.inputNumber;
         this.setState({
@@ -103,16 +127,16 @@ class Keranjang extends Component {
             { cancelable: false }
         )
     }
-    // returnData(data) {
-    //     this.state.Order.OrderItem.push(data);
-    //     this.state.Order.TotalHarga = 0;
-    //     this.state.Order.OrderItem.forEach((data) => {
-    //         data.harga = data.kuantitas * data.peritem;
-    //         this.state.Order.TotalHarga += data.harga;
-    //     })
-    //     alert(this.state.Order.OrderItem[this.state.inputNumber].nama)
-    // }
-    returnData(data){
+    returnData(data) {
+        alert('returnData');
+        this.state.Order.OrderItem.push(data);
+        this.state.Order.TotalHarga = 0;
+        this.state.Order.OrderItem.forEach((data) => {
+            data.harga = data.kuantitas * data.peritem;
+            this.state.Order.TotalHarga += data.harga;
+        })
+    }
+    returnData(data) {
         return data;
         alert(data.nama)
     }
@@ -120,7 +144,7 @@ class Keranjang extends Component {
         return this.state.Order.TotalHarga;
     }
     render() {
-         return (
+        return (
             <Container >
                 <Header style={styles.headerback}>
                     <Left style={{ width: '10%' }}>
@@ -134,7 +158,7 @@ class Keranjang extends Component {
                     </Body>
                     <Right style={{ width: '10%' }}>
                         <Button style={{ backgroundColor: 'papayawhip' }}
-                            onPress={() => this.props.navigation.navigate('Penjualan', this.returnData )}
+                            onPress={() => this.props.navigation.navigate('Penjualan', { Order: this.state.Order })}
                         >
                             <Icon name="search" style={{ color: 'darksalmon' }}>
                             </Icon>
@@ -165,9 +189,14 @@ class Keranjang extends Component {
                                 </Input>
                             </Item>
                         </Form>
-
                     </View>
                 </PopupDialog>
+                {/* <BarcodeScanner
+                    onBarCodeRead={this.barcodeReceived}
+                    style={{ flex: 1 }}
+                    torchMode={this.state.torchMode}
+                    cameraType={this.state.cameraType}
+                /> */}
                 <Content >
                     <View style={{ backgroundColor: 'transparent', padding: 0, margin: 0 }}   >
                         <List scrollEnabled={false}
@@ -244,7 +273,6 @@ class Keranjang extends Component {
                                             </View>
                                         }
                                     />
-
                                 </ListItem>}
                             keyExtractor={data => data.id}
                         />
@@ -259,7 +287,38 @@ class Keranjang extends Component {
             </Container>
         );
     }
+    // componentDidMount() {
+    //     let viewAppearCallBack = (event) => {
+    //         this.setTimeout( () => {
+    //             this.setState({
+    //                 viewAppear: true,
+    //             })
+    //         }, 255)
 
+    //     }
+    //     this._listeners = [
+    //         this.props.navigator.navigationContext.addListener('didfocus', viewAppearCallBack)
+    //     ]
+
+    // }
+    // componentWillUnmount () {
+    //     this._listeners && this._listeners.forEach(listener => listener.remove());
+    // }
+
+    // _onBarCodeRead = (e) => {
+    //     console.log(`e.nativeEvent.data.type = ${e.nativeEvent.data.type}, e.nativeEvent.data.code = ${e.nativeEvent.data.code}`)
+    //     this._stopScan()
+    //     Alert.alert(e.nativeEvent.data.type, e.nativeEvent.data.code, [
+    //         {text: 'OK', onPress: () => this._startScan()},
+    //     ])
+    // }
+
+    // _startScan = (e) => {
+    //     this._barCode.startScan()
+    // }
+
+    // _stopScan = (e) => {
+    //     this._barCode.stopScan()
+    // }
 }
-// AppRegistry.registerComponent('BarcodeScannerApp', () => BarcodeScannerApp);
 export default Keranjang;
