@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import {
     Text, View, TouchableHighlight
 } from "react-native";
-import Searchbar from './Searchbar'
 import {
     Button,
-    Col,
     Container,
     Content,
     Body,
@@ -20,7 +18,6 @@ import {
     Title,
     Icon,
 } from 'native-base'
-
 
 import styles from './styles';
 const pict1 = require("../../image/beras.jpg")
@@ -40,9 +37,9 @@ class HalamanBayar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            first: '',
-            second: '',
-            third: '',
+            cash: '',
+            debit: '',
+            credit: '',
             sum: 0,
             min: 0,
             Order:
@@ -63,33 +60,37 @@ class HalamanBayar extends Component {
         }
         let Order = this.props.navigation.getParam('Order', {});
         this.state.Order = Order;
-
-        this.setState({Order : this.state.Order})
-
+        this.setState({ Order: this.state.Order })
     }
-    totalbayar = () => {
-        const { second, first, third } = this.state;
+    // totalbayar = () => {
+    //     const { second, first, third } = this.state;
+    //     this.setState({
+    //         sum: Number(first) + Number(second) + Number(third)
+    //     });
+    // }
+    updatecash(cash, debit, credit) {
         this.setState({
-            sum: Number(first) + Number(second) + Number(third)
+            cash,
+            sum: Number(cash) + Number(debit) + Number(credit)
+        })
+    }
+    updatedebit(debit, cash, credit) {
+        this.setState({
+            debit,
+            sum: Number(cash) + Number(debit) + Number(credit)
+        })
+    }
+    updatecredit(credit, cash, debit) {
+        this.setState({
+            credit,
+            sum: Number(cash) + Number(debit) + Number(credit)
+        })
+    }
+    kembali() {
+        this.state.min = this.state.sum - this.state.Order.TotalHarga;
+        this.setState({
+            min: this.state.min
         });
-    }
-    updatefirst(first, second, third) {
-        this.setState({
-            first,
-            sum: Number(first) + Number(second) + Number(third)
-        })
-    }
-    updatesecond(second, first, third) {
-        this.setState({
-            second,
-            sum: Number(first) + Number(second) + Number(third)
-        })
-    }
-    updatethird(third, second, first) {
-        this.setState({
-            third,
-            sum: Number(first) + Number(second) + Number(third)
-        })
     }
     returnData() {
         this.props.navigation.state.params.returnData('Order');
@@ -99,7 +100,6 @@ class HalamanBayar extends Component {
         return Order.getTotal;
     }
     render() {
-
         return (
             <Container>
                 <Header style={styles.headerback}>
@@ -117,7 +117,6 @@ class HalamanBayar extends Component {
                 <Content padder style={{ backgroundColor: 'white' }}>
                     <Grid style={{ backgroundColor: 'transparent' }}>
                         <Row style={{ paddingTop: 10, paddingBottom: 10 }}>
-
                             <Left>
                                 <Text style={styles.text}>Cash</Text>
                             </Left>
@@ -128,9 +127,8 @@ class HalamanBayar extends Component {
                                         <Input onPress={this.totalbayar}
                                             style={{ width: 150, height: 40, fontSize: 15 }}
                                             keyboardType={'numeric'} placeholder="Harga"
-                                            value={this.state.first}
-                                            // onChangeText={(first) => this.setState({first})} />
-                                            onChangeText={(first) => this.updatefirst(first, this.state.third, this.state.second)} />
+                                            value={this.state.cash}
+                                            onChangeText={(cash) => this.updatecash(cash, this.state.credit, this.state.debit)} />
                                     </Item>
                                 </Form>
                             </Body>
@@ -145,9 +143,8 @@ class HalamanBayar extends Component {
                                     <Item regular>
                                         <Input style={{ width: 150, height: 40, fontSize: 15 }}
                                             keyboardType={'numeric'} placeholder="Harga"
-                                            value={this.state.second}
-                                            // onChangeText={(second) => this.setState({second})} />
-                                            onChangeText={(second) => this.updatesecond(second, this.state.first, this.state.third)} />
+                                            value={this.state.debit}
+                                            onChangeText={(debit) => this.updatedebit(debit, this.state.cash, this.state.credit)} />
 
                                     </Item>
                                 </Form>
@@ -164,9 +161,8 @@ class HalamanBayar extends Component {
                                         <Input
                                             style={{ width: 150, height: 40, fontSize: 15 }}
                                             keyboardType={'numeric'} placeholder="Harga"
-                                            value={this.state.third}
-                                            // onChangeText={(third) => this.setState({third})} />
-                                            onChangeText={(third) => this.updatethird(third, this.state.first, this.state.second)} />
+                                            value={this.state.credit}
+                                            onChangeText={(credit) => this.updatecredit(credit, this.state.cash, this.state.debit)} />
 
                                     </Item>
                                 </Form>
@@ -218,8 +214,8 @@ class HalamanBayar extends Component {
                             </Left>
                             <Body >
                                 <Text style={styles.text}>
-                                    Rp {this.min}
-                            </Text>
+                                    Rp {this.kembali(this)}
+                                </Text>
                             </Body>
                         </Row>
 

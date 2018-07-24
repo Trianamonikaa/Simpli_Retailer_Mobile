@@ -76,8 +76,8 @@ class Keranjang extends Component {
         //     this.state.Order.TotalHarga += data.harga;
         // })
     }
-    kebayar() {
-        this.props.navigation.navigate('Halaman', { Order : this.state.Order });
+    ubahkuantitas = (number) => {
+        this.setState({inputNumber : this.state.inputNumber})
     }
     static navigationOptions = {
         drawerIcon: (
@@ -121,7 +121,6 @@ class Keranjang extends Component {
                         <Button style={{ backgroundColor: 'papayawhip' }}
                             // onPress={() => this.props.navigation.navigate('Penjualan', { Order: this.state.Order })}
                             onPress={() => this.props.navigation.navigate('Penjualan', { OrderItem: this.state.Order.OrderItem })}
-
                         >
                             <Icon name="search" style={{ color: 'darksalmon' }}>
                             </Icon>
@@ -131,12 +130,12 @@ class Keranjang extends Component {
                 <PopupDialog
                     height={200}
                     actions={[<DialogButton text="Oke" align="center"
-                        onPress={() => this.ubahkuantitas()} />]}
+                        onPress={() => this.ubahkuantitas(this.state.number)} />]}
                     ref={(popupDialog) => { this.popupDialog = popupDialog; }}
                     dialogAnimation={slideAnimation}>
                     <View style={{ backgroundColor: 'white' }}>
                         <Text style={{ fontWeight: 'Bold', textAlign: 'center', fontSize: 22, paddingBottom: 5, paddingTop: 10, color: 'black' }}>
-                            Masukkan berapa banyak barang yang akan dibeli</Text>
+                            Masukkan berapa banyak yang akan dibeli</Text>
                         <Form style={{ backgroundColor: 'white', alignItems: 'center' }} >
                             <Item regular style={{
                                 backgroundColor: 'transparent', width: '50%', textAlign: 'center', justifyContent: 'center',
@@ -144,7 +143,8 @@ class Keranjang extends Component {
                             }}>
                                 <Input style={{ textAlign: 'center', backgroundColor: 'lightgrey' }}
                                     keyboardType={'numeric'} placeholder="Jumlah barang" placeholderTextColor='grey'
-                                    onChangeText={(inputNumber) => this.setState({ inputNumber })}>
+                                    onChangeText={(inputNumber) => this.setState({ inputNumber })}
+                                    value={this.state.inputNumber}>
                                 </Input>
                             </Item>
                         </Form>
@@ -164,7 +164,7 @@ class Keranjang extends Component {
                                         rightOpenValue={-75}
                                         left={
                                             <Button onPress={() => {
-                                                // this.state.selecteditem = rowID;
+                                                this.state.selecteditem = rowID;
                                                 // this.popupDialog.show();
                                             }}
                                             >
@@ -223,7 +223,7 @@ class Keranjang extends Component {
                 </Content>
                 <View >
                     <Button full style={styles.mb15}
-                        onPress={() => this.props.navigation.navigate('Halaman', {Order : this.state.Order})} >
+                        onPress={() => this.props.navigation.navigate('Halaman', { Order: this.state.Order })} >
                         <Text style={{ color: 'black' }}>{this.getTotal()} </Text>
 
                     </Button>
