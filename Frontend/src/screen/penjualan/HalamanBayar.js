@@ -37,29 +37,60 @@ class HalamanBayar extends Component {
     static navigationOptions = {
         drawerLabel: () => null
     }
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             first: '',
             second: '',
             third: '',
             sum: 0,
+            min: 0,
+            Order:
+            {
+                Id: '1',
+                OrderNo: '1',
+                OrderDate: '090718',
+                Status: '0',
+                Type: 'ok',
+                Description: 'ok',
+                CreatedTime: '1',
+                TotalHarga: 0,
+                ModifiedTime: '1',
+                ModifiedBy: '0',
+                Cashier: '2',
+                OrderItem: []
+            }
         }
+        let Order = this.props.navigation.getParam('Order', {});
+        this.state.Order = Order;
+
+        this.setState({Order : this.state.Order})
+
     }
     totalbayar = () => {
-        const { first, second, third } = this.state;
+        const { second, first, third } = this.state;
         this.setState({
             sum: Number(first) + Number(second) + Number(third)
         });
-        
     }
-    
-    // updatevalue(first, second, third){
-    //     this.setState({first, second, third,
-    //         sum: Number(first) + Number(second) + Number(third)
-    //       });
-    //     }
-    
+    updatefirst(first, second, third) {
+        this.setState({
+            first,
+            sum: Number(first) + Number(second) + Number(third)
+        })
+    }
+    updatesecond(second, first, third) {
+        this.setState({
+            second,
+            sum: Number(first) + Number(second) + Number(third)
+        })
+    }
+    updatethird(third, second, first) {
+        this.setState({
+            third,
+            sum: Number(first) + Number(second) + Number(third)
+        })
+    }
     returnData() {
         this.props.navigation.state.params.returnData('Order');
         this.props.navigation.goBack();
@@ -68,6 +99,7 @@ class HalamanBayar extends Component {
         return Order.getTotal;
     }
     render() {
+
         return (
             <Container>
                 <Header style={styles.headerback}>
@@ -93,12 +125,12 @@ class HalamanBayar extends Component {
                                 <Form style={{ width: 150, height: 40, }}>
                                     <Item regular
                                     >
-                                        <Input onPress = {this.totalbayar} 
-                                        style={{ width: 150, height: 40, fontSize: 15 }}
+                                        <Input onPress={this.totalbayar}
+                                            style={{ width: 150, height: 40, fontSize: 15 }}
                                             keyboardType={'numeric'} placeholder="Harga"
                                             value={this.state.first}
-                                            onChangeText={(first) => this.setState({first})} />
-                                            {/* onChangeText={(first) => this.updatevalue(first, this.state.second, this.state.third)} /> */}
+                                            // onChangeText={(first) => this.setState({first})} />
+                                            onChangeText={(first) => this.updatefirst(first, this.state.third, this.state.second)} />
                                     </Item>
                                 </Form>
                             </Body>
@@ -114,7 +146,9 @@ class HalamanBayar extends Component {
                                         <Input style={{ width: 150, height: 40, fontSize: 15 }}
                                             keyboardType={'numeric'} placeholder="Harga"
                                             value={this.state.second}
-                                            onChangeText={(second) => this.setState({second})} />
+                                            // onChangeText={(second) => this.setState({second})} />
+                                            onChangeText={(second) => this.updatesecond(second, this.state.first, this.state.third)} />
+
                                     </Item>
                                 </Form>
                             </Body>
@@ -131,12 +165,11 @@ class HalamanBayar extends Component {
                                             style={{ width: 150, height: 40, fontSize: 15 }}
                                             keyboardType={'numeric'} placeholder="Harga"
                                             value={this.state.third}
-                                            onChangeText={(third) => this.setState({third})} />
+                                            // onChangeText={(third) => this.setState({third})} />
+                                            onChangeText={(third) => this.updatethird(third, this.state.first, this.state.second)} />
+
                                     </Item>
                                 </Form>
-                                <TouchableHighlight onPress={this.totalbayar}>
-                                    <Text style={styles.text}>Calculate</Text>
-                                </TouchableHighlight>
                             </Body>
                         </Row>
                         <Row style={{ paddingTop: 10, paddingBottom: 10 }}>
@@ -145,7 +178,7 @@ class HalamanBayar extends Component {
                             </Left>
                             <Body >
                                 <Text style={styles.text}>
-                                    {this.returnData}
+                                    Rp {this.state.Order.TotalHarga}
                                 </Text>
                             </Body>
                         </Row>
@@ -155,7 +188,7 @@ class HalamanBayar extends Component {
                             </Left>
                             <Body >
                                 <Text style={styles.text}>
-                                    Rp 54000
+                                    Rp 0
                             </Text>
                             </Body>
                         </Row>
@@ -165,7 +198,7 @@ class HalamanBayar extends Component {
                             </Left>
                             <Body >
                                 <Text style={styles.text}>
-                                    Rp 54000
+                                    Rp 0
                             </Text>
                             </Body>
                         </Row>
@@ -185,15 +218,13 @@ class HalamanBayar extends Component {
                             </Left>
                             <Body >
                                 <Text style={styles.text}>
-                                    Rp 54000
+                                    Rp {this.min}
                             </Text>
                             </Body>
                         </Row>
 
                     </Grid>
                     <Button onPress={() => this.props.navigation.navigate('Keranjang')
-
-
                     }
                         block style={{ backgroundColor: '#ff4081' }}>
                         <Text style={styles.text}>BAYAR</Text>

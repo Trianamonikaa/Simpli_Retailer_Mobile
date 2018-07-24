@@ -78,6 +78,7 @@ const datas = [
     kuantitas: 1
   },
 ]
+
 class Penjualan extends Component {
   constructor(props) {
     super(props);
@@ -143,7 +144,6 @@ class Penjualan extends Component {
     this.props.navigation.navigate('Keranjang', {OrderItem:OrderItem} );
   }
   render() {
-
     // alert(this.state.Order.Status);
     return (
       <Container>
@@ -173,7 +173,6 @@ class Penjualan extends Component {
 
                 // onPress={() => this.props.navigation.navigate('Keranjang')}>
                 
-
                 onPress={() => this.backToKeranjang(data)}>
                 <Left style={{ backgroundColor: 'transparent' }}>
                   <Text style={styles.text}>

@@ -1,6 +1,5 @@
 'use strict';
-
-import PopupDialog, { DialogButton, SlideAnimation  } from 'react-native-popup-dialog';
+import PopupDialog, { DialogButton, SlideAnimation } from 'react-native-popup-dialog';
 import React, { Component } from "react";
 import {
     Text,
@@ -35,13 +34,12 @@ import {
 import styles from './styles'
 const slideAnimation = new SlideAnimation({
     slideFrom: 'bottom',
-  });
+});
 
 class Keranjang extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
             torchMode: 'off',
             cameraType: 'back',
             qrcode: '',
@@ -64,70 +62,22 @@ class Keranjang extends Component {
                 OrderItem: []
             }
         }
-        console.log(this.props.navigation.getParam('OrderItem', []));
+        // console.log(this.props.navigation.getParam('OrderItem', []));
         let OrderItem = this.props.navigation.getParam('OrderItem', []);
         OrderItem.forEach(item => {
             item.harga = item.peritem * item.kuantitas;
+            this.state.Order.TotalHarga += item.harga;
             this.state.Order.OrderItem.push(item);
         });
-        this.setState({Order:this.state.Order});
-        console.log(this.state.Order.OrderItem);
-
-        // if (props.navigation.state.params  != undefined) {
-        //     if (props.navigation.state.params.Order  != undefined) {
-        //         // alert(this.props.navigation.state.params.Order.Status)
-        //         this.setState({ Order: props.navigation.state.params.Order });
-        //         // alert(props.navigation.state.params.Order.OrderItem[0].nama);
-        //         alert(this.state.Order.OrderItem[0].nama);
-        //         // alert(this.state.Order.Status);
-        //     }
-        // }
-        // AsyncStorage.setItem('Order', JSON.stringify(this.state.Order), () => {
-        //     if (props.navigation.state.params != undefined) {
-        //         this.setState({ Order: props.navigation.state.params.Order });
-        //         AsyncStorage.mergeItem('Order', JSON.stringify(props.navigation.state.params.Order), () => {
-        //             AsyncStorage.getItem('Order', (err, result) => {
-        //                 console.log(result);
-        //             })
-        //         })
-        //     }
+        this.setState({ Order: this.state.Order });
+        // console.log(this.state.Order.OrderItem);
+        // this.state.Order.OrderItem.forEach((data) => {
+        //     data.harga = data.kuantitas * data.peritem;
+        //     this.state.Order.TotalHarga += data.harga;
         // })
-
     }
-
-    // barcodeReceived(e) {
-    //     console.log('Barcode: ' + e.data);
-    //     console.log('Type: ' + e.type);
-    // }
-
-    // saveData() {
-    //     let number = this.state.inputNumber;
-    //     this.setState({
-    //         number: number
-    //     })
-    //     alert('Data tersimpan');
-    // }
-    // ubahkuantitas = (number) => {
-    //     const { inputNumber } = this.state;
-    //     this.state.Order.OrderItem[this.state.selecteditem].kuantitas = number;
-    //     alert(this.state.Order.OrderItem[this.state.selecteditem].kuantitas);
-    // }
-
-    // saveData() {
-    //     let number = this.state.inputNumber;
-    //     this.setState({
-    //         number: number
-    //     })
-    //     alert('Data tersimpan');
-    // }
-    ubahkuantitas(){
-        console.log(this.state.inputNumber + " Ubah < Kuantitas");
-        console.log(this.state.selecteditem + " < Index");
-        // this.popupDialog.dismiss();
-        // this.render();
-        // if (this.PopupDialog) {
-        //     this.PopupDialog.dismiss();
-        // }
+    kebayar() {
+        this.props.navigation.navigate('Halaman', { Order : this.state.Order });
     }
     static navigationOptions = {
         drawerIcon: (
@@ -137,7 +87,6 @@ class Keranjang extends Component {
     getName() {
         return Searchbar
     }
-
     showalert1(title, msg, item) {
         Alert.alert(
             title,
@@ -150,27 +99,13 @@ class Keranjang extends Component {
             { cancelable: false }
         )
     }
-
-    // returnData(data) {
-    //     alert('returnData');
-    //     this.state.Order.OrderItem.push(data);
-    //     this.state.Order.TotalHarga = 0;
-    //     this.state.Order.OrderItem.forEach((data) => {
-    //         data.harga = data.kuantitas * data.peritem;
-    //         this.state.Order.TotalHarga += data.harga;
-    //     })
-    // }
-    // returnData(data) {
-    //     return data;
-    //     alert(data.nama)
-    // }
     getTotal() {
         return this.state.Order.TotalHarga;
     }
     render() {
         // return (
         console.log("called");
-         return (
+        return (
             <Container >
                 <Header style={styles.headerback}>
                     <Left style={{ width: '10%' }}>
@@ -184,10 +119,8 @@ class Keranjang extends Component {
                     </Body>
                     <Right style={{ width: '10%' }}>
                         <Button style={{ backgroundColor: 'papayawhip' }}
-
                             // onPress={() => this.props.navigation.navigate('Penjualan', { Order: this.state.Order })}
-
-                            onPress={() => this.props.navigation.navigate('Penjualan', {OrderItem:this.state.Order.OrderItem} )}
+                            onPress={() => this.props.navigation.navigate('Penjualan', { OrderItem: this.state.Order.OrderItem })}
 
                         >
                             <Icon name="search" style={{ color: 'darksalmon' }}>
@@ -197,8 +130,8 @@ class Keranjang extends Component {
                 </Header>
                 <PopupDialog
                     height={200}
-                    actions={[<DialogButton text="Oke" align="center" 
-                    onPress={() => this.ubahkuantitas()} />]}
+                    actions={[<DialogButton text="Oke" align="center"
+                        onPress={() => this.ubahkuantitas()} />]}
                     ref={(popupDialog) => { this.popupDialog = popupDialog; }}
                     dialogAnimation={slideAnimation}>
                     <View style={{ backgroundColor: 'white' }}>
@@ -217,12 +150,6 @@ class Keranjang extends Component {
                         </Form>
                     </View>
                 </PopupDialog>
-                {/* <BarcodeScanner
-                    onBarCodeRead={this.barcodeReceived}
-                    style={{ flex: 1 }}
-                    torchMode={this.state.torchMode}
-                    cameraType={this.state.cameraType}
-                /> */}
                 <Content >
                     <View style={{ backgroundColor: 'transparent', padding: 0, margin: 0 }}   >
                         <List scrollEnabled={false}
@@ -236,7 +163,6 @@ class Keranjang extends Component {
                                         leftOpenValue={75}
                                         rightOpenValue={-75}
                                         left={
-
                                             <Button onPress={() => {
                                                 // this.state.selecteditem = rowID;
                                                 // this.popupDialog.show();
@@ -245,51 +171,48 @@ class Keranjang extends Component {
                                                 <Icon active name="add" style={{ color: "#FFF" }} />
                                             </Button>
                                         }
-
                                         right={
-
                                             <Button danger >
                                                 <Icon active name="trash" onPress={() => this.showalert("Delete Confirmation", "Delete " + data.nama + "?", data)} />
-
                                             </Button>
                                         }
                                         body={
                                             <View noBorder={true}
                                                 style={{ backgroundColor: 'transparent', width: '100%', paddingLeft: 0, margin: 0, paddingBottom: 0, marginLeft: 0 }}>
-                                                    <Grid
-                                                        onPress={() => {
-                                                            // this.state.selecteditem = rowID;
-                                                            // this.popupDialog.show();
-                                                        }}
-                                                        style={{ backgroundColor: 'transparent', paddingBottom: 0, paddingTop: 0, marginBottom: 0, marginTop: 0, marginLeft: 10 }}>
-                                                        <Row>
-                                                            <Col style={{ paddingLeft: 10, paddingRight: 10 }} >
-                                                                <Text style={styles.text}
-                                                                    onPress={() => {
-                                                                        // alert(rowID);
-                                                                        // this.state.selecteditem = rowID;
-                                                                        // this.popupDialog.show();
-                                                                    }}>
-                                                                    {data.nama}
-                                                                </Text>
-                                                            </Col>
-                                                        </Row>
-                                                        <Row style={{ paddingLeft: 10, paddingRight: 10 }}>
-                                                            <Col >
-                                                                <Text numberOfLines={1} note style={styles.text}>
-                                                                    {data.peritem}
-                                                                </Text>
-                                                            </Col>
-                                                            <Col >
-                                                                <Text style={styles.text}> x{data.kuantitas} </Text>
-                                                            </Col>
-                                                            <Col >
-                                                                <Text style={[styles.text, { textAlign: 'right' }]}>
-                                                                    {data.harga}
-                                                                </Text>
-                                                            </Col>
-                                                        </Row>
-                                                    </Grid>
+                                                <Grid
+                                                    onPress={() => {
+                                                        // this.state.selecteditem = rowID;
+                                                        // this.popupDialog.show();
+                                                    }}
+                                                    style={{ backgroundColor: 'transparent', paddingBottom: 0, paddingTop: 0, marginBottom: 0, marginTop: 0, marginLeft: 10 }}>
+                                                    <Row>
+                                                        <Col style={{ paddingLeft: 10, paddingRight: 10 }} >
+                                                            <Text style={styles.text}
+                                                                onPress={() => {
+                                                                    // alert(rowID);
+                                                                    // this.state.selecteditem = rowID;
+                                                                    this.popupDialog.show();
+                                                                }}>
+                                                                {data.nama}
+                                                            </Text>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row style={{ paddingLeft: 10, paddingRight: 10 }}>
+                                                        <Col >
+                                                            <Text numberOfLines={1} note style={styles.text}>
+                                                                {data.peritem}
+                                                            </Text>
+                                                        </Col>
+                                                        <Col >
+                                                            <Text style={styles.text}> x{data.kuantitas} </Text>
+                                                        </Col>
+                                                        <Col >
+                                                            <Text style={[styles.text, { textAlign: 'right' }]}>
+                                                                {data.harga}
+                                                            </Text>
+                                                        </Col>
+                                                    </Row>
+                                                </Grid>
                                             </View>
                                         }
                                     />
@@ -300,45 +223,13 @@ class Keranjang extends Component {
                 </Content>
                 <View >
                     <Button full style={styles.mb15}
-                        onPress={() => this.props.navigation.navigate('Halaman', this.state.Order)} >
-                        <Text style={{ color: 'black' }}>BAYAR: {this.getTotal()} </Text>
+                        onPress={() => this.props.navigation.navigate('Halaman', {Order : this.state.Order})} >
+                        <Text style={{ color: 'black' }}>{this.getTotal()} </Text>
+
                     </Button>
                 </View>
             </Container>
         );
     }
-    // componentDidMount() {
-    //     let viewAppearCallBack = (event) => {
-    //         this.setTimeout( () => {
-    //             this.setState({
-    //                 viewAppear: true,
-    //             })
-    //         }, 255)
-
-    //     }
-    //     this._listeners = [
-    //         this.props.navigator.navigationContext.addListener('didfocus', viewAppearCallBack)
-    //     ]
-
-    // }
-    // componentWillUnmount () {
-    //     this._listeners && this._listeners.forEach(listener => listener.remove());
-    // }
-
-    // _onBarCodeRead = (e) => {
-    //     console.log(`e.nativeEvent.data.type = ${e.nativeEvent.data.type}, e.nativeEvent.data.code = ${e.nativeEvent.data.code}`)
-    //     this._stopScan()
-    //     Alert.alert(e.nativeEvent.data.type, e.nativeEvent.data.code, [
-    //         {text: 'OK', onPress: () => this._startScan()},
-    //     ])
-    // }
-
-    // _startScan = (e) => {
-    //     this._barCode.startScan()
-    // }
-
-    // _stopScan = (e) => {
-    //     this._barCode.stopScan()
-    // }
 }
 export default Keranjang;
