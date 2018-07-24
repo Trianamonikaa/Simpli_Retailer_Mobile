@@ -103,16 +103,17 @@ class Penjualan extends Component {
     //             this.setState({Order : props.navigation.state.params.Order})
     //             // alert(this.state.Order.Status);
     // }
-    AsyncStorage.setItem('Order', JSON.stringify(this.state.Order), () => {
-      if (props.navigation.state.params != undefined) {
-        this.setState({ Order: props.navigation.state.params.Order });
-        AsyncStorage.mergeItem('Order', JSON.stringify(props.navigation.state.params.Order), () => {
-          AsyncStorage.getItem('Order', (err, result) => {
-            console.log(result);
-          })
-        })
-      }
-    })
+    // AsyncStorage.setItem('Order', JSON.stringify(this.state.Order), () => {
+    //   if (props.navigation.state.params != undefined) {
+    //     this.setState({ Order: props.navigation.state.params.Order });
+    //     AsyncStorage.mergeItem('Order', JSON.stringify(props.navigation.state.params.Order), () => {
+    //       AsyncStorage.getItem('Order', (err, result) => {
+    //         console.log(result);
+    //       })
+    //     })
+    //   }
+    // })
+    console.log(this.props.navigation.getParam('OrderItem', 'default'));
   }
   static navigationOptions = {
     drawerLabel: () => null
@@ -136,7 +137,11 @@ class Penjualan extends Component {
     datas,
   }
 
-
+  backToKeranjang(data) {
+    let OrderItem = this.props.navigation.getParam('OrderItem', 'default');
+    OrderItem.push(data);
+    this.props.navigation.navigate('Keranjang', {OrderItem:OrderItem} );
+  }
   render() {
 
     // alert(this.state.Order.Status);
@@ -165,8 +170,11 @@ class Penjualan extends Component {
           <List style={{ backgroundColor: 'transparent', }}
             dataArray={datas} renderRow={data =>
               <ListItem style={{ backgroundColor: 'transparent', marginLeft: 0, paddingLeft: 8 }}
-                onPress={() => this.props.navigation.navigate('Keranjang')}>
-                {/* onPress={() => this.returnwithdata(data)}> */}
+
+                // onPress={() => this.props.navigation.navigate('Keranjang')}>
+                
+
+                onPress={() => this.backToKeranjang(data)}>
                 <Left style={{ backgroundColor: 'transparent' }}>
                   <Text style={styles.text}>
                     {data.nama}</Text>
