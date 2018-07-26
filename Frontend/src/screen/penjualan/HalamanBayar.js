@@ -44,6 +44,9 @@ class HalamanBayar extends Component {
             min: 0,
             Order:
             {
+                Cash :0,
+                Credit : 0,
+                Debit:0 ,
                 Id: '1',
                 OrderNo: '1',
                 OrderDate: '090718',
@@ -51,6 +54,8 @@ class HalamanBayar extends Component {
                 Type: 'ok',
                 Description: 'ok',
                 CreatedTime: '1',
+                TotalBayar: 0,
+                Kembalian:0 ,
                 TotalHarga: 0,
                 ModifiedTime: '1',
                 ModifiedBy: '0',
@@ -61,6 +66,7 @@ class HalamanBayar extends Component {
         let Order = this.props.navigation.getParam('Order', {});
         this.state.Order = Order;
         this.setState({ Order: this.state.Order })
+        this.setState({TotalBayar : this.state.sum })
     }
     // totalbayar = () => {
     //     const { second, first, third } = this.state;
@@ -69,28 +75,47 @@ class HalamanBayar extends Component {
     //     });
     // }
     updatecash(cash, debit, credit) {
+        this.state.Order.TotalBayar = Number(cash) + Number(debit) + Number(credit)
         this.setState({
             cash,
-            sum: Number(cash) + Number(debit) + Number(credit)
+            // sum : Number(cash) + Number(debit) + Number(credit)
+            sum : this.state.Order.TotalBayar
         })
     }
     updatedebit(debit, cash, credit) {
+
+        this.state.Order.TotalBayar = Number(cash) + Number(debit) + Number(credit)
         this.setState({
             debit,
-            sum: Number(cash) + Number(debit) + Number(credit)
+            sum : this.state.Order.TotalBayar
+            // sum: Number(cash) + Number(debit) + Number(credit)
         })
     }
     updatecredit(credit, cash, debit) {
+        this.state.Order.TotalBayar = Number(cash) + Number(debit) + Number(credit)
         this.setState({
             credit,
-            sum: Number(cash) + Number(debit) + Number(credit)
+        //    sum: Number(cash) + Number(debit) + Number(credit)
+        sum : this.state.Order.TotalBayar
         })
     }
-    kembali() {
-        this.state.min = this.state.sum - this.state.Order.TotalHarga;
-        this.setState({
-            min: this.state.min
-        });
+    // kembali(penjumlahan, total) {
+    //     // const penjumlahan = this.state.sum;
+    //     // const total = this.state.Order.TotalHarga;
+    //     // this.state.min = penjumlahan - total;
+    //     // this.setState({
+    //     //     min: this.state.min
+    //     // })
+    //     this.setState({
+    //         penjumlahan : this.state.sum,
+    //         total : this.state.Order.TotalHarga,
+    //     })
+    //     min: penjumlahan - total
+
+    // }
+    kembalian(){
+        this.state.Order.Kembalian = this.state.Order.TotalBayar + this.state.Order.TotalHarga;
+        this.setState({Kembalian : this.state.Order.Kembalian})
     }
     returnData() {
         this.props.navigation.state.params.returnData('Order');
@@ -98,6 +123,9 @@ class HalamanBayar extends Component {
         // Order.totalharga.push(Order);
         // return Order.totalharga;
         return Order.getTotal;
+    }
+    backtokeranjang(){
+        
     }
     render() {
         return (
@@ -204,7 +232,7 @@ class HalamanBayar extends Component {
                             </Left>
                             <Body >
                                 <Text style={styles.text}>
-                                    Rp {this.state.sum}
+                                    Rp {this.state.Order.TotalBayar}
                                 </Text>
                             </Body>
                         </Row>
@@ -214,13 +242,13 @@ class HalamanBayar extends Component {
                             </Left>
                             <Body >
                                 <Text style={styles.text}>
-                                    Rp {this.kembali(this)}
+                                    Rp {this.state.Order.Kembalian}
                                 </Text>
                             </Body>
                         </Row>
 
                     </Grid>
-                    <Button onPress={() => this.props.navigation.navigate('Keranjang')
+                    <Button onPress={() => this.backtokeranjang()
                     }
                         block style={{ backgroundColor: '#ff4081' }}>
                         <Text style={styles.text}>BAYAR</Text>

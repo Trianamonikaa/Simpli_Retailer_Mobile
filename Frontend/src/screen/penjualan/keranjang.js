@@ -48,6 +48,9 @@ class Keranjang extends Component {
             number: '',
             Order:
             {
+                Cash :0,
+                Credit : 0,
+                Debit:0 ,
                 Id: '1',
                 OrderNo: '1',
                 OrderDate: '090718',
@@ -55,7 +58,9 @@ class Keranjang extends Component {
                 Type: 'ok',
                 Description: 'ok',
                 CreatedTime: '1',
+                TotalBayar: 8,
                 TotalHarga: 0,
+                Kembalian : 9,
                 ModifiedTime: '1',
                 ModifiedBy: '0',
                 Cashier: '2',
