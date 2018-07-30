@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import {
   Text,
-  AsyncStorage,
+  View,
+  ScrollView,
 } from "react-native";
-
 import {
   Input,
   Container,
@@ -19,60 +19,108 @@ import {
 
 import styles from './styles'
 
-
 const datas = [
   {
     id: 1,
-    nama: "pasir lalalalalal",
+    nama: "sample 1",
     harga: 0,
     peritem: 5000,
     kuantitas: 1
   },
   {
     id: 2,
-    nama: "eskrim ayaaaamm",
+    nama: "sample 2",
     harga: 0,
     peritem: 8000,
     kuantitas: 1
   },
   {
     id: 3,
-    nama: "selada guuuuu",
+    nama: "sample 3",
     harga: 0,
     peritem: 6000,
     kuantitas: 1
   },
   {
     id: 4,
-    nama: "bakso",
+    nama: "sample 4",
     harga: 0,
     peritem: 8000,
     kuantitas: 1
   },
   {
     id: 5,
-    nama: "tuna",
+    nama: "sample 5",
     harga: 0,
     peritem: 3000,
     kuantitas: 1
   },
   {
     id: 6,
-    nama: "pisang",
+    nama: "sample 6",
     harga: 0,
     peritem: 9000,
     kuantitas: 1
   },
   {
     id: 7,
-    nama: "lala",
+    nama: "sample 7",
     harga: 0,
     peritem: 5000,
     kuantitas: 1
   },
   {
     id: 8,
-    nama: "lala",
+    nama: "sample 8",
+    harga: 0,
+    peritem: 5000,
+    kuantitas: 1
+  },
+  {
+    id: 9,
+    nama: "sample 9",
+    harga: 0,
+    peritem: 5000,
+    kuantitas: 1
+  },
+  {
+    id: 10,
+    nama: "sample 10",
+    harga: 0,
+    peritem: 5000,
+    kuantitas: 1
+  },
+  {
+    id: 11,
+    nama: "sample 11",
+    harga: 0,
+    peritem: 5000,
+    kuantitas: 1
+  },
+  {
+    id: 12,
+    nama: "sample 12",
+    harga: 0,
+    peritem: 5000,
+    kuantitas: 1
+  },
+  {
+    id: 13,
+    nama: "sample 13",
+    harga: 0,
+    peritem: 5000,
+    kuantitas: 1
+  },
+  {
+    id: 14,
+    nama: "sample 14",
+    harga: 0,
+    peritem: 5000,
+    kuantitas: 1
+  },
+  {
+    id: 15,
+    nama: "sample 15",
     harga: 0,
     peritem: 5000,
     kuantitas: 1
@@ -83,6 +131,7 @@ class Penjualan extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      search: '',
       Order: {
         Id: '1',
         OrderNo: '1',
@@ -123,8 +172,6 @@ class Penjualan extends Component {
   //   // alert(this.state.Order.Id);
   //   this.state.Order.OrderItem.push(data);
   //   // alert(this.state.Order.OrderItem[0].nama);
-
-  //   // alert(this.state.Order.OrderItem[0].nama);
   //   this.setState({Order : this.state.Order});
   //   // alert(this.state.Order.OrderItem[0].nama);
   //   // alert(this.state.Order.Status);
@@ -137,14 +184,15 @@ class Penjualan extends Component {
   state = {
     datas,
   }
-
+  updateSearch(event) {
+    this.setState({ search: event.target.value.substr(0, 20) });
+  }
   backToKeranjang(data) {
     let OrderItem = this.props.navigation.getParam('OrderItem', 'default');
     OrderItem.push(data);
-    this.props.navigation.navigate('Keranjang', {OrderItem:OrderItem} );
+    this.props.navigation.navigate('Keranjang', { OrderItem: OrderItem });
   }
   render() {
-    // alert(this.state.Order.Status);
     return (
       <Container>
         <Header style={styles.headerback}>
@@ -159,20 +207,18 @@ class Penjualan extends Component {
               <Icon
                 active name="search" />
               <Input style={styles.headerback}
+                value={this.state.search}
+                onChangeText={this.updateSearch.bind(this)}
                 placeholder="Search ..." />
             </Item>
           </Body>
           <Right style={{ width: '0%' }}>
           </Right>
         </Header>
-
         <Content >
           <List style={{ backgroundColor: 'transparent', }}
             dataArray={datas} renderRow={data =>
               <ListItem style={{ backgroundColor: 'transparent', marginLeft: 0, paddingLeft: 8 }}
-
-                // onPress={() => this.props.navigation.navigate('Keranjang')}>
-                
                 onPress={() => this.backToKeranjang(data)}>
                 <Left style={{ backgroundColor: 'transparent' }}>
                   <Text style={styles.text}>
@@ -183,8 +229,6 @@ class Penjualan extends Component {
                 </Right>
               </ListItem>}
           />
-
-
         </Content>
 
       </Container>

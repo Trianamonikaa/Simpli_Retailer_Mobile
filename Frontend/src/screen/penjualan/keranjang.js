@@ -4,12 +4,8 @@ import React, { Component } from "react";
 import {
     Text,
     View,
-    StyleSheet,
     Alert,
-    AsyncStorage,
-    AppRegistry,
 } from "react-native";
-import Searchbar from './Searchbar';
 import {
     Button,
     Icon,
@@ -29,7 +25,6 @@ import {
     Grid,
     Row,
     Col,
-    Thumbnail
 } from 'native-base'
 import styles from './styles'
 const slideAnimation = new SlideAnimation({
@@ -89,9 +84,6 @@ class Keranjang extends Component {
             <Icon name="cart" />
         )
     }
-    getName() {
-        return Searchbar
-    }
     showalert1(title, msg, item) {
         Alert.alert(
             title,
@@ -108,8 +100,6 @@ class Keranjang extends Component {
         return this.state.Order.TotalHarga;
     }
     render() {
-        // return (
-        console.log("called");
         return (
             <Container >
                 <Header style={styles.headerback}>
@@ -134,7 +124,7 @@ class Keranjang extends Component {
                 </Header>
                 <PopupDialog
                     height={200}
-                    actions={[<DialogButton text="Oke" align="center"
+                    actions={[<DialogButton text="header" align="center"
                         onPress={() => this.ubahkuantitas(this.state.number)} />]}
                     ref={(popupDialog) => { this.popupDialog = popupDialog; }}
                     dialogAnimation={slideAnimation}>

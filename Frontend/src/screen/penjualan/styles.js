@@ -31,10 +31,10 @@ export default {
     justifyContent: "center",
     borderColor: "#FFF"
   },
-  mf: {
-    flexGrow: 1,
-    alignSelf: "center",
-    alignItems: "center"
+  searchInput:{
+    padding: 10,
+    borderColor: '#CCC',
+    borderWidth: 1
   },
   Searchbar: {
     backgroundColor: "#FFF",
