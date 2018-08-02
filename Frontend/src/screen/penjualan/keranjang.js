@@ -8,6 +8,7 @@ import {
     Alert,
     AsyncStorage,
     AppRegistry,
+    TouchableOpacity
 } from "react-native";
 import Searchbar from './Searchbar';
 import {
@@ -40,34 +41,33 @@ class Keranjang extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            torchMode: 'off',
-            cameraType: 'back',
-            qrcode: '',
+            count: 0,
             inputNumber: 0,
             selecteditem: 0,
             number: '',
             Order:
             {
-                Cash :0,
-                Credit : 0,
-                Debit:0 ,
-                Id: '1',
+                Cash: 0,
+                Credit: 0,
+                Debit: 0,
+                Id: 0,
                 OrderNo: '1',
-                OrderDate: '090718',
+                OrderDate: '09-07-18',
                 Status: '0',
                 Type: 'ok',
                 Description: 'ok',
                 CreatedTime: '1',
-                TotalBayar: 8,
+                TotalBayar: 0,
                 TotalHarga: 0,
-                Kembalian : 9,
+                Kuantitas: 1,
+                Kembalian: 0,
                 ModifiedTime: '1',
                 ModifiedBy: '0',
                 Cashier: '2',
-                OrderItem: []
+                OrderItem: [],
+                ListOrder: []
             }
         }
-        // console.log(this.props.navigation.getParam('OrderItem', []));
         let OrderItem = this.props.navigation.getParam('OrderItem', []);
         OrderItem.forEach(item => {
             item.harga = item.peritem * item.kuantitas;
@@ -75,14 +75,11 @@ class Keranjang extends Component {
             this.state.Order.OrderItem.push(item);
         });
         this.setState({ Order: this.state.Order });
-        // console.log(this.state.Order.OrderItem);
-        // this.state.Order.OrderItem.forEach((data) => {
-        //     data.harga = data.kuantitas * data.peritem;
-        //     this.state.Order.TotalHarga += data.harga;
-        // })
     }
-    ubahkuantitas = (number) => {
-        this.setState({inputNumber : this.state.inputNumber})
+    ubahkuantitas() {
+        this.props.navigation.getParam('inputNumber')
+        this.setState({ inputNumber: this.state.Order.Kuantitas })
+        console.log(inputNumber)
     }
     static navigationOptions = {
         drawerIcon: (
@@ -107,9 +104,12 @@ class Keranjang extends Component {
     getTotal() {
         return this.state.Order.TotalHarga;
     }
+    onPress = () => {
+        this.setState({
+            count: this.state.count+1
+        })
+    }
     render() {
-        // return (
-        console.log("called");
         return (
             <Container >
                 <Header style={styles.headerback}>
@@ -124,7 +124,6 @@ class Keranjang extends Component {
                     </Body>
                     <Right style={{ width: '10%' }}>
                         <Button style={{ backgroundColor: 'papayawhip' }}
-                            // onPress={() => this.props.navigation.navigate('Penjualan', { Order: this.state.Order })}
                             onPress={() => this.props.navigation.navigate('Penjualan', { OrderItem: this.state.Order.OrderItem })}
                         >
                             <Icon name="search" style={{ color: 'darksalmon' }}>
@@ -135,7 +134,7 @@ class Keranjang extends Component {
                 <PopupDialog
                     height={200}
                     actions={[<DialogButton text="Oke" align="center"
-                        onPress={() => this.ubahkuantitas(this.state.number)} />]}
+                        onPress={() => this.ubahkuantitas(this.state.Order.Kuantitas)} />]}
                     ref={(popupDialog) => { this.popupDialog = popupDialog; }}
                     dialogAnimation={slideAnimation}>
                     <View style={{ backgroundColor: 'white' }}>
@@ -168,13 +167,11 @@ class Keranjang extends Component {
                                         leftOpenValue={75}
                                         rightOpenValue={-75}
                                         left={
-                                            <Button onPress={() => {
-                                                this.state.selecteditem = rowID;
-                                                // this.popupDialog.show();
-                                            }}
+                                            <TouchableOpacity onPress={this.onPress}
                                             >
+                                            <Text>TOUCH</Text>
                                                 <Icon active name="add" style={{ color: "#FFF" }} />
-                                            </Button>
+                                            </TouchableOpacity>
                                         }
                                         right={
                                             <Button danger >
@@ -186,16 +183,12 @@ class Keranjang extends Component {
                                                 style={{ backgroundColor: 'transparent', width: '100%', paddingLeft: 0, margin: 0, paddingBottom: 0, marginLeft: 0 }}>
                                                 <Grid
                                                     onPress={() => {
-                                                        // this.state.selecteditem = rowID;
-                                                        // this.popupDialog.show();
                                                     }}
                                                     style={{ backgroundColor: 'transparent', paddingBottom: 0, paddingTop: 0, marginBottom: 0, marginTop: 0, marginLeft: 10 }}>
                                                     <Row>
                                                         <Col style={{ paddingLeft: 10, paddingRight: 10 }} >
                                                             <Text style={styles.text}
                                                                 onPress={() => {
-                                                                    // alert(rowID);
-                                                                    // this.state.selecteditem = rowID;
                                                                     this.popupDialog.show();
                                                                 }}>
                                                                 {data.nama}
@@ -209,7 +202,8 @@ class Keranjang extends Component {
                                                             </Text>
                                                         </Col>
                                                         <Col >
-                                                            <Text style={styles.text}> x{data.kuantitas} </Text>
+                                                            <Text style={styles.Text}> x{this.state.Order.Kuantitas}
+                                                            </Text>
                                                         </Col>
                                                         <Col >
                                                             <Text style={[styles.text, { textAlign: 'right' }]}>
@@ -230,7 +224,6 @@ class Keranjang extends Component {
                     <Button full style={styles.mb15}
                         onPress={() => this.props.navigation.navigate('Halaman', { Order: this.state.Order })} >
                         <Text style={{ color: 'black' }}>{this.getTotal()} </Text>
-
                     </Button>
                 </View>
             </Container>

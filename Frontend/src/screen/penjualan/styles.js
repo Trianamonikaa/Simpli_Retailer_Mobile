@@ -31,6 +31,9 @@ export default {
     justifyContent: "center",
     borderColor: "#FFF"
   },
+  countText: {
+    color: '#FF00FF'
+  },
   mf: {
     flexGrow: 1,
     alignSelf: "center",

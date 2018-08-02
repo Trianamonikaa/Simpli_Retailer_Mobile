@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
     View,
     Text,
-
+    AsyncStorage
 } from "react-native";
 
 import {
@@ -22,22 +22,18 @@ import {
     Col,
 } from 'native-base';
 import styles from './styles'
-
-
-const data = [
-    {
-        text: "02-07-242",
-        note: "Rp 67.000",
-        time: "2.42 pm"
-    },
-    {
-        text: "02-07-112",
-        note: "Rp 576.000 ",
-        time: "1:12 pm"
-    }
-]
-
 class RiwayatPenjualan extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ListOrder: []
+        }
+        AsyncStorage.getItem('ListOrder', (err, result) => {
+            this.state.ListOrder = result;
+            this.setState({ ListOrder: this.state.ListOrder });
+            console.log(this.state.ListOrder);
+        });
+    }
     static navigationOptions = {
         drawerIcon: (
             <Icon name="paper" />
@@ -58,32 +54,29 @@ class RiwayatPenjualan extends Component {
                     <Right style={{ width: '50%' }}>
                     </Right>
                 </Header>
-
                 <Content >
-
                     <View>
-                        <List 
-                            dataArray={data}
+                        <List
+                            dataArray={this.state.ListOrder}
                             renderRow={data =>
-                                <ListItem  noBorder = {true}
-                                onPress={() => this.props.navigation.navigate('riwayatpage2')}>
-                                    
+                                <ListItem noBorder={true}
+                                    onPress={() => this.props.navigation.navigate('riwayatpage2', { Order: this.state.Order })}>
                                     <Grid>
                                         <Row style={{ backgroundColor: 'transparent' }}>
                                             <Col>
-                                                <Text style={{ fontSize: 20,color : 'black' }}>{data.text}</Text>
-
+                                                <Text style={{ fontSize: 20, color: 'black' }}>ttt{data.Kembalian}</Text>
                                             </Col>
-                                            <Col style={{ backgroundColor: 'transparent'}}>
+                                            <Col style={{ backgroundColor: 'transparent' }}>
                                                 {/* <Right style={{  fontSize: 14 , backgroundColor : 'green'}}> */}
-                                                    <Text style= {{textAlign : 'right',color : 'black'}}>
-                                                        {data.time}
-                                                    </Text>
+                                                <Text style={{ textAlign: 'right', color: 'black' }}>
+                                                    uiuiu{data.OrderDate}
+
+                                                </Text>
                                                 {/* </Right> */}
                                             </Col>
                                         </Row>
-                                        <Col><Text style={{ fontSize: 16,color : 'black' }}
-                                            numberOfLines={1} note>{data.note}</Text>
+                                        <Col><Text style={{ fontSize: 16, color: 'black' }}
+                                            numberOfLines={1} note>lalala{data.TotalHarga}</Text>
                                         </Col>
                                         <Row>
                                         </Row>
@@ -91,9 +84,7 @@ class RiwayatPenjualan extends Component {
                                 </ListItem>}
                         />
                     </View>
-
                 </Content>
-
             </Container>
         );
     }
